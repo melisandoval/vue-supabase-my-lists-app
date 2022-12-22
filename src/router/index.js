@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Dashboard from "../pages/Dashboard.vue";
-import Auth from "../pages/Auth.vue";
+import Dashboard from "../pages/Dashboard/Dashboard.vue";
+import Auth from "../pages/Auth/Auth.vue";
 
 const routes = [
   { path: "/", component: Dashboard },
