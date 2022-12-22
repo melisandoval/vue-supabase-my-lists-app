@@ -4,12 +4,12 @@
     @toggleForm="toggleForm"
   />
   <LogInErrorMsg v-if="userHasAnAccount && !userConfirmedEmail" />
-  <SignUp v-if="!userHasAnAccount" @toggleForm="toggleForm" />
+  <Register v-if="!userHasAnAccount" @toggleForm="toggleForm" />
 </template>
 
 <script setup>
 import LogIn from "./components/LogIn.vue";
-import SignUp from "./components/SignUp.vue";
+import Register from "./components/Register.vue";
 import LogInErrorMsg from "./components/LogInErrorMsg.vue";
 
 import { ref } from "vue";

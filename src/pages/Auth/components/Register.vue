@@ -71,7 +71,7 @@
           class="text-blue-500 hover:text-blue-800"
           href="#"
         >
-          Already have an account? Sign in.
+          Already have an account? Please sign in.
         </button>
       </div>
     </form>

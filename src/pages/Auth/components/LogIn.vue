@@ -55,7 +55,7 @@
           class="text-blue-500 hover:text-blue-800"
           href="#"
         >
-          Don't have an account? Please Register.
+          Don't have an account? Please register.
         </button>
       </div>
     </form>
