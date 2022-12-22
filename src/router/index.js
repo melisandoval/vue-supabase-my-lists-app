@@ -3,8 +3,8 @@ import Dashboard from "../pages/Dashboard/Dashboard.vue";
 import Auth from "../pages/Auth/Auth.vue";
 
 const routes = [
-  { path: "/", component: Dashboard },
-  { path: "/auth", component: Auth },
+  { path: "/", name: "Dashboard", component: Dashboard },
+  { path: "/auth", name: "Auth", component: Auth },
 ];
 
 const router = createRouter({
