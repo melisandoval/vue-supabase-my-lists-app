@@ -4,9 +4,15 @@ import { supabase } from "../supabase";
 export const useUserStore = defineStore("user", {
   state: () => ({
     user: null,
+    error: null,
   }),
 
   actions: {
+    // prueba. borrar luego!
+    // setUser(user) {
+    //   this.user = user;
+    // },
+
     async fetchUser() {
       try {
         const user = await supabase.auth.user();
@@ -16,21 +22,21 @@ export const useUserStore = defineStore("user", {
       }
     },
 
-    async signUp(email, password) {
+    async signUp(userEmail, userPassword) {
       try {
         const { user, error } = await supabase.auth.signUp({
-          email: email,
-          password: password,
+          email: userEmail,
+          password: userPassword,
         });
         if (user) this.user = user;
+        if (error) this.error = error;
       } catch (error) {
-        console.log(error);
+        this.error = error;
       }
     },
 
     // Hacer sign in
     // Hacer log out
-
     persist: {
       enabled: true,
       strategies: [

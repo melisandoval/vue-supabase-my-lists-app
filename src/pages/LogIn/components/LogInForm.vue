@@ -50,26 +50,20 @@
         </button>
       </div>
       <div class="my-4 flex items-center justify-between">
-        <button
-          @click="showSignUpForm"
-          class="text-blue-500 hover:text-blue-800"
-          href="#"
-        >
-          Don't have an account? Please register.
-        </button>
+        <p>
+          Don't have an account?
+          <span class="text-blue-500 hover:text-blue-800"
+            ><router-link to="/register">Please register</router-link></span
+          >.
+        </p>
       </div>
     </form>
   </main>
 </template>
 
 <script setup>
-import { defineEmits } from "vue";
-
-const emits = defineEmits(["toggleForm"]);
-
-function showSignUpForm() {
-  emits("toggleForm");
-}
+// import { defineEmits } from "vue";
+// const emits = defineEmits([""]);
 </script>
 
 <style scoped></style>

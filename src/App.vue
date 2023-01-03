@@ -1,6 +1,6 @@
 <template>
   <section>
-    <router-view class="app-main" />
+    <router-view />
   </section>
 </template>
 
@@ -18,8 +18,8 @@ onMounted(async () => {
   try {
     await userStore.fetchUser(); // here we call fetch user
     if (!user.value) {
-      // redirect them to logout if the user is not there
-      router.push({ path: "/auth" });
+      // redirect them to log in if the user is not there
+      router.push({ path: "/login" });
     } else {
       // continue to dashboard
       router.push({ path: "/" });
