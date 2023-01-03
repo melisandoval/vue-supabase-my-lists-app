@@ -1,6 +1,6 @@
 <template>
   <main class="flex items-center justify-center h-screen">
-    <form
+    <form v-on:submit.prevent="submitRegistration"
       class="w-full max-w-xs flex-col"
     >
       <!-- user name -->
@@ -99,7 +99,7 @@
 <script setup allowJs: true >
 // import RegisterResponse from "./RegisterResponse.vue";
 
-import { ref } from "vue";
+import { reactive } from "vue";
 import { defineEmits } from "vue";
 // import { useUserStore } from "../../../store/user";
 
@@ -109,7 +109,7 @@ const emits = defineEmits([""]);
 //   emits("toggleForm");
 // }
 
-const user = ref({
+const user = reactive({
   name: "",
   email: "",
   password: "",
@@ -123,21 +123,23 @@ const user = ref({
 
 
 
-// function submitRegistration(event) {
-//   userStore.signUp(user.email, user.password);
-//   event.target.reset();
+function submitRegistration(event) {
+  // userStore.signUp(user.email, user.password);
+  event.target.reset();
 
-//   console.log(`user from Register form is: ${user.name}`);
-//   console.log(`user in userStore is: ${userStore.user}`);
-//   console.log(`user error is ${userStore.error}`);
+  console.log(user.name)
 
-//   if (userStore.error) {
-//     error.value = true;
-//     errorMsg.value = userStore.error;
-//   }
+  // console.log(`user from Register form is: ${user.name}`);
+  // console.log(`user in userStore is: ${userStore.user}`);
+  // console.log(`user error is ${userStore.error}`);
 
-//   // formSubmitted.value = true;
-// }
+  // if (userStore.error) {
+  //   error.value = true;
+  //   errorMsg.value = userStore.error;
+  // }
+
+  // formSubmitted.value = true;
+}
 
 // const user = useUserStore();
 </script>
