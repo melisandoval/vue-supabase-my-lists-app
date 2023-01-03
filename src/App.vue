@@ -8,7 +8,7 @@
 import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
-import { useUserStore } from "./store/user.js";
+import { useUserStore } from "./piniaStores/userStore";
 
 const router = useRouter();
 const userStore = useUserStore();

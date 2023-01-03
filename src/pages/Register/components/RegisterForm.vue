@@ -125,6 +125,7 @@ const user = reactive({
 
 function submitRegistration(event) {
   // userStore.signUp(user.email, user.password);
+  
   event.target.reset();
 
   console.log(user.name)
