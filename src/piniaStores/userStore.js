@@ -22,16 +22,21 @@ export const useUserStore = defineStore("user", {
       }
     },
 
-    async signUp(userEmail, userPassword) {
+    async signUp(userEmail, userPassword, userName) {
       try {
         const { user, error } = await supabase.auth.signUp({
           email: userEmail,
           password: userPassword,
+          options: {
+            user: {
+              name: userName,
+            },
+          },
         });
         if (user) {
-          console.log(`User from Supabase is ${user.email}`);
+          console.log(`User from Supabase is ${JSON.stringify(this.user)}`);
           this.user = user;
-          console.log(`User from Pinia is ${this.user}`);
+          console.log(`User from Pinia is ${JSON.stringify(this.user)}`);
         }
         if (error) {
           // this.error = error.message;

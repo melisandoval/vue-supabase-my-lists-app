@@ -53,25 +53,6 @@
         />
       </div>
 
-      <!-- confirm password input -->
-      <div class="mb-6">
-        <label
-          class="block text-gray-700 text-sm font-bold mb-2"
-          for="password"
-          required
-        >
-          Confirm password *
-        </label>
-        <input
-          v-model="user.confirmedPassword"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-          id="confirmed-password"
-          type="password"
-          placeholder="********"
-          required
-        />
-      </div>
-
       <!-- error message -->
       <div class="my-6">
         <p class="text-red-600">{{ errorMsg }}</p>
@@ -112,7 +93,6 @@ const user = reactive({
   name: "",
   email: "",
   password: "",
-  confirmedPassword: "",
 });
 
 let errorMsg = ref("");
@@ -127,12 +107,13 @@ const userStore = useUserStore();
 async function submitRegistration(event) {
   console.log(`User from inputs is ${user}`);
 
-  const error = await userStore.signUp(user.email, user.password);
+  const error = await userStore.signUp(user.email, user.password, user.name);
 
   if (error) {
+    console.log(`error returned is ${error.message}`);
     if (error.message === "Password should be at least 6 characters") {
       errorMsg.value = "Please enter a password with at least 6 characters.";
-    }
+    } else errorMsg.value = error.message;
   }
 
   if (userStore.user) {
