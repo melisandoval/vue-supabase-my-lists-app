@@ -73,9 +73,9 @@
       </div>
 
       <!-- error message -->
-      <!-- <div v-if="errorMsg" class="mb-6">
-        <p>{{ errorMsg }}</p>
-      </div> -->
+      <div class="my-6">
+        <p class="text-red-600">{{ errorMsg }}</p>
+      </div>
 
       <!-- submit button -->
       <div class="flex items-center justify-between">
@@ -101,9 +101,9 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import { defineEmits } from "vue";
-// import { useUserStore } from "../../../store/user";
+import { useUserStore } from "../../../piniaStores/userStore";
 
 // emits
 const emit = defineEmits(["toggleFormHasBeenSent"]);
@@ -115,33 +115,32 @@ const user = reactive({
   confirmedPassword: "",
 });
 
+let errorMsg = ref("");
+
 function showResponse() {
   emit("toggleFormHasBeenSent");
 }
 
-// submit
-// const userStore = useUserStore();
-// const formSubmitted = ref(false);
-// const errorMsg = ref(null);
+// extract object with state and methods from userStore:
+const userStore = useUserStore();
 
-function submitRegistration(event) {
-  // userStore.signUp(user.email, user.password);
+async function submitRegistration(event) {
+  console.log(`User from inputs is ${user}`);
+
+  const error = await userStore.signUp(user.email, user.password);
+
+  if (error) {
+    if (error.message === "Password should be at least 6 characters") {
+      errorMsg.value = "Please enter a password with at least 6 characters.";
+    }
+  }
+
+  if (userStore.user) {
+    errorMsg.value = "";
+    showResponse();
+  }
 
   event.target.reset();
-
-  console.log(user);
-
-  // console.log(`user from Register form is: ${user.name}`);
-  // console.log(`user in userStore is: ${userStore.user}`);
-  // console.log(`user error is ${userStore.error}`);
-
-  // if (userStore.error) {
-  //   error.value = true;
-  //   errorMsg.value = userStore.error;
-  // }
-
-  // formSubmitted.value = true;
-  showResponse();
 }
 
 // const user = useUserStore();

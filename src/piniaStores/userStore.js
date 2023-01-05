@@ -4,7 +4,7 @@ import { supabase } from "../supabase";
 export const useUserStore = defineStore("user", {
   state: () => ({
     user: null,
-    error: null,
+    // error: null,
   }),
 
   actions: {
@@ -15,7 +15,7 @@ export const useUserStore = defineStore("user", {
 
     async fetchUser() {
       try {
-        const user = await supabase.auth.user();
+        const user = supabase.auth.user();
         this.user = user;
       } catch (error) {
         console.log(error);
@@ -28,10 +28,18 @@ export const useUserStore = defineStore("user", {
           email: userEmail,
           password: userPassword,
         });
-        if (user) this.user = user;
-        if (error) this.error = error;
+        if (user) {
+          console.log(`User from Supabase is ${user.email}`);
+          this.user = user;
+          console.log(`User from Pinia is ${this.user}`);
+        }
+        if (error) {
+          // this.error = error.message;
+          // console.log(`Error from Pinia is ${this.error}`);
+          return error;
+        }
       } catch (error) {
-        this.error = error;
+        console.log(`signUp try-catch error is ${error}`);
       }
     },
 
