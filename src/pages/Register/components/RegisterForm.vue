@@ -1,6 +1,7 @@
 <template>
   <main class="flex items-center justify-center h-screen">
-    <form v-on:submit.prevent="submitRegistration"
+    <form
+      v-on:submit.prevent="submitRegistration"
       class="w-full max-w-xs flex-col"
     >
       <!-- user name -->
@@ -88,26 +89,24 @@
 
       <!-- link to Sign up form -->
       <div class="my-4 flex items-center justify-between">
-        <p>Already have an account? <span class="text-blue-500 hover:text-blue-800"><router-link to="/login">Please login</router-link></span>.</p>
+        <p>
+          Already have an account?
+          <span class="text-blue-500 hover:text-blue-800"
+            ><router-link to="/login">Please login</router-link></span
+          >.
+        </p>
       </div>
     </form>
-
-    <!-- <RegisterResponse v-if="formSubmitted && !errorMsg" /> -->
   </main>
 </template>
 
-<script setup allowJs: true >
-// import RegisterResponse from "./RegisterResponse.vue";
-
+<script setup>
 import { reactive } from "vue";
 import { defineEmits } from "vue";
 // import { useUserStore } from "../../../store/user";
 
 // emits
-const emits = defineEmits([""]);
-// function showLogInForm() {
-//   emits("toggleForm");
-// }
+const emit = defineEmits(["toggleFormHasBeenSent"]);
 
 const user = reactive({
   name: "",
@@ -116,19 +115,21 @@ const user = reactive({
   confirmedPassword: "",
 });
 
+function showResponse() {
+  emit("toggleFormHasBeenSent");
+}
+
 // submit
 // const userStore = useUserStore();
 // const formSubmitted = ref(false);
 // const errorMsg = ref(null);
 
-
-
 function submitRegistration(event) {
   // userStore.signUp(user.email, user.password);
-  
+
   event.target.reset();
 
-  console.log(user.name)
+  console.log(user);
 
   // console.log(`user from Register form is: ${user.name}`);
   // console.log(`user in userStore is: ${userStore.user}`);
@@ -140,6 +141,7 @@ function submitRegistration(event) {
   // }
 
   // formSubmitted.value = true;
+  showResponse();
 }
 
 // const user = useUserStore();
