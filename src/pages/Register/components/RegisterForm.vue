@@ -15,7 +15,6 @@
           id="name"
           type="text"
           required
-          oninvalid="this.setCustomValidity('Please enter your name')"
         />
       </div>
 
@@ -30,7 +29,6 @@
           id="email"
           type="email"
           required
-          oninvalid="this.setCustomValidity('Please enter a valid email')"
         />
       </div>
 
@@ -108,24 +106,23 @@ const userStore = useUserStore();
 async function submitRegistration(event) {
   console.log(`User from inputs is ${JSON.stringify(user)}`);
 
+  // signUp() action from userStore registers the user to Supabase and returns and error if there is one:
   const error = await userStore.signUp(user.email, user.password, user.name);
 
   if (error) {
-    console.log(`error returned is ${error.message}`);
+    console.log(`error returned from userStore.signUp() is ${error.message}`);
     if (error.message === "Password should be at least 6 characters") {
       errorMsg.value = "Please enter a password with at least 6 characters.";
     } else errorMsg.value = error.message;
   }
 
-  if (userStore.user) {
+  if (userStore.user.user) {
     errorMsg.value = "";
     showResponse();
   }
 
   event.target.reset();
 }
-
-// const user = useUserStore();
 </script>
 
 <style lang="scss" scoped></style>
