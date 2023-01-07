@@ -14,8 +14,8 @@
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="name"
           type="text"
-          placeholder="e.g. Bob Smith"
           required
+          oninvalid="this.setCustomValidity('Please enter your name')"
         />
       </div>
 
@@ -29,8 +29,8 @@
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="email"
           type="email"
-          placeholder="e.g. bobsmith@gmail.com"
           required
+          oninvalid="this.setCustomValidity('Please enter a valid email')"
         />
       </div>
 
@@ -48,10 +48,11 @@
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:outline-none focus:shadow-outline"
           id="password"
           type="password"
-          placeholder="********"
           required
         />
       </div>
+
+      <!-- oninvalid="this.setCustomValidity('Please enter a password with at least 6 characters.')" -->
 
       <!-- error message -->
       <div class="my-6">
@@ -105,7 +106,7 @@ function showResponse() {
 const userStore = useUserStore();
 
 async function submitRegistration(event) {
-  console.log(`User from inputs is ${user}`);
+  console.log(`User from inputs is ${JSON.stringify(user)}`);
 
   const error = await userStore.signUp(user.email, user.password, user.name);
 
