@@ -50,21 +50,24 @@
         />
       </div>
 
-      <!-- oninvalid="this.setCustomValidity('Please enter a password with at least 6 characters.')" -->
-
       <!-- error message -->
       <div class="my-6">
         <p class="text-red-600">{{ errorMsg }}</p>
       </div>
 
       <!-- submit button -->
-      <div class="flex items-center justify-between">
+      <div class="flex items-center">
         <button
           type="submit"
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           Register
         </button>
+
+        <!-- spinner -->
+        <div v-if="showSpinner" class="mx-4">
+          <Spinner />
+        </div>
       </div>
 
       <!-- link to Sign up form -->
@@ -84,45 +87,57 @@
 import { reactive, ref } from "vue";
 import { defineEmits } from "vue";
 import { useUserStore } from "../../../piniaStores/userStore";
+import Spinner from "../../../components/Spinner.vue";
 
-// emits
-const emit = defineEmits(["toggleFormHasBeenSent"]);
-
+// for storing user inputs:
 const user = reactive({
   name: "",
   email: "",
   password: "",
 });
 
+// v-ifs:
 let errorMsg = ref("");
+let showSpinner = ref(false);
+
+// emits
+const emit = defineEmits(["toggleFormHasBeenSent"]);
 
 function showResponse() {
   emit("toggleFormHasBeenSent");
 }
 
-// extract object with state and methods from userStore:
+// get userStore object in order to use user state and actions:
 const userStore = useUserStore();
 
-async function submitRegistration(event) {
-  console.log(`User from inputs is ${JSON.stringify(user)}`);
-
-  // signUp() action from userStore registers the user to Supabase and returns and error if there is one:
-  const error = await userStore.signUp(user.email, user.password, user.name);
+// Register button function:
+async function submitRegistration() {
+  // action from userStore that registers the user to Supabase and
+  // returns and error if there is one
+  // and a data object that Supabase creates if the user is succesfully registered:
+  const { data, error } = await userStore.signUp(
+    user.email,
+    user.password,
+    user.name
+  );
 
   if (error) {
     console.log(`error returned from userStore.signUp() is ${error.message}`);
+
     if (error.message === "Password should be at least 6 characters") {
+      // show a different error copy to user:
       errorMsg.value = "Please enter a password with at least 6 characters.";
     } else errorMsg.value = error.message;
   }
 
-  if (userStore.user.user) {
+  // if user is succesfully register in Supabase emit an event in order to
+  // make parent component Register to show the RegistrationResponse instead of this component:
+  if (data.user) {
     errorMsg.value = "";
     showResponse();
+    showSpinner.value = true; // to-do: SPINNER DOESNT SHOW!
   }
-
-  event.target.reset();
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

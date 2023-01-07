@@ -34,13 +34,7 @@ export const useUserStore = defineStore("user", {
             },
           },
         });
-        if (data) {
-          this.user = data;
-          console.log(`User from Pinia is ${JSON.stringify(this.user)}`);
-        }
-        if (error) {
-          return error;
-        }
+        return { data, error }; // to use the values in the components
       } catch (error) {
         console.log(`userStore signUp() error is ${error}`);
       }
