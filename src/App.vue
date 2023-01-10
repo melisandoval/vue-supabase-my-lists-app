@@ -22,16 +22,17 @@ onMounted(async () => {
     // the Pinia store calls Supabase to get the logged-in user in order to show the user's dashboard in path "/":
     await userStore.fetchUser();
 
-    if (!user) {
+    if (!user.value) {
       // inicial pinia state "user" is null, but fetchUser() sets "user" value to the logged in user in Supabase, so:
       // if the current Pinia user state is null, means that the user is not logged in in Supabase,
       // so router redirects the user from path "/" to path "/login":
       router.push({ path: "/login" });
     }
 
-    if (session) {
+    if (session.value) {
       // if the user is logged in in Supabase, continue to user's dashboard
-      console.log(`user in Pinia store is ${JSON.stringify(user)}`);
+      console.log(`session in Pinia store is ${JSON.stringify(session.value)}`);
+      console.log(`user in Pinia store is ${JSON.stringify(user.value)}`);
       router.push({ path: "/" });
     }
   } catch (error) {

@@ -44,17 +44,26 @@ export const useUserStore = defineStore("user", {
 
     // Hacer sign in
 
-    // Hacer log out:
+    // to log out a user from Supabase
 
-    // from Pinia persist:
-    persist: {
-      enabled: true,
-      strategies: [
-        {
-          key: "user",
-          storage: localStorage,
-        },
-      ],
+    async signOut() {
+      try {
+        const { error } = await supabase.auth.signOut();
+        return error;
+      } catch (error) {
+        console.log(`Error from userStore signOut() is ${error}`);
+      }
     },
+  },
+
+  // from Pinia persist:
+  persist: {
+    enabled: true,
+    strategies: [
+      {
+        key: "user",
+        storage: localStorage,
+      },
+    ],
   },
 });
