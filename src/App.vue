@@ -15,19 +15,23 @@ const router = useRouter();
 // storing the Pinia store object to use its states and actions:
 const userStore = useUserStore();
 // getting the state user from the Pinia store:
-const { user } = storeToRefs(userStore);
+const { user, session } = storeToRefs(userStore);
 
 onMounted(async () => {
   try {
+    // the Pinia store calls Supabase to get the logged-in user in order to show the user's dashboard in path "/":
     await userStore.fetchUser();
-    // the Pinia store calls Supabase to get the logged-in user in order to show the user's dashboard in path "/"
-    if (!user.value) {
+
+    if (!user) {
       // inicial pinia state "user" is null, but fetchUser() sets "user" value to the logged in user in Supabase, so:
       // if the current Pinia user state is null, means that the user is not logged in in Supabase,
       // so router redirects the user from path "/" to path "/login":
       router.push({ path: "/login" });
-    } else {
+    }
+
+    if (session) {
       // if the user is logged in in Supabase, continue to user's dashboard
+      console.log(`user in Pinia store is ${JSON.stringify(user)}`);
       router.push({ path: "/" });
     }
   } catch (error) {

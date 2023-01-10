@@ -85,7 +85,7 @@
 
 <script setup>
 import { reactive, ref } from "vue";
-import { defineEmits } from "vue";
+// import { defineEmits } from "vue";
 import { useUserStore } from "../../../piniaStores/userStore";
 import Spinner from "../../../components/Spinner.vue";
 
@@ -130,8 +130,8 @@ async function submitRegistration() {
     } else errorMsg.value = error.message;
   }
 
-  // if user is succesfully register in Supabase emit an event in order to
-  // make parent component Register to show the RegistrationResponse instead of this component:
+  // if user is succesfully registered in Supabase, emit an event in order to
+  // make parent component Register to show the RegistrationResponse instead of this Form component:
   if (data.user) {
     errorMsg.value = "";
     showResponse();

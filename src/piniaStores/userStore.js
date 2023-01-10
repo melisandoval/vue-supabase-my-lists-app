@@ -4,6 +4,7 @@ import { supabase } from "../supabase";
 export const useUserStore = defineStore("user", {
   state: () => ({
     user: null,
+    session: null,
   }),
 
   actions: {
@@ -15,6 +16,7 @@ export const useUserStore = defineStore("user", {
         } = await supabase.auth.getSession(); // gets the logged-in user
         if (session) {
           const { user } = session;
+          this.session = session;
           this.user = user; // save the current Supabase logged in user in the state "user":
         }
       } catch (error) {
@@ -41,8 +43,10 @@ export const useUserStore = defineStore("user", {
     },
 
     // Hacer sign in
-    // Hacer log out
 
+    // Hacer log out:
+
+    // from Pinia persist:
     persist: {
       enabled: true,
       strategies: [
