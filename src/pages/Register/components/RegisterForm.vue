@@ -85,7 +85,6 @@
 
 <script setup>
 import { reactive, ref } from "vue";
-// import { defineEmits } from "vue";
 import { useUserStore } from "../../../piniaStores/userStore";
 import Spinner from "../../../components/Spinner.vue";
 
@@ -112,6 +111,8 @@ const userStore = useUserStore();
 
 // Register button function:
 async function submitRegistration() {
+  showSpinner.value = true;
+
   // action from userStore that registers the user to Supabase and
   // returns and error if there is one
   // and a data object that Supabase creates if the user is succesfully registered:
@@ -122,6 +123,7 @@ async function submitRegistration() {
   );
 
   if (error) {
+    showSpinner.value = false;
     console.log(`error returned from userStore.signUp() is ${error.message}`);
 
     if (error.message === "Password should be at least 6 characters") {
@@ -135,7 +137,6 @@ async function submitRegistration() {
   if (data.user) {
     errorMsg.value = "";
     showResponse();
-    showSpinner.value = true; // to-do: SPINNER DOESNT SHOW!
   }
 }
 </script>
