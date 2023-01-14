@@ -44,14 +44,14 @@ export const useUserStore = defineStore("user", {
     },
 
     // To Sign in user to Supabase:
-
     async signIn(userEmail, userPassword) {
       try {
-        // const { data, error } = await supabase.auth.signInWithPassword({
-        //   email: userPassword,
-        //   password: userPassword,
-        // });
-        console.log(userEmail, userPassword);
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: userEmail,
+          password: userPassword,
+        });
+        this.user = data.user; // save the current Supabase logged in user in the state "user":
+        console.log(`this.user in Pinia is ${this.user}`);
         return { data, error };
       } catch (error) {
         console.log(`Error from userStore signIn() is ${error}`);
