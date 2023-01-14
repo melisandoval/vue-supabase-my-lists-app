@@ -42,16 +42,32 @@ export const useUserStore = defineStore("user", {
       }
     },
 
-    // Hacer sign in
+    // To Sign in user to Supabase:
 
-    // to log out a user from Supabase
+    async signIn(userEmail, userPassword) {
+      try {
+        // const { data, error } = await supabase.auth.signInWithPassword({
+        //   email: userPassword,
+        //   password: userPassword,
+        // });
+        console.log(userEmail, userPassword);
+        return { data, error };
+      } catch (error) {
+        console.log(`Error from userStore signIn() is ${error}`);
+      }
+    },
 
+    // to Log Out a user from Supabase:
     async signOut() {
       try {
         const { error } = await supabase.auth.signOut();
+        console.log(`Supabase signOut error is ${error}`);
+        this.user = null;
+        this.session = null;
+        console.log(`Pinia user after signOut is ${JSON.stringify(this.user)}`);
         return error;
-      } catch (error) {
-        console.log(`Error from userStore signOut() is ${error}`);
+      } catch (e) {
+        console.log(`Error from userStore signOut() is ${e}`);
       }
     },
   },

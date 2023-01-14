@@ -18,8 +18,13 @@ import { useUserStore } from "../../piniaStores/userStore.js";
 // get userStore object in order to use user state and actions:
 const userStore = useUserStore();
 
-function logOut() {
-  userStore.signOut();
+async function logOut() {
+  const error = await userStore.signOut();
+  if (error) {
+    console.log(`Error from HomeDashboard logOut() is ${error.message}`);
+  }
+
+  // to-do redirigir al usuario a la página de log in!!
 }
 </script>
 
