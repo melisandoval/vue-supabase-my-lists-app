@@ -64,15 +64,18 @@
           >.
         </p>
       </div>
-
-      <!-- link to Reset password page  -->
-      <div class="my-4 flex items-center justify-between">
-        <p>
-          Forgot your password?
-          <span class="text-blue-500 hover:text-blue-800">Reset password</span>.
-        </p>
-      </div>
     </form>
+
+    <!-- link to Reset password page  -->
+    <div class="my-4 flex items-center justify-between">
+      Forgot your password?
+      <button
+        @click="showResetPasswordForm"
+        class="text-blue-500 hover:text-blue-800"
+      >
+        Reset password.
+      </button>
+    </div>
   </main>
 </template>
 
@@ -96,7 +99,12 @@ const user = reactive({
 // get userStore object in order to use user state and actions:
 const userStore = useUserStore();
 
-// const emits = defineEmits([""]);
+const emit = defineEmits(["showResetPasswordForm"]);
+
+function showResetPasswordForm() {
+  console.log(`showResetPasswordForm was clicked!!!!!!!`);
+  emit("showResetPasswordForm");
+}
 
 async function submitLogIn() {
   showSpinner.value = true;

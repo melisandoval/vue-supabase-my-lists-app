@@ -31,7 +31,6 @@ onMounted(async () => {
 
     if (user.value) {
       // if the user is logged in in Supabase, continue to user's dashboard
-      // console.log(`session in Pinia store is ${JSON.stringify(session.value)}`);
       console.log(`user in Pinia store is ${JSON.stringify(user.value)}`);
       router.push({ path: "/" });
     }

@@ -1,14 +1,21 @@
 <template>
-  <LogInForm />
-  <LogInErrorMsg v-if="thereIsAnError" />
+  <LogInForm
+    @showResetPasswordForm="showResetPasswordForm"
+    v-if="showLogInForm"
+  />
+  <ResetPasswordForm v-else />
 </template>
 
 <script setup>
 import LogInForm from "./components/LogInForm.vue";
-import LogInErrorMsg from "./components/LogInErrorMsg.vue";
+import ResetPasswordForm from "./components/ResetPasswordForm.vue";
 import { ref } from "vue";
 
-const thereIsAnError = ref(false);
+let showLogInForm = ref(true);
+
+function showResetPasswordForm() {
+  showLogInForm.value = !showLogInForm.value;
+}
 </script>
 
 <style scoped></style>
