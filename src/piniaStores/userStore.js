@@ -18,6 +18,7 @@ export const useUserStore = defineStore("user", {
           const { user } = session;
           this.session = session;
           this.user = user; // save the current Supabase logged in user in the state "user":
+          console.log(`User in Pinia is ${this.user}`);
         }
       } catch (error) {
         console.log(`userStore fetchUser() error is: "${error}"`);
@@ -65,6 +66,7 @@ export const useUserStore = defineStore("user", {
         this.user = null;
         this.session = null;
         console.log(`Pinia user after signOut is ${JSON.stringify(this.user)}`);
+
         return error;
       } catch (e) {
         console.log(`Error from userStore signOut() is ${e}`);

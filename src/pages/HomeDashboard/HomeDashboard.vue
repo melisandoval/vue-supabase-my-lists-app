@@ -14,17 +14,18 @@
 
 <script setup>
 import { useUserStore } from "../../piniaStores/userStore.js";
+import { useRouter } from "vue-router";
 
-// get userStore object in order to use user state and actions:
 const userStore = useUserStore();
+const router = useRouter();
 
 async function logOut() {
   const error = await userStore.signOut();
   if (error) {
     console.log(`Error from HomeDashboard logOut() is ${error.message}`);
   }
-
-  // to-do redirigir al usuario a la página de log in!!
+  // after log out redirect user to login page:
+  router.push({ path: "/login" });
 }
 </script>
 
