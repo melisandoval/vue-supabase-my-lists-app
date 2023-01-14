@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeDashboard from "./pages/HomeDashboard/HomeDashboard.vue";
-import LogIn from "./pages/LogIn/LogIn.vue";
-import Register from "./pages/Register/Register.vue";
+import LogInPage from "./pages/LogIn/LogInPage.vue";
+import RegisterPage from "./pages/Register/RegisterPage.vue";
 
 const routes = [
   { path: "/", name: "Home Dashboard", component: HomeDashboard },
-  { path: "/login", name: "Log in", component: LogIn },
-  { path: "/register", name: "Register", component: Register },
+  { path: "/login", name: "LogIn Page", component: LogInPage },
+  { path: "/register", name: "Register", component: RegisterPage },
 ];
 
 const router = createRouter({

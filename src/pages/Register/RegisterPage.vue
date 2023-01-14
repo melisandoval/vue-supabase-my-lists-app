@@ -11,7 +11,7 @@
 <script setup>
 import { ref } from "vue";
 import RegisterForm from "./components/RegisterForm.vue";
-import RegistrationResponse from "../Register/components/RegistrationResponseMsg.vue";
+import RegistrationResponse from "./components/RegistrationResponseMsg.vue";
 
 let formHasBeenSent = ref(false);
 
