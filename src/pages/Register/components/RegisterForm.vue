@@ -70,7 +70,7 @@
         </div>
       </div>
 
-      <!-- link to Sign up form -->
+      <!-- link to Log In form -->
       <div class="my-4 flex items-center justify-between">
         <p>
           Already have an account?

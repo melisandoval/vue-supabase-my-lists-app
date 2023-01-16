@@ -1,5 +1,5 @@
 <template>
-  <main class="flex items-center justify-center h-screen">
+  <main class="flex flex-col items-center justify-center h-screen">
     <form @submit.prevent="resetPassword">
       <div class="mb-4">
         <label class="block text-gray-700 font-medium mb-2" for="email">
@@ -17,9 +17,18 @@
       <button
         class="bg-indigo-500 text-white p-2 rounded-lg hover:bg-indigo-600"
       >
-        Reset password
+        Send me the link
       </button>
     </form>
+
+    <!-- link to Log In form -->
+    <div class="my-4 flex items-center justify-between">
+      <p>
+        <span class="text-blue-500 hover:text-blue-800"
+          ><router-link to="/login">Return to login</router-link></span
+        >.
+      </p>
+    </div>
   </main>
 </template>
 
