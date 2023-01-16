@@ -51,7 +51,7 @@ export const useUserStore = defineStore("user", {
           password: userPassword,
         });
         this.user = data.user; // save the current Supabase logged in user in the state "user":
-        console.log(`this.user in Pinia is ${this.user}`);
+        console.log(`user in Pinia is ${JSON.stringify(this.user)}`);
         return { data, error };
       } catch (error) {
         console.log(`Error from userStore signIn() is ${error}`);

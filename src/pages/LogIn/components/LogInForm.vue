@@ -83,6 +83,10 @@
 import { reactive, ref } from "vue";
 import { useUserStore } from "../../../piniaStores/userStore";
 import Spinner from "../../../components/Spinner.vue";
+import { useRouter } from "vue-router";
+
+// for redirecting the user after logged in:
+const router = useRouter();
 
 // for v-if showSpinner:
 let showSpinner = ref(false);
@@ -125,6 +129,10 @@ async function submitLogIn() {
       errorMsg.value =
         "Sorry, the email or password you entered is incorrect. Please try again or click 'Reset password' to reset your credentials.";
     } else errorMsg.value = error.message;
+  }
+
+  if (!error) {
+    router.push({ path: "/" });
   }
 
   showSpinner.value = false;
