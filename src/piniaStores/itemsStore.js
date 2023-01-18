@@ -1,11 +1,9 @@
-// /store/task.js
-
 import { defineStore } from "pinia";
 import { supabase } from "../supabase";
 
 export const useItemsStore = defineStore("items", {
   state: () => ({
-    tasks: null,
+    items: null,
   }),
   actions: {
     async fetchTasks() {
@@ -13,7 +11,7 @@ export const useItemsStore = defineStore("items", {
         .from("items")
         .select("*")
         .order("id", { ascending: false });
-      this.tasks = tasks;
+      this.items = items;
     },
     // Hacer POST
     // Hacer el PUT (edit)
