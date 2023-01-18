@@ -81,6 +81,7 @@ async function fetchUserLists() {
 
 fetchUserLists();
 
+// antes lo tenía en un onMounted y luego lo cambié a sin esto para poder volver a llamar a la función cuando se actualiza la lista.
 // onMounted(async () => {
 //   try {
 //     const { data, error } = await supabase
@@ -111,6 +112,7 @@ async function createNewList() {
 
     if (!error) {
       fetchUserLists();
+      newList.value = "";
     }
 
     if (error) {
