@@ -3,7 +3,8 @@
     <nav
       class="bg-gray-200 min-w-min max-w-xl px-8 flex flex-col absolute inset-y-0 left-0"
     >
-      <div
+      <!-- welcome section -->
+      <section
         class="text-3xl text-blue-500 py-16 px-6 block font-medium leading-relaxed"
       >
         <h1>
@@ -12,18 +13,22 @@
             userStore.user.user_metadata.name
           }}</span>
         </h1>
-      </div>
+      </section>
 
-      <div class="text-lg py-3 px-6 block">
-        <h2>Your lists:</h2>
-      </div>
+      <!-- list of list titles: -->
+      <section>
+        <div class="text-lg py-3 px-6 block">
+          <h2>Your lists:</h2>
+        </div>
 
-      <ul>
-        <li v-for="list in lists">
-          <button>{{ list.title }}</button>
-        </li>
-      </ul>
+        <ul>
+          <li v-for="list in lists">
+            <ListTitleButton :title="list.title"></ListTitleButton>
+          </li>
+        </ul>
+      </section>
 
+      <!-- form to create a new List: -->
       <form v-on:submit.prevent="createNewList" class="my-12">
         <h2>Create a new list:</h2>
         <label
@@ -51,6 +56,7 @@
 import { supabase } from "../../../supabase.js";
 import { useUserStore } from "../../../piniaStores/userStore.js";
 import { onMounted, ref, watch } from "vue";
+import ListTitleButton from "./ListTitleButton.vue";
 
 const userStore = useUserStore();
 
@@ -80,29 +86,6 @@ async function fetchUserLists() {
 }
 
 fetchUserLists();
-
-// antes lo tenía en un onMounted y luego lo cambié a sin esto para poder volver a llamar a la función cuando se actualiza la lista.
-// onMounted(async () => {
-//   try {
-//     const { data, error } = await supabase
-//       .from("lists")
-//       .select("title")
-//       .match({ user_id: userStore.user.id });
-
-//     if (data) {
-//       lists.value = data;
-//       console.log(lists.value);
-//     }
-
-//     if (error) {
-//       console.log(
-//         `error from supabase.from("lists").select() is ${error.message}`
-//       );
-//     }
-//   } catch (e) {
-//     console.log(`error from Navbar try-catch fetch lists titles is ${e}`);
-//   }
-// });
 
 async function createNewList() {
   try {
