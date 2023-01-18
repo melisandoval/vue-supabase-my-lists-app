@@ -15,7 +15,7 @@
         </h1>
       </section>
 
-      <!-- list of list titles: -->
+      <!-- list of list titles buttons: -->
       <section>
         <div class="text-lg py-3 px-6 block">
           <h2>Your lists:</h2>
@@ -55,38 +55,26 @@
 <script setup>
 import { supabase } from "../../../supabase.js";
 import { useUserStore } from "../../../piniaStores/userStore.js";
-import { onMounted, ref, watch } from "vue";
+import { useListsStore } from "../../../piniaStores/listsStore";
+import { storeToRefs } from "pinia";
+
+import { ref } from "vue";
 import ListTitleButton from "./ListTitleButton.vue";
 
+// get user store to get the name of the user to display in Navbar:
 const userStore = useUserStore();
+// get lists store to get the titles of the lists to display in lists titles button section:
+const listsStore = useListsStore();
 
-let lists = ref([]);
+const { lists } = storeToRefs(listsStore);
+
+// ref for the create a new list input field:
 let newList = ref("");
 
-async function fetchUserLists() {
-  try {
-    const { data, error } = await supabase
-      .from("lists")
-      .select("title")
-      .match({ user_id: userStore.user.id });
+// fetch user lists with first render:
+listsStore.fetchUserLists();
 
-    if (data) {
-      lists.value = data;
-      console.log(lists.value);
-    }
-
-    if (error) {
-      console.log(
-        `error from supabase.from("lists").select() is ${error.message}`
-      );
-    }
-  } catch (e) {
-    console.log(`error from Navbar try-catch fetch lists titles is ${e}`);
-  }
-}
-
-fetchUserLists();
-
+// function for create new list form:
 async function createNewList() {
   try {
     const { error } = await supabase
@@ -94,7 +82,9 @@ async function createNewList() {
       .insert({ title: newList.value, user_id: userStore.user.id });
 
     if (!error) {
-      fetchUserLists();
+      // fetch the lists' titles again to reflect the updated lists in the lists tittles section:
+      listsStore.fetchUserLists();
+      // clear newList input field:
       newList.value = "";
     }
 
