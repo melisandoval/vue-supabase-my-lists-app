@@ -3,14 +3,14 @@
 import { defineStore } from "pinia";
 import { supabase } from "../supabase";
 
-export const useTaskStore = defineStore("tasks", {
+export const useItemsStore = defineStore("items", {
   state: () => ({
     tasks: null,
   }),
   actions: {
     async fetchTasks() {
-      const { data: tasks } = await supabase
-        .from("tasks")
+      const { data: items } = await supabase
+        .from("items")
         .select("*")
         .order("id", { ascending: false });
       this.tasks = tasks;
