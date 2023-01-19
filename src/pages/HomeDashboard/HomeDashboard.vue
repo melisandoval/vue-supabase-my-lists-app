@@ -5,16 +5,27 @@
   >
     Log out
   </button>
+  <DeleteListModal v-if="listSelected" />
   <Navbar />
 </template>
 
 <script setup>
 import { useUserStore } from "../../piniaStores/userStore.js";
+import { useListsStore } from "../../piniaStores/listsStore";
+import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
 import Navbar from "./components/Navbar.vue";
+import DeleteListModal from "./components/DeleteListModal.vue";
+import { ref } from "vue";
 
-const userStore = useUserStore();
 const router = useRouter();
+
+// stores:
+const userStore = useUserStore();
+const listsStore = useListsStore();
+
+// ref from store to handle show/hide DeleteListModal component:
+const { listSelected } = storeToRefs(listsStore);
 
 async function logOut() {
   const error = await userStore.signOut();

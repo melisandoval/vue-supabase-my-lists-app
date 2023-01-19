@@ -23,7 +23,10 @@
 
         <ul>
           <li v-for="list in lists">
-            <ListTitleButton :title="list.title"></ListTitleButton>
+            <ListTitleButton
+              :title="list.title"
+              :listId="list.list_id"
+            ></ListTitleButton>
           </li>
         </ul>
       </section>
@@ -66,13 +69,12 @@ const userStore = useUserStore();
 // get lists store to get the titles of the lists to display in lists titles button section:
 const listsStore = useListsStore();
 
+// fetch user lists with first render:
+listsStore.fetchUserLists();
 const { lists } = storeToRefs(listsStore);
 
 // ref for the create a new list input field:
 let newList = ref("");
-
-// fetch user lists with first render:
-listsStore.fetchUserLists();
 
 // function for create new list form:
 async function createNewList() {

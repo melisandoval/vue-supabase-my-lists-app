@@ -9,6 +9,7 @@ export const useListsStore = defineStore("lists", {
 
   state: () => ({
     lists: null,
+    listSelected: null,
   }),
 
   actions: {
@@ -34,9 +35,21 @@ export const useListsStore = defineStore("lists", {
         console.log(`error from fetchUserLists() try-catch is ${e}`);
       }
     },
+
+    // mostrar modal que borra:
+
+    selectList(listId) {
+      this.listSelected = listId;
+      console.log(`listSelected in Pinia is ${this.listSelected}`);
+    },
+
+    deselectList() {
+      this.listSelected = null;
+      console.log(`listSelected in Pinia is ${this.listSelected}`);
+    },
+
+    // borrar lista seleccionada:
+
+    // to-do cambiar nombre de la lista:
   },
-
-  // hacer borrar lista seleccionada:
-
-  // hacer cambiar nombre de la lista:
 });
