@@ -16,7 +16,6 @@ import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
 import Navbar from "./components/Navbar.vue";
 import DeleteListModal from "./components/DeleteListModal.vue";
-import { ref } from "vue";
 
 const router = useRouter();
 

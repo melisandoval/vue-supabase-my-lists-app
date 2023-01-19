@@ -38,9 +38,11 @@ export const useListsStore = defineStore("lists", {
 
     // mostrar modal que borra:
 
-    selectList(listId) {
-      this.listSelected = listId;
-      console.log(`listSelected in Pinia is ${this.listSelected}`);
+    selectList(listObj) {
+      this.listSelected = listObj;
+      console.log(
+        `listSelected in Pinia is ${JSON.stringify(this.listSelected)}`
+      );
     },
 
     deselectList() {
