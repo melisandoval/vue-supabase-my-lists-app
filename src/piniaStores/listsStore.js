@@ -15,6 +15,7 @@ export const useListsStore = defineStore("lists", {
   actions: {
     async fetchUserLists() {
       const userStore = useUserStore();
+
       try {
         const { data, error } = await supabase
           .from("lists")
@@ -51,6 +52,27 @@ export const useListsStore = defineStore("lists", {
     },
 
     // borrar lista seleccionada:
+
+    async deleteSelectedList(listId) {
+      try {
+        const { error } = await supabase
+          .from("lists")
+          .delete()
+          .eq("list_id", listId);
+
+        if (error) {
+          console.log(
+            `Error from supabase.from("lists").delete().eq("list_id", listId); is ${error.message}`
+          );
+        }
+
+        if (!error) {
+          return true;
+        }
+      } catch (e) {
+        console.log(`Error from deleteSelectedList(listId) catch is ${e}`);
+      }
+    },
 
     // to-do cambiar nombre de la lista:
   },

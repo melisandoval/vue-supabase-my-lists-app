@@ -15,12 +15,13 @@
         </h1>
       </section>
 
-      <!-- list of list titles buttons: -->
       <section>
         <div class="text-lg py-3 px-6 block">
           <h2>Your lists:</h2>
         </div>
 
+        <!-- display a list of List titles buttons: -->
+        <!-- lists come from storeToRefs(listsStore) -->
         <ul>
           <li v-for="list in lists">
             <ListTitleButton
@@ -71,6 +72,8 @@ const listsStore = useListsStore();
 
 // fetch user lists with first render:
 listsStore.fetchUserLists();
+
+// obtain lists state as ref to display a list of Lists titles buttons:
 const { lists } = storeToRefs(listsStore);
 
 // ref for the create a new list input field:
