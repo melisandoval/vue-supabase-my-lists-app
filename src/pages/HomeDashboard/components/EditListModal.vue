@@ -4,13 +4,13 @@
       class="relative min-w-fit z-40 bg-white border-2 border-slate-500 p-12"
     >
       <div class="m-6">
-        <p>Insert the new list's name:</p>
+        <p>Change the list's name:</p>
         <label for="new-list-name">
           <input
             v-model="newListName"
             id="new-list-name"
             type="text"
-            placeholder=""
+            :placeholder="listSelectedToEdit.listName"
             class="border-2 border-slate-500"
           />
         </label>
@@ -29,7 +29,7 @@
           </button>
 
           <p v-if="showInputValMsg">
-            Please enter a name with at least one caracter
+            Please enter a name with at least one caracter.
           </p>
         </div>
       </div>
