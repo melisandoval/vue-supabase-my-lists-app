@@ -36,13 +36,13 @@
       <form v-on:submit.prevent="createNewList" class="my-12">
         <h2>Create a new list:</h2>
         <label
-          for="title"
+          for="new-list-title"
           class="block text-sm font-medium leading-5 text-gray-900"
           >List's title</label
         >
         <input
           v-model="newListTitle"
-          id="title"
+          id="new-list-title"
           class="form-input py-3 px-4 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5"
         />
 
@@ -57,7 +57,6 @@
 </template>
 
 <script setup>
-import { supabase } from "../../../supabase.js";
 import { useUserStore } from "../../../piniaStores/userStore.js";
 import { useListsStore } from "../../../piniaStores/listsStore";
 import { storeToRefs } from "pinia";

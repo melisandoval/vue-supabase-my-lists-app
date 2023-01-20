@@ -10,6 +10,7 @@ export const useListsStore = defineStore("lists", {
   state: () => ({
     lists: null,
     listSelectedToDelete: null,
+    listSelectedToEdit: null,
   }),
 
   actions: {
@@ -49,6 +50,7 @@ export const useListsStore = defineStore("lists", {
     },
 
     // handle state in order to show/hide delete list confirmation modal:
+    // needs to receive Id and name of the list
     selectListToDelete(listObj) {
       this.listSelectedToDelete = listObj;
       console.log(
@@ -87,6 +89,20 @@ export const useListsStore = defineStore("lists", {
       }
     },
 
-    // to-do cambiar nombre de la lista:
+    // handle state in order to show/hide edit list modal:
+    // needs to receive Id and name of the list
+    selectListToEdit(listObj) {
+      this.listSelectedToEdit = listObj;
+      console.log(
+        `listSelectedToEdit in Pinia is ${JSON.stringify(
+          this.listSelectedToEdit
+        )}`
+      );
+    },
+
+    deselectListToEdit() {
+      this.listSelectedToEdit = null;
+      console.log(`listSelectedToEdit in Pinia is ${this.listSelectedToEdit}`);
+    },
   },
 });
