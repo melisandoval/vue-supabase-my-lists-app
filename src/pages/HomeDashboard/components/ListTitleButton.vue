@@ -22,7 +22,11 @@ function handleEditList() {
     listId: props.listId,
     listName: props.title,
   });
-  console.log(listsStore.listSelectedToEdit);
+  console.log(
+    `listsStore.listSelectedToEdit is ${JSON.stringify(
+      listsStore.listSelectedToEdit
+    )}`
+  );
 }
 
 // makes the delete list modal appears:

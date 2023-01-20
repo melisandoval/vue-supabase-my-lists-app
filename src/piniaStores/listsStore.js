@@ -104,5 +104,25 @@ export const useListsStore = defineStore("lists", {
       this.listSelectedToEdit = null;
       console.log(`listSelectedToEdit in Pinia is ${this.listSelectedToEdit}`);
     },
+
+    async editSelectedList(newListTitle, listId) {
+      try {
+        const { error } = await supabase
+          .from("lists")
+          .update({ title: newListTitle })
+          .eq("list_id", listId);
+
+        if (error) {
+          console.log(error.message);
+          return error;
+        }
+
+        if (!error) {
+          this.listSelectedToEdit = null;
+        }
+      } catch (e) {
+        console.log(`Error from editSelectedList() catch is ${e}`);
+      }
+    },
   },
 });

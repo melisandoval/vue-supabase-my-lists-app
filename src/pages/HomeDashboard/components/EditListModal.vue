@@ -27,6 +27,10 @@
           >
             Cancel
           </button>
+
+          <p v-if="showInputValMsg">
+            Please enter a name with at least one caracter
+          </p>
         </div>
       </div>
     </div>
@@ -34,18 +38,43 @@
 </template>
 
 <script setup>
+import { storeToRefs } from "pinia";
 import { ref } from "vue";
 import { useListsStore } from "../../../piniaStores/listsStore";
 
-// list store:
+// lists store:
 const listsStore = useListsStore();
 
-// ref for the input:
+const { listSelectedToEdit } = storeToRefs(listsStore);
 
+// ref for the input:
 const newListName = ref("");
 
-function handleConfirmNewName() {
-  //   console.log(newListName.value);
+// ref for input validation:
+let showInputValMsg = ref(false);
+
+async function handleConfirmNewName() {
+  if (!newListName.value) {
+    showInputValMsg.value = true;
+  } else {
+    try {
+      //   console.log(listsStore.listSelectedToEdit.listId);
+      //   console.log(newListName.value);
+      const error = await listsStore.editSelectedList(
+        newListName.value,
+        listSelectedToEdit.value["listId"]
+      );
+
+      if (!error) {
+        // fetch again the updtated list to update navbar lists buttons:
+        listsStore.fetchUserLists();
+        // set input validation message back to false:
+        showInputValMsg.value = false;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }
 
 function handleCloseModal() {
