@@ -15,7 +15,10 @@ const emit = defineEmits(["deleteList"]);
 const listsStore = useListsStore();
 
 function handleDeleteList() {
-  listsStore.selectList({ listId: props.listId, listName: props.title });
+  listsStore.selectListToDelete({
+    listId: props.listId,
+    listName: props.title,
+  });
 }
 </script>
 

@@ -5,7 +5,7 @@
   >
     Log out
   </button>
-  <DeleteListModal v-if="listSelected" />
+  <DeleteListModal v-if="listSelectedToDelete" />
   <Navbar />
 </template>
 
@@ -24,7 +24,7 @@ const userStore = useUserStore();
 const listsStore = useListsStore();
 
 // ref from store to handle show/hide DeleteListModal component:
-const { listSelected } = storeToRefs(listsStore);
+const { listSelectedToDelete } = storeToRefs(listsStore);
 
 async function logOut() {
   const error = await userStore.signOut();

@@ -9,7 +9,7 @@ export const useListsStore = defineStore("lists", {
 
   state: () => ({
     lists: null,
-    listSelected: null,
+    listSelectedToDelete: null,
   }),
 
   actions: {
@@ -39,16 +39,20 @@ export const useListsStore = defineStore("lists", {
 
     // mostrar modal que borra:
 
-    selectList(listObj) {
-      this.listSelected = listObj;
+    selectListToDelete(listObj) {
+      this.listSelectedToDelete = listObj;
       console.log(
-        `listSelected in Pinia is ${JSON.stringify(this.listSelected)}`
+        `listSelectedToDelete in Pinia is ${JSON.stringify(
+          this.listSelectedToDelete
+        )}`
       );
     },
 
-    deselectList() {
-      this.listSelected = null;
-      console.log(`listSelected in Pinia is ${this.listSelected}`);
+    deselectListToDelete() {
+      this.listSelectedToDelete = null;
+      console.log(
+        `listSelectedToDelete in Pinia is ${this.listSelectedToDelete}`
+      );
     },
 
     // borrar lista seleccionada:
