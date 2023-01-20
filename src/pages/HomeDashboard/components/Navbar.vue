@@ -41,7 +41,7 @@
           >List's title</label
         >
         <input
-          v-model="newList"
+          v-model="newListTitle"
           id="title"
           class="form-input py-3 px-4 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5"
         />
@@ -77,25 +77,24 @@ listsStore.fetchUserLists();
 const { lists } = storeToRefs(listsStore);
 
 // ref for the create a new list input field:
-let newList = ref("");
+let newListTitle = ref("");
 
 // function for create new list form:
 async function createNewList() {
   try {
-    const { error } = await supabase
-      .from("lists")
-      .insert({ title: newList.value, user_id: userStore.user.id });
+    // call listStore action that adds a new list to Supabase Lists table:
+    const { error } = await listsStore.addNewList(newListTitle.value);
 
     if (!error) {
-      // fetch the lists' titles again to reflect the updated lists in the lists tittles section:
+      // fetch the lists' titles again to reflect the updated lists in the lists titles section:
       listsStore.fetchUserLists();
       // clear newList input field:
-      newList.value = "";
+      newListTitle.value = "";
     }
 
     if (error) {
       console.log(
-        `error returned from supabase.from("lists").insert() is ${error.message}`
+        `error returned from listsStore.addNewList() is ${error.message}`
       );
     }
   } catch (e) {

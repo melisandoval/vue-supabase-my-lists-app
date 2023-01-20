@@ -37,8 +37,18 @@ export const useListsStore = defineStore("lists", {
       }
     },
 
-    // mostrar modal que borra:
+    // add a new list to the Lists table in Supabase:
+    async addNewList(newListTitle) {
+      const userStore = useUserStore();
 
+      const { error } = await supabase
+        .from("lists")
+        .insert({ title: newListTitle, user_id: userStore.user.id });
+
+      return { error };
+    },
+
+    // handle state in order to show/hide delete list confirmation modal:
     selectListToDelete(listObj) {
       this.listSelectedToDelete = listObj;
       console.log(
@@ -55,8 +65,7 @@ export const useListsStore = defineStore("lists", {
       );
     },
 
-    // borrar lista seleccionada:
-
+    // delete in Supabase selected list to delete:
     async deleteSelectedList(listId) {
       try {
         const { error } = await supabase
