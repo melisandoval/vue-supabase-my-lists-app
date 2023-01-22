@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="flex flex-row gap-2">
-      <button>{{ title }}</button>
+      <button @click="handleShowList">{{ title }}</button>
       <button @click="handleEditList" class="text-blue-500">Edit</button>
       <button @click="handleDeleteList" class="text-blue-500">Delete</button>
     </div>
@@ -16,12 +16,24 @@ const emit = defineEmits(["deleteList"]);
 
 const listsStore = useListsStore();
 
+// handle show selected list item's:
+function handleShowList() {
+  listsStore.selectListToShow({
+    listName: props.title,
+    listId: props.listId,
+  });
+  console.log(
+    `listsStore.selectedList is ${JSON.stringify(listsStore.selectedList)}`
+  );
+}
+
 // makes the edit list modal appears:
 function handleEditList() {
   listsStore.selectListToEdit({
-    listId: props.listId,
     listName: props.title,
+    listId: props.listId,
   });
+
   console.log(
     `listsStore.listSelectedToEdit is ${JSON.stringify(
       listsStore.listSelectedToEdit
@@ -33,9 +45,15 @@ function handleEditList() {
 function handleDeleteList() {
   // call lists store action and pass a list obj to set listSelectedToDelete state:
   listsStore.selectListToDelete({
-    listId: props.listId,
     listName: props.title,
+    listId: props.listId,
   });
+
+  console.log(
+    `listsStore.listSelectedToDelete is ${JSON.stringify(
+      listsStore.listSelectedToDelete
+    )}`
+  );
 }
 </script>
 

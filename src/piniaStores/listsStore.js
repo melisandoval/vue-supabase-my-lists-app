@@ -9,8 +9,9 @@ export const useListsStore = defineStore("lists", {
 
   state: () => ({
     lists: null,
-    listSelectedToDelete: null,
+    selectedList: null,
     listSelectedToEdit: null,
+    listSelectedToDelete: null,
   }),
 
   actions: {
@@ -38,6 +39,11 @@ export const useListsStore = defineStore("lists", {
       }
     },
 
+    // handle state to SHOW the item's list:
+    selectListToShow(listObj) {
+      this.selectedList = listObj;
+    },
+
     // add a new list to the Lists table in Supabase:
     async addNewList(newListTitle) {
       const userStore = useUserStore();
@@ -49,8 +55,8 @@ export const useListsStore = defineStore("lists", {
       return { error };
     },
 
-    // handle state in order to show/hide delete list confirmation modal:
-    // needs to receive Id and name of the list
+    // handle state in order to SHOW delete list confirmation modal:
+    // needs to receive an obj with the name and Id of the list:
     selectListToDelete(listObj) {
       this.listSelectedToDelete = listObj;
       console.log(
@@ -60,6 +66,7 @@ export const useListsStore = defineStore("lists", {
       );
     },
 
+    // handle state in order to HIDE delete list confirmation modal:
     deselectListToDelete() {
       this.listSelectedToDelete = null;
       console.log(
@@ -67,7 +74,7 @@ export const useListsStore = defineStore("lists", {
       );
     },
 
-    // delete in Supabase selected list to delete:
+    // handle delete in Supabase selected list to delete:
     async deleteSelectedList(listId) {
       try {
         const { error } = await supabase
@@ -89,7 +96,7 @@ export const useListsStore = defineStore("lists", {
       }
     },
 
-    // handle state in order to show/hide edit list modal:
+    // handle state in order to SHOW edit list modal:
     // needs to receive Id and name of the list
     selectListToEdit(listObj) {
       this.listSelectedToEdit = listObj;
@@ -100,6 +107,7 @@ export const useListsStore = defineStore("lists", {
       );
     },
 
+    // handle state in order to HIDE edit list modal:
     deselectListToEdit() {
       this.listSelectedToEdit = null;
       console.log(`listSelectedToEdit in Pinia is ${this.listSelectedToEdit}`);

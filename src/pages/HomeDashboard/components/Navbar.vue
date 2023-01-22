@@ -27,6 +27,7 @@
             <ListTitleButton
               :title="list.title"
               :listId="list.list_id"
+              :key="list.list_id"
             ></ListTitleButton>
           </li>
         </ul>
