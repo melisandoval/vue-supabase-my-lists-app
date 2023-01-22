@@ -10,9 +10,11 @@ export const useListsStore = defineStore("lists", {
   state: () => ({
     lists: null,
     selectedList: null,
-    listSelectedToEdit: null,
-    listSelectedToDelete: null,
+    selectedListToEdit: null,
+    selectedListToDelete: null,
   }),
+
+  //selectedListToDelete
 
   actions: {
     async fetchUserLists() {
@@ -58,19 +60,19 @@ export const useListsStore = defineStore("lists", {
     // handle state in order to SHOW delete list confirmation modal:
     // needs to receive an obj with the name and Id of the list:
     selectListToDelete(listObj) {
-      this.listSelectedToDelete = listObj;
+      this.selectedListToDelete = listObj;
       console.log(
-        `listSelectedToDelete in Pinia is ${JSON.stringify(
-          this.listSelectedToDelete
+        `selectedListToDelete in Pinia is ${JSON.stringify(
+          this.selectedListToDelete
         )}`
       );
     },
 
     // handle state in order to HIDE delete list confirmation modal:
     deselectListToDelete() {
-      this.listSelectedToDelete = null;
+      this.selectedListToDelete = null;
       console.log(
-        `listSelectedToDelete in Pinia is ${this.listSelectedToDelete}`
+        `selectedListToDelete in Pinia is ${this.selectedListToDelete}`
       );
     },
 
@@ -99,25 +101,25 @@ export const useListsStore = defineStore("lists", {
     // handle state in order to SHOW edit list modal:
     // needs to receive Id and name of the list
     selectListToEdit(listObj) {
-      this.listSelectedToEdit = listObj;
+      this.selectedListToEdit = listObj;
       console.log(
-        `listSelectedToEdit in Pinia is ${JSON.stringify(
-          this.listSelectedToEdit
+        `selectedListToEdit in Pinia is ${JSON.stringify(
+          this.selectedListToEdit
         )}`
       );
     },
 
     // handle state in order to HIDE edit list modal:
     deselectListToEdit() {
-      this.listSelectedToEdit = null;
-      console.log(`listSelectedToEdit in Pinia is ${this.listSelectedToEdit}`);
+      this.selectedListToEdit = null;
+      console.log(`selectedListToEdit in Pinia is ${this.selectedListToEdit}`);
     },
 
-    async editSelectedList(newListTitle, listId) {
+    async editSelectedList(newListName, listId) {
       try {
         const { error } = await supabase
           .from("lists")
-          .update({ title: newListTitle })
+          .update({ title: newListName })
           .eq("list_id", listId);
 
         if (error) {
@@ -126,7 +128,7 @@ export const useListsStore = defineStore("lists", {
         }
 
         if (!error) {
-          this.listSelectedToEdit = null;
+          this.selectedListToEdit = null;
         }
       } catch (e) {
         console.log(`Error from editSelectedList() catch is ${e}`);

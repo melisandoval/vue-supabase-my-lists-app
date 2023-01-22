@@ -35,23 +35,23 @@ function handleEditList() {
   });
 
   console.log(
-    `listsStore.listSelectedToEdit is ${JSON.stringify(
-      listsStore.listSelectedToEdit
+    `listsStore.selectedListToEdit is ${JSON.stringify(
+      listsStore.selectedListToEdit
     )}`
   );
 }
 
 // makes the delete list modal appears:
 function handleDeleteList() {
-  // call lists store action and pass a list obj to set listSelectedToDelete state:
+  // call lists store action and pass a list obj to set selectedListToDelete state:
   listsStore.selectListToDelete({
     listName: props.title,
     listId: props.listId,
   });
 
   console.log(
-    `listsStore.listSelectedToDelete is ${JSON.stringify(
-      listsStore.listSelectedToDelete
+    `listsStore.selectedListToDelete is ${JSON.stringify(
+      listsStore.selectedListToDelete
     )}`
   );
 }

@@ -10,7 +10,7 @@
             v-model="newListName"
             id="new-list-name"
             type="text"
-            :placeholder="listSelectedToEdit.listName"
+            :placeholder="selectedListToEdit.listName"
             class="border-2 border-slate-500"
           />
         </label>
@@ -45,9 +45,9 @@ import { useListsStore } from "../../../piniaStores/listsStore";
 // lists store:
 const listsStore = useListsStore();
 
-const { listSelectedToEdit } = storeToRefs(listsStore);
+const { selectedListToEdit } = storeToRefs(listsStore);
 
-// ref for the input:
+// ref for the form input to edit the List's name:
 const newListName = ref("");
 
 // ref for input validation:
@@ -58,11 +58,9 @@ async function handleConfirmNewName() {
     showInputValMsg.value = true;
   } else {
     try {
-      //   console.log(listsStore.listSelectedToEdit.listId);
-      //   console.log(newListName.value);
       const error = await listsStore.editSelectedList(
         newListName.value,
-        listSelectedToEdit.value["listId"]
+        selectedListToEdit.value["listId"]
       );
 
       if (!error) {

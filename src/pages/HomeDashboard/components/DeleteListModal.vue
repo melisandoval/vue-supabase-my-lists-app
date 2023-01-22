@@ -6,7 +6,7 @@
       <div v-if="!showDeleteListResponse" class="m-6">
         <h3>
           Are you sure you want to delete the
-          <span class="text-blue-500">{{ listSelectedToDelete.listName }}</span>
+          <span class="text-blue-500">{{ selectedListToDelete.listName }}</span>
           list?
         </h3>
         <p>All the items asociated to the list will be deleted too!</p>
@@ -50,7 +50,7 @@ import { ref } from "vue";
 // list store:
 const listsStore = useListsStore();
 
-const { listSelectedToDelete } = storeToRefs(listsStore);
+const { selectedListToDelete } = storeToRefs(listsStore);
 
 // to show response and hide delete buttons after deleting a list:
 let showDeleteListResponse = ref(false);
@@ -63,10 +63,10 @@ function handleCloseModal() {
 async function handleDeleteList() {
   // send the ID of the selected list to delete list action in store:
   console.log(
-    `listsStore.listSelectedToDelete is ${listsStore.listSelectedToDelete}`
+    `listsStore.selectedListToDelete is ${listsStore.selectedListToDelete}`
   );
   const isDeleted = await listsStore.deleteSelectedList(
-    listSelectedToDelete.value["listId"]
+    selectedListToDelete.value["listId"]
   );
 
   if (isDeleted) {
@@ -76,7 +76,7 @@ async function handleDeleteList() {
 
   showDeleteListResponse.value = true;
   console.log(
-    `listsStore.listSelectedToDelete is ${listsStore.listSelectedToDelete}`
+    `listsStore.selectedListToDelete is ${listsStore.selectedListToDelete}`
   );
 }
 </script>
