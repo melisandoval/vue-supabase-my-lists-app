@@ -7,6 +7,7 @@
   </button>
   <EditListModal v-if="selectedListToEdit" />
   <DeleteListModal v-if="selectedListToDelete" />
+  <ListItemsWelcomeVue v-if="!selectedList" />
   <Navbar />
 </template>
 
@@ -18,6 +19,7 @@ import { useRouter } from "vue-router";
 import Navbar from "./components/Navbar.vue";
 import DeleteListModal from "./components/DeleteListModal.vue";
 import EditListModal from "./components/EditListModal.vue";
+import ListItemsWelcomeVue from "./components/ListItemsWelcome.vue";
 
 const router = useRouter();
 
@@ -25,8 +27,9 @@ const router = useRouter();
 const userStore = useUserStore();
 const listsStore = useListsStore();
 
-// ref from store to handle show/hide DeleteListModal component:
-const { selectedListToDelete, selectedListToEdit } = storeToRefs(listsStore);
+// ref to handle v-if =
+const { selectedList, selectedListToEdit, selectedListToDelete } =
+  storeToRefs(listsStore);
 
 async function logOut() {
   const error = await userStore.signOut();
