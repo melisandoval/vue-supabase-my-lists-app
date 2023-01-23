@@ -28,7 +28,7 @@ export const useListsStore = defineStore("lists", {
 
         if (data) {
           this.lists = data;
-          console.log(`lists in Pinia store is ${JSON.stringify(this.lists)}`);
+          console.log(`lists in Pinia store are ${JSON.stringify(this.lists)}`);
         }
 
         if (error) {

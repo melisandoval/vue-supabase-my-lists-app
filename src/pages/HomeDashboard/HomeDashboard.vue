@@ -16,10 +16,10 @@ import { useUserStore } from "../../piniaStores/userStore.js";
 import { useListsStore } from "../../piniaStores/listsStore";
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
-import Navbar from "./components/Navbar.vue";
-import DeleteListModal from "./components/DeleteListModal.vue";
-import EditListModal from "./components/EditListModal.vue";
-import ListItemsWelcomeVue from "./components/ListItemsWelcome.vue";
+import Navbar from "./components/Navbar/Navbar.vue";
+import DeleteListModal from "./components/Modals/DeleteListModal.vue";
+import EditListModal from "./components/Modals/EditListModal.vue";
+import ListItemsWelcomeVue from "./components/ListItemsSection/ListItemsWelcome.vue";
 
 const router = useRouter();
 

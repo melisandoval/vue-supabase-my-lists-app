@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-import { useListsStore } from "../../../piniaStores/listsStore";
+import { useListsStore } from "../../../../piniaStores/listsStore";
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
 

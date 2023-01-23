@@ -1,15 +1,13 @@
 <template>
-  <div>
-    <div class="flex flex-row gap-2">
-      <button @click="handleShowList">{{ title }}</button>
-      <button @click="handleEditList" class="text-blue-500">Edit</button>
-      <button @click="handleDeleteList" class="text-blue-500">Delete</button>
-    </div>
-  </div>
+  <section class="flex flex-row gap-2">
+    <button @click="handleShowList">{{ title }}</button>
+    <button @click="handleEditList" class="text-blue-500">Edit</button>
+    <button @click="handleDeleteList" class="text-blue-500">Delete</button>
+  </section>
 </template>
 
 <script setup>
-import { useListsStore } from "../../../piniaStores/listsStore";
+import { useListsStore } from "../../../../../piniaStores/listsStore";
 
 const props = defineProps(["title", "listId"]);
 const emit = defineEmits(["deleteList"]);

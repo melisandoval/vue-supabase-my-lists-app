@@ -40,7 +40,7 @@
 <script setup>
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
-import { useListsStore } from "../../../piniaStores/listsStore";
+import { useListsStore } from "../../../../piniaStores/listsStore";
 
 // lists store:
 const listsStore = useListsStore();
