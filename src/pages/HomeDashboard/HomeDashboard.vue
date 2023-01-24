@@ -8,7 +8,8 @@
       <Navbar />
     </section>
     <section class="lists-items-section-container">
-      <button @click="logOut">Log out</button>
+      <!-- <button @click="logOut">Log out</button> -->
+      <PrimaryButton @click="logOut" text="Log out" />
       <ListItemsWelcomeVue v-if="!selectedList" />
     </section>
   </div>
@@ -23,6 +24,7 @@ import Navbar from "./components/Navbar/Navbar.vue";
 import DeleteListModal from "./components/Modals/DeleteListModal.vue";
 import EditListModal from "./components/Modals/EditListModal.vue";
 import ListItemsWelcomeVue from "./components/ListItemsSection/ListItemsWelcome.vue";
+import PrimaryButton from "../../components/PrimaryButton.vue";
 
 const router = useRouter();
 
