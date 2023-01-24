@@ -84,4 +84,9 @@ async function createNewList() {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+#new-list-title {
+  padding: 0.4em;
+  font-size: 1rem;
+}
+</style>
