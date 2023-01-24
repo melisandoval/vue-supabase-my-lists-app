@@ -9,8 +9,10 @@
     </section>
     <section class="lists-items-section-container">
       <!-- <button @click="logOut">Log out</button> -->
-      <PrimaryButton @click="logOut" text="Log out" />
-      <ListItemsWelcomeVue v-if="!selectedList" />
+      <PrimaryButton @click="logOut" text="Log out" class="log-out-button" />
+      <div>
+        <ListItemsWelcomeVue v-if="!selectedList" />
+      </div>
     </section>
   </div>
 </template>

@@ -215,6 +215,18 @@ h3 {
   background-color: white;
 }
 
+.lists-items-section-container {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.log-out-button {
+  position: absolute;
+  align-self: start;
+  justify-self: end;
+}
+
 @media (min-width: 768px) {
   .dashboard-container {
     width: 100%;
