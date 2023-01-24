@@ -1,7 +1,5 @@
 <template>
-  <button>
-    {{ text }}
-  </button>
+  <button>{{ text }}</button>
 </template>
 
 <script setup>
@@ -10,12 +8,11 @@ const props = defineProps(["text"]);
 
 <style scoped>
 button {
-  font-family: "Pacifico", cursive;
-  color: white;
-  background-color: #fe8684;
+  color: #fe8684;
+  background-color: #fdaea14f;
   font-size: 1.4rem;
   padding: 0.4rem 1rem;
-  border: 0.1rem solid #fe8684;
+  border: 0.1rem solid #fdaea14f;
   border-radius: 0.5rem;
   margin: 1rem;
   cursor: pointer;
@@ -24,7 +21,6 @@ button {
 
 button:hover {
   background-color: white;
-  color: #fe8684;
-  border: 0.1rem solid #fe8684;
+  border: 0.1rem solid #fdaea14f;
 }
 </style>
