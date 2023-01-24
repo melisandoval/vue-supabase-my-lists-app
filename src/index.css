@@ -214,7 +214,7 @@ h3 {
 }
 
 .modal {
-  padding: 2em;
+  padding: 1em;
   background-color: white;
   width: 80%;
   border: solid 0.2em var(--light-pink);
@@ -224,10 +224,10 @@ h3 {
   justify-items: center;
 }
 
-.modal-buttons-container {
+/* .modal-buttons-container {
   display: flex;
   justify-content: space-between;
-}
+} */
 
 .lists-items-section-container {
   position: relative;

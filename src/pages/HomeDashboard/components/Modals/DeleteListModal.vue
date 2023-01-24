@@ -75,10 +75,9 @@ h3 {
   padding: 1rem;
 }
 
-p,
-u {
+p {
   font-size: 1.3rem;
-  padding: 1rem;
+  padding-bottom: 1rem;
 }
 
 p span {

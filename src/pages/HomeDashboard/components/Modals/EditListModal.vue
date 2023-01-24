@@ -4,16 +4,15 @@
       <div class="edit-list-modal-content">
         <h3>Change the list's name:</h3>
         <!-- input field -->
-        <label for="new-list-name">
-          <input
-            v-model="newListName"
-            id="new-list-name"
-            type="text"
-            :placeholder="selectedListToEdit.listName"
-          />
-        </label>
+        <label for="new-list-name"> </label>
+        <input
+          v-model="newListName"
+          id="new-list-name"
+          type="text"
+          :placeholder="selectedListToEdit.listName"
+        />
         <!-- buttons -->
-        <div class="modal-buttons-container">
+        <div>
           <PrimaryButton text="Confirm" @click="handleConfirmNewName" />
           <SecondaryButton text="Cancel" @click="handleCloseModal" />
         </div>
@@ -75,6 +74,10 @@ function handleCloseModal() {
 </script>
 
 <style scoped>
+* {
+  text-align: center;
+}
+
 h3 {
   font-size: 2rem;
   padding: 1em 0;
@@ -82,7 +85,7 @@ h3 {
 }
 
 input[type="text"] {
-  width: 100%;
+  max-width: 100%;
   border: 0.1em solid #fdaea14f;
   margin: 1em 0;
 }
@@ -92,7 +95,9 @@ input::placeholder {
 }
 
 .edit-list-modal-content {
+  max-width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 </style>
