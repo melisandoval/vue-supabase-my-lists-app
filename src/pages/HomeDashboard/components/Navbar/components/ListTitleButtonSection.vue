@@ -1,8 +1,20 @@
 <template>
-  <section class="flex flex-row gap-2">
+  <section class="list-title-button-section">
     <button @click="handleShowList">{{ title }}</button>
-    <button @click="handleEditList" class="text-blue-500">Edit</button>
-    <button @click="handleDeleteList" class="text-blue-500">Delete</button>
+    <button @click="handleEditList" class="text-blue-500">
+      <img
+        src="../../../../../assets/edit-pencil.svg"
+        alt="edit-icon"
+        class="action-icon"
+      />
+    </button>
+    <button @click="handleDeleteList" class="text-blue-500">
+      <img
+        src="../../../../../assets/trash.svg"
+        alt="delete-icon"
+        class="action-icon"
+      />
+    </button>
   </section>
 </template>
 

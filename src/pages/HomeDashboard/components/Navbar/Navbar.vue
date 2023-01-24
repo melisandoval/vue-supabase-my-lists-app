@@ -1,17 +1,13 @@
 <template>
   <nav>
     <!-- welcome section -->
-    <section class="navbar-welcome-section">
-      <h1>
-        <span>{{ userStore.user.user_metadata.name }}</span
-        >'s <br />
-        amaizing lists!
-      </h1>
+    <section class="navbar-header">
+      <img src="../../../../assets/rabbit-writting.png" alt="" />
     </section>
     <!-- lists of Lists section -->
-    <section>
+    <section class="lists-of-lists-section">
       <div>
-        <h2>My lists:</h2>
+        <h1>My lists</h1>
       </div>
       <!-- display a list of List titles buttons: -->
       <!-- lists come from storeToRefs(listsStore) -->
@@ -26,12 +22,16 @@
       </ul>
     </section>
     <!-- new list form section -->
-    <section>
-      <form v-on:submit.prevent="createNewList" class="my-12">
-        <h2>New list:</h2>
-        <label for="new-list-title">List's title</label>
-        <input v-model="newListTitle" id="new-list-title" />
-        <button>Add list</button>
+    <section class="navbar-new-list-form-section">
+      <form v-on:submit.prevent="createNewList">
+        <h3>New list</h3>
+        <label for="new-list-title">List's title:</label>
+        <div class="new-list-input-and-button">
+          <input v-model="newListTitle" id="new-list-title" />
+          <button>
+            <img src="../../../../assets/add-circle.svg" alt="Add list" />
+          </button>
+        </div>
       </form>
     </section>
   </nav>
