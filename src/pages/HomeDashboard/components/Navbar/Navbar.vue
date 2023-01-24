@@ -2,7 +2,7 @@
   <nav>
     <!-- welcome section -->
     <section class="navbar-header">
-      <img src="../../../../assets/rabbit-writting.png" alt="" />
+      <img src="../../../../assets/rabbit-writting-2.png" alt="" />
     </section>
     <!-- lists of Lists section -->
     <section class="lists-of-lists-section">
@@ -66,6 +66,7 @@ async function createNewList() {
     const { error } = await listsStore.addNewList(newListTitle.value);
 
     if (!error) {
+      console.log(newListTitle.value);
       // fetch the lists' titles again to reflect the updated lists in the lists titles section:
       listsStore.fetchUserLists();
       // clear newList input field:

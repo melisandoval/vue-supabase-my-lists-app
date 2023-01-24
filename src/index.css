@@ -4,15 +4,19 @@
 
 :root {
   --light-pink: #fdaea14f;
-  --dark-pink: #fc8683;
+  --dark-pink: #fe8684;
   --dark-brown: #300703;
   /* --dark-grey: #595959; */
 }
 
 * {
-  color: var(--dark-brown);
+  color: var(--dark-pink);
   font-family: "Gloria Hallelujah", cursive;
   font-size: 1rem;
+}
+
+wired-input {
+  color: var(--dark-brown);
 }
 
 img {
@@ -27,7 +31,8 @@ body {
 
 h1,
 h2,
-h3 {
+h3,
+p {
   margin-block-start: 0px;
   margin-block-end: 0px;
 }
@@ -46,9 +51,20 @@ button {
   padding: 0;
   background: none;
   border: none;
+  font-size: 1.1rem;
 }
 
 /* general styles */
+
+.action-icon-button {
+  cursor: pointer;
+  padding: 0.2em;
+}
+
+.action-icon-button:hover {
+  background-color: var(--dark-pink);
+  border-radius: 55%;
+}
 
 .action-icon {
   width: 1rem;
@@ -75,7 +91,7 @@ nav {
   height: 100vh;
   display: grid;
   grid-template-rows: 25% 50% 25%;
-  padding: 2em;
+  padding: 1em;
   justify-items: center;
   align-items: start;
   max-width: 100%;
@@ -101,9 +117,9 @@ h1 span {
   text-align: center;
 }
 
-h1 span {
+/* h1 span {
   color: var(--dark-pink);
-}
+} */
 
 h3 {
   font-size: 1.8rem;
@@ -121,6 +137,19 @@ h3 {
   padding: 0.2em 0;
   display: flex;
   justify-content: space-between;
+  gap: 0.5em;
+}
+
+.list-title-button {
+  padding: 0em 0.2em;
+}
+
+.list-title-button:hover {
+  color: white;
+  background-color: var(--dark-pink);
+  cursor: pointer;
+  transform: skew(9deg, 0deg);
+  font-style: italic;
 }
 
 .list-title-button-div button {
@@ -130,6 +159,8 @@ h3 {
 
 .title-edit-delete-buttons-container {
   display: flex;
+  align-items: center;
+  gap: 0.5em;
 }
 
 .navbar-new-list-form-section form {
@@ -151,10 +182,32 @@ h3 {
   padding: 0.2em;
 }
 
+.modal-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.modal {
+  border: solid 2px var(--dark-brown);
+  padding: 2em;
+  background-color: white;
+}
+
 @media (min-width: 768px) {
   .dashboard-container {
+    width: 100%;
+    height: 100%;
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 40% 60%;
     height: 100vh;
+  }
+}
+
+@media (min-width: 1024px) {
+  .dashboard-container {
+    grid-template-columns: 30% 70%;
   }
 }

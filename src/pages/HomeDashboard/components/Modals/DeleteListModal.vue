@@ -1,42 +1,23 @@
 <template>
-  <div class="absolute w-full h-full grid place-items-center">
-    <div
-      class="relative min-w-fit z-40 bg-white border-2 border-slate-500 p-12"
-    >
+  <div class="modal-container">
+    <div class="modal">
       <div v-if="!showDeleteListResponse" class="m-6">
         <h3>
           Are you sure you want to delete the
-          <span class="text-blue-500">{{ selectedListToDelete.listName }}</span>
+          <span>{{ selectedListToDelete.listName }}</span>
           list?
         </h3>
         <p>All the items asociated to the list will be deleted too!</p>
 
         <div>
-          <button
-            @click="handleDeleteList"
-            class="border-2 border-slate-500 p-4 m-2"
-          >
-            Delete list
-          </button>
-          <button
-            @click="handleCloseModal"
-            class="border-2 border-slate-500 p-4 m-2"
-          >
-            Cancel
-          </button>
+          <button @click="handleDeleteList">Delete list</button>
+          <button @click="handleCloseModal">Cancel</button>
         </div>
       </div>
 
       <div v-if="showDeleteListResponse" class="grid place-items-center">
-        <p class="bg-blue-500 text-center p-4">
-          Done! The list has been deleted.
-        </p>
-        <button
-          @click="handleCloseModal"
-          class="m-4 p-2 border-2 border-slate-500"
-        >
-          Close
-        </button>
+        <p>Done! The list has been deleted.</p>
+        <button @click="handleCloseModal">Close</button>
       </div>
     </div>
   </div>

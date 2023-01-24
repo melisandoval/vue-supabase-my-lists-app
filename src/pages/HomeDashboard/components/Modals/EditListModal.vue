@@ -1,9 +1,7 @@
 <template>
-  <div class="absolute w-full h-full grid place-items-center">
-    <div
-      class="relative min-w-fit z-40 bg-white border-2 border-slate-500 p-12"
-    >
-      <div class="m-6">
+  <div class="modal-container">
+    <div class="modal">
+      <div class="modal-modal-content">
         <p>Change the list's name:</p>
         <label for="new-list-name">
           <input
@@ -11,22 +9,11 @@
             id="new-list-name"
             type="text"
             :placeholder="selectedListToEdit.listName"
-            class="border-2 border-slate-500"
           />
         </label>
         <div>
-          <button
-            @click="handleConfirmNewName"
-            class="border-2 border-slate-500 p-4 m-2"
-          >
-            Confirm
-          </button>
-          <button
-            @click="handleCloseModal"
-            class="border-2 border-slate-500 p-4 m-2"
-          >
-            Cancel
-          </button>
+          <button @click="handleConfirmNewName">Confirm</button>
+          <button @click="handleCloseModal">Cancel</button>
 
           <p v-if="showInputValMsg">
             Please enter a name with at least one caracter.

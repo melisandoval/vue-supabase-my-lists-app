@@ -1,22 +1,17 @@
 <template>
+  <!-- full page modals -->
+  <EditListModal v-if="selectedListToEdit" />
+  <DeleteListModal v-if="selectedListToDelete" />
+  <!-- Home/ Dashboard -->
   <div class="dashboard-container">
     <section class="navbar-container">
       <Navbar />
     </section>
     <section class="lists-items-section-container">
-      <!-- <button
-        @click="logOut"
-        class="bg-blue-500 hover:bg-blue-700 absolute top-0 right-0 text-white font-bold py-2 px-4 my-6 mx-8 rounded focus:outline-none focus:shadow-outline"
-      >
-        Log out
-      </button>
-      <ListItemsWelcomeVue v-if="!selectedList" /> -->
+      <button @click="logOut">Log out</button>
+      <ListItemsWelcomeVue v-if="!selectedList" />
     </section>
   </div>
-
-  <!-- <EditListModal v-if="selectedListToEdit" />
-  <DeleteListModal v-if="selectedListToDelete" />
-   -->
 </template>
 
 <script setup>
