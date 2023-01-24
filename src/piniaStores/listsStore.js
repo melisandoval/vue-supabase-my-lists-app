@@ -24,7 +24,8 @@ export const useListsStore = defineStore("lists", {
         const { data, error } = await supabase
           .from("lists")
           .select()
-          .match({ user_id: userStore.user.id });
+          .match({ user_id: userStore.user.id })
+          .order("title", { ascending: true });
 
         if (data) {
           this.lists = data;
