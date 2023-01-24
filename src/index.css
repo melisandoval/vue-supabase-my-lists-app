@@ -53,6 +53,7 @@ button {
 .action-icon {
   width: 1rem;
   height: 1rem;
+  padding: 0.2rem;
 }
 
 h1,
@@ -113,11 +114,22 @@ h3 {
 }
 
 .lists-of-lists-section ul {
-  padding: 2em;
+  padding: 2em 0;
 }
 
-.list-title-button-section {
+.list-title-button-div {
   padding: 0.2em 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.list-title-button-div button {
+  display: grid;
+  place-items: center;
+}
+
+.title-edit-delete-buttons-container {
+  display: flex;
 }
 
 .navbar-new-list-form-section form {

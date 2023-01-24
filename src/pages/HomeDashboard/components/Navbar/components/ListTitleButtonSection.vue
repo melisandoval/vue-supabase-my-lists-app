@@ -1,21 +1,23 @@
 <template>
-  <section class="list-title-button-section">
+  <div class="list-title-button-div">
     <button @click="handleShowList">{{ title }}</button>
-    <button @click="handleEditList" class="text-blue-500">
-      <img
-        src="../../../../../assets/edit-pencil.svg"
-        alt="edit-icon"
-        class="action-icon"
-      />
-    </button>
-    <button @click="handleDeleteList" class="text-blue-500">
-      <img
-        src="../../../../../assets/trash.svg"
-        alt="delete-icon"
-        class="action-icon"
-      />
-    </button>
-  </section>
+    <div class="title-edit-delete-buttons-container">
+      <button @click="handleEditList" class="text-blue-500">
+        <img
+          src="../../../../../assets/edit-pencil.svg"
+          alt="edit-icon"
+          class="action-icon"
+        />
+      </button>
+      <button @click="handleDeleteList" class="text-blue-500">
+        <img
+          src="../../../../../assets/trash.svg"
+          alt="delete-icon"
+          class="action-icon"
+        />
+      </button>
+    </div>
+  </div>
 </template>
 
 <script setup>
