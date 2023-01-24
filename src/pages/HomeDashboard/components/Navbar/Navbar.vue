@@ -2,14 +2,14 @@
   <nav>
     <!-- welcome section -->
     <section class="navbar-header">
-      <img src="../../../../assets/rabbit-writting-2.png" alt="" />
+      <img src="../../../../assets/rabbit-writting.png" alt="" />
     </section>
     <!-- lists of Lists section -->
     <section class="lists-of-lists-section">
       <div>
         <h1>My lists</h1>
       </div>
-      <!-- display a list of List titles buttons: -->
+      <!-- Display a list of List titles buttons, -->
       <!-- lists come from storeToRefs(listsStore) -->
       <ul>
         <li v-for="list in lists">

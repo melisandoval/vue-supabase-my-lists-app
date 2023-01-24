@@ -54,6 +54,17 @@ button {
   font-size: 1.1rem;
 }
 
+input {
+  padding: 0;
+  background: white;
+  border: none;
+  border-radius: 0.2em;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 /* general styles */
 
 .action-icon-button {
@@ -166,15 +177,22 @@ h3 {
 .navbar-new-list-form-section form {
   display: flex;
   flex-direction: column;
+  gap: 0.3em;
+}
+
+.navbar-new-list-form-section label {
+  font-size: 0.9rem;
 }
 
 .new-list-input-and-button {
   display: flex;
+  gap: 0.5em;
 }
 
 .new-list-input-and-button button {
   display: grid;
   place-items: center;
+  cursor: pointer;
 }
 
 .new-list-input-and-button img {
