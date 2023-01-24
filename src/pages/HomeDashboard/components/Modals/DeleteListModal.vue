@@ -2,22 +2,22 @@
   <div class="modal-container">
     <div class="modal">
       <div v-if="!showDeleteListResponse" class="m-6">
-        <h3>
-          Are you sure you want to delete the
-          <span>{{ selectedListToDelete.listName }}</span>
-          list?
-        </h3>
-        <p>All the items asociated to the list will be deleted too!</p>
-
+        <h3>Are you sure?</h3>
+        <p>
+          All the items asociated with the list <br />
+          <span>" {{ selectedListToDelete.listName }} "</span><br />
+          will be deleted too!!!
+        </p>
         <div>
-          <button @click="handleDeleteList">Delete list</button>
-          <button @click="handleCloseModal">Cancel</button>
+          <SecondaryButton @click="handleDeleteList" text="Delete list" />
+          <PrimaryButton @click="handleCloseModal" text="Cancel" />
         </div>
       </div>
 
       <div v-if="showDeleteListResponse" class="grid place-items-center">
-        <p>Done! The list has been deleted.</p>
-        <button @click="handleCloseModal">Close</button>
+        <h3>Done!</h3>
+        <p>The list has been deleted.</p>
+        <PrimaryButton @click="handleCloseModal" text="Close" />
       </div>
     </div>
   </div>
@@ -27,6 +27,8 @@
 import { useListsStore } from "../../../../piniaStores/listsStore";
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
+import SecondaryButton from "../../../../components/SecondaryButton.vue";
+import PrimaryButton from "../../../../components/PrimaryButton.vue";
 
 // list store:
 const listsStore = useListsStore();
@@ -62,4 +64,27 @@ async function handleDeleteList() {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+* {
+  text-align: center;
+}
+
+h3 {
+  font-family: "Pacifico", cursive;
+  font-size: 2.2rem;
+  padding: 1rem;
+}
+
+p,
+u {
+  font-size: 1.3rem;
+  padding: 1rem;
+}
+
+p span {
+  font-size: 1.3rem;
+  background-color: #fdaea14f;
+  font-family: "Pacifico", cursive;
+  padding: 0 1em;
+}
+</style>

@@ -3,7 +3,6 @@
     <div class="modal">
       <div class="edit-list-modal-content">
         <h3>Change the list's name:</h3>
-
         <!-- input field -->
         <label for="new-list-name">
           <input
@@ -13,15 +12,11 @@
             :placeholder="selectedListToEdit.listName"
           />
         </label>
-
+        <!-- buttons -->
         <div class="modal-buttons-container">
-          <!-- <button @click="handleConfirmNewName">Confirm</button> -->
           <PrimaryButton text="Confirm" @click="handleConfirmNewName" />
-          <!-- <SecondaryButton text="Cancel" @click="handleCloseModal /> -->
-          <!-- <button @click="handleCloseModal">Cancel</button> -->
           <SecondaryButton text="Cancel" @click="handleCloseModal" />
         </div>
-
         <!-- error message: -->
         <div v-if="showInputValMsg">
           <p>Please enter a name with at least one caracter.</p>
@@ -64,6 +59,8 @@ async function handleConfirmNewName() {
         listsStore.fetchUserLists();
         // set input validation message back to false:
         showInputValMsg.value = false;
+        // set pinia state selectedListToEdit back to null:
+        listsStore.deselectListToEdit();
       }
     } catch (e) {
       console.log(e);
