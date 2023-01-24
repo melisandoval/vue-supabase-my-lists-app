@@ -1,3 +1,60 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --light-pink: #f2ced1;
+  --dark-pink: #ff7589;
+  --dark-grey: #595959;
+}
+
+* {
+  color: var(--dark-grey);
+  font-family: "Gloria Hallelujah", cursive;
+  font-size: 1rem;
+}
+
+h1,
+h2 {
+  font-family: "Pacifico", cursive;
+}
+
+.navbar-container {
+  display: block;
+  background-color: var(--light-pink);
+  max-width: 100%;
+  height: 100%;
+}
+
+nav {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 70% 30%;
+  padding: 2em;
+}
+
+.navbar-welcome-section {
+  display: none;
+}
+
+h1,
+h1 span {
+  font-size: 3rem;
+  font-family: "Pacifico", cursive;
+}
+
+h1 span {
+  color: var(--dark-pink);
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+@media (min-width: 768px) {
+  .dashboard-container {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    height: 100vh;
+  }
+}

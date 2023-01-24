@@ -1,60 +1,40 @@
 <template>
-  <section class="h-screen">
-    <nav
-      class="bg-gray-200 min-w-min max-w-xl px-8 flex flex-col absolute inset-y-0 left-0"
-    >
-      <!-- welcome section -->
-      <section
-        class="text-3xl text-blue-500 py-16 px-6 block font-medium leading-relaxed"
-      >
-        <h1>
-          Welcome, <br />
-          <span class="text-gray-900">{{
-            userStore.user.user_metadata.name
-          }}</span>
-        </h1>
-      </section>
-
-      <section>
-        <div class="text-lg py-3 px-6 block">
-          <h2>Your lists:</h2>
-        </div>
-
-        <!-- display a list of List titles buttons: -->
-        <!-- lists come from storeToRefs(listsStore) -->
-        <ul>
-          <li v-for="list in lists">
-            <ListTitleButton
-              :title="list.title"
-              :listId="list.list_id"
-              :key="list.list_id"
-            ></ListTitleButton>
-          </li>
-        </ul>
-      </section>
-
-      <!-- form to create a new List: -->
+  <nav>
+    <!-- welcome section -->
+    <section class="navbar-welcome-section">
+      <h1>
+        <span>{{ userStore.user.user_metadata.name }}</span
+        >'s <br />
+        amaizing lists!
+      </h1>
+    </section>
+    <!-- lists of Lists section -->
+    <section>
+      <div>
+        <h2>My lists:</h2>
+      </div>
+      <!-- display a list of List titles buttons: -->
+      <!-- lists come from storeToRefs(listsStore) -->
+      <ul>
+        <li v-for="list in lists">
+          <ListTitleButton
+            :title="list.title"
+            :listId="list.list_id"
+            :key="list.list_id"
+          ></ListTitleButton>
+        </li>
+      </ul>
+    </section>
+    <!-- new list form section -->
+    <section>
       <form v-on:submit.prevent="createNewList" class="my-12">
-        <h2>Create a new list:</h2>
-        <label
-          for="new-list-title"
-          class="block text-sm font-medium leading-5 text-gray-900"
-          >List's title</label
-        >
-        <input
-          v-model="newListTitle"
-          id="new-list-title"
-          class="form-input py-3 px-4 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-        />
-
-        <button
-          class="px-4 py-2 font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-500 focus:outline-none focus:shadow-outline-indigo active:bg-indigo-800"
-        >
-          Add list
-        </button>
+        <h2>New list:</h2>
+        <label for="new-list-title">List's title</label>
+        <input v-model="newListTitle" id="new-list-title" />
+        <button>Add list</button>
       </form>
-    </nav>
-  </section>
+    </section>
+  </nav>
 </template>
 
 <script setup>
