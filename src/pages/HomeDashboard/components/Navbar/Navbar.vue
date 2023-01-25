@@ -24,7 +24,7 @@
 
     <!-- new list form section -->
     <section class="navbar-new-list-form-section">
-      <form v-on:submit.prevent="createNewList">
+      <form v-on:submit.prevent="createNewList" autocomplete="off">
         <h3>New list</h3>
         <label for="new-list-title">List's title:</label>
         <div class="new-list-input-and-button">

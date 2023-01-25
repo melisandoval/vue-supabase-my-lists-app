@@ -5,11 +5,6 @@
     </button>
     <div class="title-edit-delete-buttons-container">
       <button @click="handleEditList" class="action-icon-button">
-        <!-- <img
-          src="../../../../../assets/edit-pencil.svg"
-          alt="edit-icon"
-          class="action-icon"
-        /> -->
         <svg
           class="action-icon"
           width="16px"

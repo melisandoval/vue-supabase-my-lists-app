@@ -1,7 +1,7 @@
 <template>
   <!-- form section -->
   <section>
-    <form v-on:submit.prevent="createNewListItem">
+    <form v-on:submit.prevent="createNewListItem" autocomplete="off">
       <div class="new-item-form-content">
         <h3>New item:</h3>
         <label for="new-item"></label>
@@ -17,16 +17,19 @@
       </div>
     </form>
   </section>
-
   <!-- list of list's items section -->
   <section>
-    <h2>{{ listsStore.selectedList.listName }}:</h2>
+    <h2>{{ listsStore.selectedList.listName }}</h2>
+    <ul class="list-of-items">
+      <li><Item /></li>
+    </ul>
   </section>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useListsStore } from "../../../../piniaStores/listsStore";
+import Item from "./Item.vue";
 
 // stores:
 const listsStore = useListsStore();
@@ -102,5 +105,9 @@ img {
 .error-msg {
   font-size: 0.9rem;
   padding: 0;
+}
+
+.list-of-items {
+  padding: 2em;
 }
 </style>
