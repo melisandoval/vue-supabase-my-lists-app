@@ -7,6 +7,8 @@
         @click="toggleBullet"
       />
     </div>
+    <!-- item text -->
+    <p>Algo para hacer</p>
     <!-- favorite button -->
     <div class="button-container">
       <button @click="toggleFavourite">
@@ -50,8 +52,6 @@
         </svg>
       </button>
     </div>
-    <!-- item text -->
-    <p>Algo para hacer</p>
   </div>
 </template>
 
@@ -82,6 +82,7 @@ button {
 
 .item-component p {
   padding-left: 0.6em;
+  padding-right: 0.1em;
 }
 
 .button-container {
@@ -116,7 +117,7 @@ button {
 }
 
 .heart-icon {
-  width: 1.3rem;
-  height: 1.3rem;
+  width: 0.9rem;
+  height: 0.9rem;
 }
 </style>
