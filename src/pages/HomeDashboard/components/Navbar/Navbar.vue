@@ -33,7 +33,7 @@
             <img src="../../../../assets/add-circle.svg" alt="Add list" />
           </button>
         </div>
-        <p v-if="showErrorMsg">Please add least one character.</p>
+        <p v-if="showErrorMsg">Please add at least one character.</p>
       </form>
     </section>
   </nav>
@@ -96,5 +96,6 @@ async function createNewList() {
 #new-list-title {
   padding: 0.4em;
   font-size: 1rem;
+  width: 100%;
 }
 </style>
