@@ -202,6 +202,10 @@ h3 {
   padding: 0.2em;
 }
 
+.new-list-input-and-button p {
+  font-size: 0.9rem;
+}
+
 /* modals */
 
 .modal-container {
@@ -223,11 +227,6 @@ h3 {
   place-items: center;
   justify-items: center;
 }
-
-/* .modal-buttons-container {
-  display: flex;
-  justify-content: space-between;
-} */
 
 .lists-items-section-container {
   position: relative;

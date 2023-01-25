@@ -21,6 +21,7 @@
         </li>
       </ul>
     </section>
+
     <!-- new list form section -->
     <section class="navbar-new-list-form-section">
       <form v-on:submit.prevent="createNewList">
@@ -32,6 +33,7 @@
             <img src="../../../../assets/add-circle.svg" alt="Add list" />
           </button>
         </div>
+        <p v-if="showErrorMsg">Please add least one character.</p>
       </form>
     </section>
   </nav>
@@ -58,25 +60,31 @@ const { lists } = storeToRefs(listsStore);
 
 // ref for the create a new list input field:
 let newListTitle = ref("");
+let showErrorMsg = ref(false);
 
 // function for create new list form:
 async function createNewList() {
   try {
-    // call listStore action that adds a new list to Supabase Lists table:
-    const { error } = await listsStore.addNewList(newListTitle.value);
+    if (newListTitle.value.length === 0) {
+      showErrorMsg.value = true;
+    } else {
+      showErrorMsg.value = false;
+      // call listStore action that adds a new list to Supabase Lists table:
+      const { error } = await listsStore.addNewList(newListTitle.value);
 
-    if (!error) {
-      console.log(newListTitle.value);
-      // fetch the lists' titles again to reflect the updated lists in the lists titles section:
-      listsStore.fetchUserLists();
-      // clear newList input field:
-      newListTitle.value = "";
-    }
+      if (!error) {
+        console.log(newListTitle.value);
+        // fetch the lists' titles again to reflect the updated lists in the lists titles section:
+        listsStore.fetchUserLists();
+        // clear newList input field:
+        newListTitle.value = "";
+      }
 
-    if (error) {
-      console.log(
-        `error returned from listsStore.addNewList() is ${error.message}`
-      );
+      if (error) {
+        console.log(
+          `error returned from listsStore.addNewList() is ${error.message}`
+        );
+      }
     }
   } catch (e) {
     console.log(`error from createNewList() is ${e}`);
