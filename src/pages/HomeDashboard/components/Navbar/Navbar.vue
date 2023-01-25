@@ -33,7 +33,9 @@
             <img src="../../../../assets/add-circle.svg" alt="Add list" />
           </button>
         </div>
-        <p v-if="showErrorMsg">Please add at least one character.</p>
+        <p v-if="showErrorMsg" class="error-msg">
+          Please add at least one character.
+        </p>
       </form>
     </section>
   </nav>
@@ -65,8 +67,12 @@ let showErrorMsg = ref(false);
 // function for create new list form:
 async function createNewList() {
   try {
+    // preven user to create a list with an empty string:
     if (newListTitle.value.length === 0) {
       showErrorMsg.value = true;
+      setTimeout(() => {
+        showErrorMsg.value = false;
+      }, "2000");
     } else {
       showErrorMsg.value = false;
       // call listStore action that adds a new list to Supabase Lists table:
@@ -97,5 +103,9 @@ async function createNewList() {
   padding: 0.4em;
   font-size: 1rem;
   width: 100%;
+}
+
+.error-msg {
+  font-size: 0.8rem;
 }
 </style>
