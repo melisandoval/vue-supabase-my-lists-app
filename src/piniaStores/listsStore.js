@@ -2,8 +2,6 @@ import { defineStore } from "pinia";
 import { supabase } from "../supabase";
 import { useUserStore } from "./userStore";
 
-// const userStore = useUserStore();
-
 export const useListsStore = defineStore("lists", {
   stores: [useUserStore],
 
@@ -13,8 +11,6 @@ export const useListsStore = defineStore("lists", {
     selectedListToEdit: null,
     selectedListToDelete: null,
   }),
-
-  //selectedListToDelete
 
   actions: {
     async fetchUserLists() {

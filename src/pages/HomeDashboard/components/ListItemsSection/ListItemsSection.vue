@@ -21,15 +21,23 @@
   <section>
     <h2>{{ listsStore.selectedList.listName }}</h2>
     <ul class="list-of-items">
-      <li><Item /></li>
+      <Item v-for="item in list" :text="item.name" />
     </ul>
   </section>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import { useListsStore } from "../../../../piniaStores/listsStore";
 import Item from "./Item.vue";
+
+// array de prueba BORRAR:
+const list = reactive([
+  { name: "Harry Potter 1" },
+  { name: "Cuidado bebé suelto" },
+  { name: "Mi pobre angelito" },
+  { name: "Mean girls" },
+]);
 
 // stores:
 const listsStore = useListsStore();
@@ -108,6 +116,6 @@ img {
 }
 
 .list-of-items {
-  padding: 2em;
+  padding: 0 2em 2em;
 }
 </style>

@@ -25,11 +25,6 @@
         </svg>
       </button>
       <button @click="handleDeleteList" class="action-icon-button">
-        <!-- <img
-          src="../../../../../assets/trash.svg"
-          alt="delete-icon"
-          class="action-icon"
-        /> -->
         <svg
           class="action-icon"
           width="16px"

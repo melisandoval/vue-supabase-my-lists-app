@@ -1,5 +1,5 @@
 <template>
-  <div class="item-component">
+  <li class="item-component">
     <!-- bullet button -->
     <div class="button-container">
       <button
@@ -8,7 +8,7 @@
       />
     </div>
     <!-- item text -->
-    <p>Algo para hacer</p>
+    <p>{{ text }}</p>
     <!-- favorite button -->
     <div class="button-container">
       <button @click="toggleFavourite">
@@ -52,11 +52,13 @@
         </svg>
       </button>
     </div>
-  </div>
+  </li>
 </template>
 
 <script setup>
 import { ref } from "vue";
+
+const props = defineProps(["text"]);
 
 let isCompleted = ref(true);
 let isFavourite = ref(false);
