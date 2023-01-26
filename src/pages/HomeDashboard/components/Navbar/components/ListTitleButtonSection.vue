@@ -62,9 +62,6 @@ function handleShowList() {
     listName: props.title,
     listId: props.listId,
   });
-  console.log(
-    `listsStore.selectedList is ${JSON.stringify(listsStore.selectedList)}`
-  );
 }
 
 // makes the edit list modal appears:
@@ -88,12 +85,6 @@ function handleDeleteList() {
     listName: props.title,
     listId: props.listId,
   });
-
-  console.log(
-    `listsStore.selectedListToDelete is ${JSON.stringify(
-      listsStore.selectedListToDelete
-    )}`
-  );
 }
 </script>
 

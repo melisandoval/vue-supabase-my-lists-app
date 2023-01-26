@@ -12,40 +12,57 @@
           </button>
         </div>
         <p v-if="showErrorMsg" class="error-msg">
-          Please add at least one character.
+          {{ errorMsg }}
         </p>
       </div>
     </form>
   </section>
   <!-- list of list's items section -->
   <section>
-    <h2>{{ listsStore.selectedList.listName }}</h2>
+    <h2>{{ selectedList.listName }}</h2>
     <ul class="list-of-items">
-      <Item v-for="item in list" :text="item.name" />
+      <Item v-for="item in items" :text="item.item" />
     </ul>
   </section>
 </template>
 
 <script setup>
-import { ref, reactive } from "vue";
+import { ref, watch, onMounted } from "vue";
 import { useListsStore } from "../../../../piniaStores/listsStore";
+import { useItemsStore } from "../../../../piniaStores/itemsStore";
+import { storeToRefs } from "pinia";
 import Item from "./Item.vue";
 
-// array de prueba BORRAR:
-const list = reactive([
-  { name: "Harry Potter 1" },
-  { name: "Cuidado bebé suelto" },
-  { name: "Mi pobre angelito" },
-  { name: "Mean girls" },
-]);
+const DEFAULT_ERROR_MESSAGE = "Please add at least one character.";
 
 // stores:
 const listsStore = useListsStore();
+const itemsStore = useItemsStore();
 
+// states from the stores:
+const { items } = storeToRefs(itemsStore);
+const { selectedList } = storeToRefs(listsStore);
+
+// call fetch items of current selected list with first component render:
+onMounted(() => {
+  itemsStore.fetchListItems(selectedList.value.listId);
+});
+
+// call fetch items again whenever selectedList changes!:
+watch(selectedList, async () => {
+  itemsStore.fetchListItems(selectedList.value.listId);
+});
+
+// component refs:
 let newListItem = ref("");
 let showErrorMsg = ref(false);
+let errorMsg = ref(DEFAULT_ERROR_MESSAGE);
 
-function createNewListItem() {
+// function called by add new item form:
+async function createNewListItem() {
+  // set error message back to its default just in case was changed in last call:
+  errorMsg.value = DEFAULT_ERROR_MESSAGE;
+
   // prevent user to send an empty string:
   if (newListItem.value.length === 0) {
     showErrorMsg.value = true;
@@ -57,7 +74,24 @@ function createNewListItem() {
   // if is not empty string, allow to create new item:
   if (newListItem.value.length > 0) {
     showErrorMsg.value = false;
+
     console.log(newListItem.value);
+
+    try {
+      const error = await itemsStore.addItemToList(newListItem.value);
+      if (error) {
+        errorMsg.value = error.message;
+      }
+      if (!error) {
+        // if there is no error,
+        // fetch again the items in order to display them in component:
+        itemsStore.fetchListItems(selectedList.value.listId);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    // clean input field:
     newListItem.value = "";
   }
 }

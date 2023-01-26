@@ -15,7 +15,6 @@ export const useListsStore = defineStore("lists", {
   actions: {
     async fetchUserLists() {
       const userStore = useUserStore();
-
       try {
         const { data, error } = await supabase
           .from("lists")
@@ -27,7 +26,6 @@ export const useListsStore = defineStore("lists", {
           this.lists = data;
           console.log(`lists in Pinia store are ${JSON.stringify(this.lists)}`);
         }
-
         if (error) {
           console.log(
             `error from supabase.from("lists").select() is ${error.message}`
@@ -41,17 +39,22 @@ export const useListsStore = defineStore("lists", {
     // handle state to SHOW the item's list:
     selectListToShow(listObj) {
       this.selectedList = listObj;
+      console.log(
+        `selectedListToShow is ${JSON.stringify(this.selectedList)}}`
+      );
     },
 
     // add a new list to the Lists table in Supabase:
     async addNewList(newListTitle) {
       const userStore = useUserStore();
-
-      const { error } = await supabase
-        .from("lists")
-        .insert({ title: newListTitle, user_id: userStore.user.id });
-
-      return { error };
+      try {
+        const { error } = await supabase
+          .from("lists")
+          .insert({ title: newListTitle, user_id: userStore.user.id });
+        return { error };
+      } catch (e) {
+        console.log(`error from listsSTore.addNewList catch is ${e}`);
+      }
     },
 
     // handle state in order to SHOW delete list confirmation modal:

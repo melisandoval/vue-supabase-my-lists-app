@@ -15,7 +15,7 @@ const router = useRouter();
 // storing the Pinia store object to use its states and actions:
 const userStore = useUserStore();
 // getting the state user from the Pinia store:
-const { user, session } = storeToRefs(userStore);
+const { user } = storeToRefs(userStore);
 
 onMounted(async () => {
   try {
@@ -31,7 +31,6 @@ onMounted(async () => {
 
     if (user.value) {
       // if the user is logged in in Supabase, continue to user's dashboard
-      console.log(`session in Pinia store is ${JSON.stringify(session.value)}`);
       router.push({ path: "/" });
     }
   } catch (error) {

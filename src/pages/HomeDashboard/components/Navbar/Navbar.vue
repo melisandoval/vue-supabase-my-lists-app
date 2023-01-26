@@ -42,15 +42,12 @@
 </template>
 
 <script setup>
-import { useUserStore } from "../../../../piniaStores/userStore.js";
 import { useListsStore } from "../../../../piniaStores/listsStore";
 import { storeToRefs } from "pinia";
 
 import { ref } from "vue";
 import ListTitleButton from "./components/ListTitleButtonSection.vue";
 
-// get user store to get the name of the user to display in Navbar:
-const userStore = useUserStore();
 // get lists store to get the titles of the lists to display in lists titles button section:
 const listsStore = useListsStore();
 
