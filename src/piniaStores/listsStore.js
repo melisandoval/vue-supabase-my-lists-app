@@ -24,7 +24,7 @@ export const useListsStore = defineStore("lists", {
 
         if (data) {
           this.lists = data;
-          console.log(`lists in Pinia store are ${JSON.stringify(this.lists)}`);
+          // console.log(`lists in Pinia store are ${JSON.stringify(this.lists)}`);
         }
         if (error) {
           console.log(
@@ -39,9 +39,9 @@ export const useListsStore = defineStore("lists", {
     // handle state to SHOW the item's list:
     selectListToShow(listObj) {
       this.selectedList = listObj;
-      console.log(
-        `selectedListToShow is ${JSON.stringify(this.selectedList)}}`
-      );
+      // console.log(
+      //   `selectedListToShow is ${JSON.stringify(this.selectedList)}}`
+      // );
     },
 
     // add a new list to the Lists table in Supabase:

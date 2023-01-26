@@ -21,7 +21,12 @@
   <section>
     <h2>{{ selectedList.listName }}</h2>
     <ul class="list-of-items">
-      <Item v-for="item in items" :text="item.item" />
+      <Item
+        v-for="item in items"
+        :key="item.item_id"
+        :item="item"
+        @itemChanged="updateItems"
+      />
     </ul>
   </section>
 </template>
@@ -57,6 +62,11 @@ watch(selectedList, async () => {
 let newListItem = ref("");
 let showErrorMsg = ref(false);
 let errorMsg = ref(DEFAULT_ERROR_MESSAGE);
+
+// function called when children component emits @itemChanged:
+function updateItems() {
+  itemsStore.fetchListItems(selectedList.value.listId);
+}
 
 // function called by add new item form:
 async function createNewListItem() {

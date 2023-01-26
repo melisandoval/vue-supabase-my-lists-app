@@ -3,16 +3,19 @@
     <!-- bullet button -->
     <div class="button-container">
       <button
-        :class="{ 'empty-bullet': !isCompleted, 'filled-bullet': isCompleted }"
+        :class="{
+          'empty-bullet': !item.is_completed,
+          'filled-bullet': item.is_completed,
+        }"
         @click="toggleBullet"
       />
     </div>
     <!-- item text -->
-    <p>{{ text }}</p>
+    <p>{{ item.item_text }}</p>
     <!-- favorite button -->
     <div class="button-container">
       <button @click="toggleFavourite">
-        <!-- filled heart icon ("favourite")-->
+        <!-- filled heart icon if is favourite-->
         <svg
           v-if="isFavourite"
           class="heart-icon"
@@ -31,7 +34,7 @@
             stroke-linejoin="round"
           ></path>
         </svg>
-        <!-- unfilled heart icon ("no-favourite")-->
+        <!-- unfilled heart icon if is not favourite-->
         <svg
           v-else
           class="heart-icon"
@@ -56,20 +59,34 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, toRef } from "vue";
+import { useItemsStore } from "../../../../piniaStores/itemsStore";
 
-const props = defineProps(["text"]);
+// store
+const itemsStore = useItemsStore();
 
-let isCompleted = ref(true);
+// props
+const props = defineProps(["item"]);
+const item = toRef(props, "item");
+
+const emit = defineEmits(["itemChanged"]);
+
 let isFavourite = ref(false);
 
-function toggleBullet() {
-  isCompleted.value = !isCompleted.value;
-}
+async function toggleBullet() {
+  const error = await itemsStore.toggleItemIsCompleted(
+    item.value.item_id,
+    item.value.is_completed
+  );
 
-function toggleFavourite() {
-  isFavourite.value = !isFavourite.value;
+  if (!error) {
+    emit("itemChanged");
+  }
 }
+// TO-DO!!!!
+// function toggleFavourite() {
+//   isFavourite.value = !isFavourite.value;
+// }
 </script>
 
 <style scoped>

@@ -8,20 +8,24 @@ export const useItemsStore = defineStore("items", {
 
   state: () => ({
     items: null,
+    // selectedItem: null,
   }),
 
   actions: {
     // fetch a list of items from a single list of the logged in user:
     async fetchListItems(selectedListId) {
-      console.log("fetchListItems() is called!!!!!!!!!!!!!");
+      console.log(
+        "%c fetchListItems() is called!",
+        "background: #222; color: #bada55"
+      );
 
       const userStore = useUserStore();
       const listStore = useListsStore();
-      console.log(
-        `selectedList in itemsStore is ${JSON.stringify(
-          listStore.selectedList
-        )}`
-      );
+      // console.log(
+      //   `selectedList in itemsStore is ${JSON.stringify(
+      //     listStore.selectedList
+      //   )}`
+      // );
 
       try {
         const { data, error } = await supabase
@@ -31,11 +35,13 @@ export const useItemsStore = defineStore("items", {
             user_id: userStore.user.id,
             list_id: selectedListId,
           })
-          .order("item", { ascending: true });
+          .order("is_favourite")
+          .order("is_completed");
 
         if (data) {
+          // update items state with the fetched data:
           this.items = data;
-          console.log(`this.items are ${JSON.stringify(this.items)}`);
+          // console.log(`items are ${JSON.stringify(this.items)}`);
         }
         if (error) {
           console.log(
@@ -54,7 +60,7 @@ export const useItemsStore = defineStore("items", {
 
       try {
         const { error } = await supabase.from("items").insert({
-          item: item,
+          item_text: item,
           user_id: userStore.user.id,
           list_id: listStore.selectedList.listId,
         });
@@ -64,9 +70,44 @@ export const useItemsStore = defineStore("items", {
       }
     },
 
-    // Hacer el PUT (edit)
-    // Hacer el delete
-    // Hacer el PUT (cambiar entre completada y pendiente)
+    // toggle is_completed of selected item:
+    async toggleItemIsCompleted(itemId, isCompleted) {
+      if (!isCompleted) {
+        try {
+          const { error } = await supabase
+            .from("items")
+            .update({ is_completed: true })
+            .eq("item_id", itemId);
+
+          if (error) {
+            console.log(error.message);
+          }
+
+          return error;
+        } catch (e) {
+          console.log(`Error from toggleItemIsCompleted() catch is ${e}`);
+        }
+      }
+
+      if (isCompleted) {
+        try {
+          const { error } = await supabase
+            .from("items")
+            .update({ is_completed: false })
+            .eq("item_id", itemId);
+
+          if (error) {
+            console.log(error.message);
+          }
+          return error;
+        } catch (e) {
+          console.log(`Error from toggleItemIsCompleted() catch is ${e}`);
+        }
+      }
+    },
+
     // hacer el de cambiar entre favorito/ no favorito
+
+    // Hacer el delete
   },
 });
