@@ -9,15 +9,14 @@
       <div>
         <h1>My lists</h1>
       </div>
-      <!-- Display a list of List titles buttons, -->
-      <!-- lists come from storeToRefs(listsStore) -->
+      <!-- List of list titles buttons, lists state is from storeToRefs(listsStore) -->
       <ul>
         <li v-for="list in lists">
-          <ListTitleButton
+          <ListTitleButtonDiv
             :title="list.title"
             :listId="list.list_id"
             :key="list.list_id"
-          ></ListTitleButton>
+          ></ListTitleButtonDiv>
         </li>
       </ul>
     </section>
@@ -46,7 +45,7 @@ import { useListsStore } from "../../../../piniaStores/listsStore";
 import { storeToRefs } from "pinia";
 
 import { ref } from "vue";
-import ListTitleButton from "./components/ListTitleButtonSection.vue";
+import ListTitleButtonDiv from "./components/ListTitleButtonDiv.vue";
 
 // get lists store to get the titles of the lists to display in lists titles button section:
 const listsStore = useListsStore();
