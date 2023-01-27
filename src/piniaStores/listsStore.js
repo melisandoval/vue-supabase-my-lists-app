@@ -39,9 +39,13 @@ export const useListsStore = defineStore("lists", {
     // handle state to SHOW the item's list:
     selectListToShow(listObj) {
       this.selectedList = listObj;
-      // console.log(
-      //   `selectedListToShow is ${JSON.stringify(this.selectedList)}}`
-      // );
+      console.log(`selected list is ${JSON.stringify(this.selectedList)}`);
+    },
+
+    // sets selectedList back to null:
+    deselectListToShow() {
+      this.selectedList = null;
+      console.log(`selected list is ${JSON.stringify(this.selectedList)}`);
     },
 
     // add a new list to the Lists table in Supabase:
@@ -61,37 +65,50 @@ export const useListsStore = defineStore("lists", {
     // needs to receive an obj with the name and Id of the list:
     selectListToDelete(listObj) {
       this.selectedListToDelete = listObj;
-      console.log(
-        `selectedListToDelete in Pinia is ${JSON.stringify(
-          this.selectedListToDelete
-        )}`
-      );
     },
 
     // handle state in order to HIDE delete list confirmation modal:
     deselectListToDelete() {
       this.selectedListToDelete = null;
-      console.log(
-        `selectedListToDelete in Pinia is ${this.selectedListToDelete}`
-      );
     },
 
     // handle delete in Supabase selected list to delete:
     async deleteSelectedList(listId) {
+      // first delete all items related with the list:
       try {
         const { error } = await supabase
-          .from("lists")
+          .from("items")
           .delete()
           .eq("list_id", listId);
 
         if (error) {
           console.log(
-            `Error from supabase.from("lists").delete().eq("list_id", listId); is ${error.message}`
+            `Error from deleteSelectedList(listId) is ${error.message}`
           );
+          return error;
         }
 
         if (!error) {
-          return true;
+          // now delete the list:
+          try {
+            const { error } = await supabase
+              .from("lists")
+              .delete()
+              .eq("list_id", listId);
+
+            if (error) {
+              console.log(
+                `Error from deleteSelectedList(listId) is ${error.message}`
+              );
+            }
+            if (!error) {
+              this.selectedListToDelete = null;
+            }
+
+            return error;
+          } catch (e) {
+            console.log(`Error from deleteSelectedList(listId) catch is ${e}`);
+          }
         }
       } catch (e) {
         console.log(`Error from deleteSelectedList(listId) catch is ${e}`);

@@ -35,7 +35,7 @@ const router = useRouter();
 const userStore = useUserStore();
 const listsStore = useListsStore();
 
-// ref to handle v-if =
+// ref to handle v-ifs =
 const { selectedList, selectedListToEdit, selectedListToDelete } =
   storeToRefs(listsStore);
 

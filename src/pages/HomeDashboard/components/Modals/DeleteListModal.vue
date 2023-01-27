@@ -33,7 +33,7 @@ import PrimaryButton from "../../../../components/PrimaryButton.vue";
 // list store:
 const listsStore = useListsStore();
 
-const { selectedListToDelete } = storeToRefs(listsStore);
+const { selectedListToDelete, selectedList } = storeToRefs(listsStore);
 
 // to show response and hide delete buttons after deleting a list:
 let showDeleteListResponse = ref(false);
@@ -45,15 +45,15 @@ function handleCloseModal() {
 
 async function handleDeleteList() {
   // send the ID of the selected list to delete list action in store:
-  console.log(
-    `listsStore.selectedListToDelete is ${listsStore.selectedListToDelete}`
-  );
-  const isDeleted = await listsStore.deleteSelectedList(
-    selectedListToDelete.value["listId"]
+  if (selectedListToDelete.value.listId === selectedList.value.listId) {
+    listsStore.deselectListToShow();
+  }
+
+  const error = await listsStore.deleteSelectedList(
+    selectedListToDelete.value.listId
   );
 
-  if (isDeleted) {
-    console.log(`isDeleted is ${true}`);
+  if (!error) {
     listsStore.fetchUserLists();
   }
 

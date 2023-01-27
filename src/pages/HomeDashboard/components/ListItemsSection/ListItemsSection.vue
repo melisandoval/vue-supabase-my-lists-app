@@ -55,7 +55,11 @@ onMounted(() => {
 
 // call fetch items again whenever selectedList changes!:
 watch(selectedList, async () => {
-  itemsStore.fetchListItems(selectedList.value.listId);
+  try {
+    await itemsStore.fetchListItems(selectedList.value.listId);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 // component refs:

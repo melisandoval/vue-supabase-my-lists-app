@@ -24,7 +24,7 @@
           ></path>
         </svg>
       </button>
-      <button @click="handleDeleteList" class="action-icon-button">
+      <button @click="showDeleteListModal" class="action-icon-button">
         <svg
           class="action-icon"
           width="16px"
@@ -79,7 +79,7 @@ function handleEditList() {
 }
 
 // makes the delete list modal appears:
-function handleDeleteList() {
+function showDeleteListModal() {
   // call lists store action and pass a list obj to set selectedListToDelete state:
   listsStore.selectListToDelete({
     listName: props.title,
