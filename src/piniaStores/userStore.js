@@ -18,7 +18,7 @@ export const useUserStore = defineStore("user", {
           const { user } = session;
           this.session = session;
           this.user = user; // save the current Supabase logged in user in the state "user":
-          console.log(`User in Pinia is ${JSON.stringify(this.user.email)}`);
+          console.log(`user is ${JSON.stringify(this.user.email)}`);
         }
       } catch (error) {
         console.log(`userStore fetchUser() error is: "${error}"`);

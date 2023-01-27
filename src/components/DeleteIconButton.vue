@@ -1,5 +1,5 @@
 <template>
-  <button @click="handleClick" :class="class">
+  <button>
     <svg
       class="action-icon"
       width="16px"
@@ -21,8 +21,6 @@
   </button>
 </template>
 
-<script setup>
-const props = defineProps(["handleClick", "class"]);
-</script>
+<script setup></script>
 
 <style lang="scss" scoped></style>

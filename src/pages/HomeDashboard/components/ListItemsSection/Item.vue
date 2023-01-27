@@ -1,7 +1,7 @@
 <template>
   <li class="item-component">
     <!-- bullet button -->
-    <div class="button-container">
+    <div class="favourite-button-container">
       <button
         :class="{
           'empty-bullet': !item.is_completed,
@@ -12,48 +12,58 @@
     </div>
     <!-- item text -->
     <p>{{ item.item_text }}</p>
-    <!-- favorite button -->
-    <div class="button-container">
-      <button @click="toggleFavourite">
-        <!-- filled heart icon if is favourite-->
-        <svg
-          v-if="isFavourite"
-          class="heart-icon"
-          width="16px"
-          height="16px"
-          stroke-width="2.02"
-          viewBox="0 0 24 24"
-          fill="#fe8684"
-          xmlns="http://www.w3.org/2000/svg"
-          color="#fe8684"
-        >
-          <path
-            d="M22 8.862a5.95 5.95 0 01-1.654 4.13c-2.441 2.531-4.809 5.17-7.34 7.608-.581.55-1.502.53-2.057-.045l-7.295-7.562c-2.205-2.286-2.205-5.976 0-8.261a5.58 5.58 0 018.08 0l.266.274.265-.274A5.612 5.612 0 0116.305 3c1.52 0 2.973.624 4.04 1.732A5.95 5.95 0 0122 8.862z"
-            stroke="#fe8684"
+    <div
+      :class="{
+        'edit-item-buttons-hidden': !showEditItemButtons,
+        'edit-item-buttons-visible': showEditItemButtons,
+      }"
+      class="edit-item-buttons"
+    >
+      <!-- favorite button -->
+      <div class="favourite-button-container">
+        <button @click="toggleFavourite">
+          <!-- filled heart icon if is favourite-->
+          <svg
+            v-if="isFavourite"
+            class="heart-icon"
+            width="16px"
+            height="16px"
             stroke-width="2.02"
-            stroke-linejoin="round"
-          ></path>
-        </svg>
-        <!-- unfilled heart icon if is not favourite-->
-        <svg
-          v-else
-          class="heart-icon"
-          width="16px"
-          height="16px"
-          stroke-width="2.02"
-          viewBox="0 0 24 24"
-          fill="#ffffff"
-          xmlns="http://www.w3.org/2000/svg"
-          color="#fe8684"
-        >
-          <path
-            d="M22 8.862a5.95 5.95 0 01-1.654 4.13c-2.441 2.531-4.809 5.17-7.34 7.608-.581.55-1.502.53-2.057-.045l-7.295-7.562c-2.205-2.286-2.205-5.976 0-8.261a5.58 5.58 0 018.08 0l.266.274.265-.274A5.612 5.612 0 0116.305 3c1.52 0 2.973.624 4.04 1.732A5.95 5.95 0 0122 8.862z"
-            stroke="#fe8684"
+            viewBox="0 0 24 24"
+            fill="#fe8684"
+            xmlns="http://www.w3.org/2000/svg"
+            color="#fe8684"
+          >
+            <path
+              d="M22 8.862a5.95 5.95 0 01-1.654 4.13c-2.441 2.531-4.809 5.17-7.34 7.608-.581.55-1.502.53-2.057-.045l-7.295-7.562c-2.205-2.286-2.205-5.976 0-8.261a5.58 5.58 0 018.08 0l.266.274.265-.274A5.612 5.612 0 0116.305 3c1.52 0 2.973.624 4.04 1.732A5.95 5.95 0 0122 8.862z"
+              stroke="#fe8684"
+              stroke-width="2.02"
+              stroke-linejoin="round"
+            ></path>
+          </svg>
+          <!-- unfilled heart icon if is not favourite-->
+          <svg
+            v-else
+            class="heart-icon"
+            width="16px"
+            height="16px"
             stroke-width="2.02"
-            stroke-linejoin="round"
-          ></path>
-        </svg>
-      </button>
+            viewBox="0 0 24 24"
+            fill="#ffffff"
+            xmlns="http://www.w3.org/2000/svg"
+            color="#fe8684"
+          >
+            <path
+              d="M22 8.862a5.95 5.95 0 01-1.654 4.13c-2.441 2.531-4.809 5.17-7.34 7.608-.581.55-1.502.53-2.057-.045l-7.295-7.562c-2.205-2.286-2.205-5.976 0-8.261a5.58 5.58 0 018.08 0l.266.274.265-.274A5.612 5.612 0 0116.305 3c1.52 0 2.973.624 4.04 1.732A5.95 5.95 0 0122 8.862z"
+              stroke="#fe8684"
+              stroke-width="2.02"
+              stroke-linejoin="round"
+            ></path>
+          </svg>
+        </button>
+      </div>
+      <!-- delete button -->
+      <DeleteIconButton @handleClick="deleteItem" class="action-icon-button" />
     </div>
   </li>
 </template>
@@ -61,13 +71,15 @@
 <script setup>
 import { ref, toRef } from "vue";
 import { useItemsStore } from "../../../../piniaStores/itemsStore";
+import DeleteIconButton from "../../../../components/DeleteIconButton.vue";
 
 // store
 const itemsStore = useItemsStore();
 
 // props
-const props = defineProps(["item"]);
+const props = defineProps(["item", "showEditItemButtons"]);
 const item = toRef(props, "item");
+const showEditItemButtons = toRef(props, "showEditItemButtons");
 
 const emit = defineEmits(["itemChanged"]);
 
@@ -83,6 +95,11 @@ async function toggleBullet() {
     emit("itemChanged");
   }
 }
+
+async function deleteItem() {
+  console.log(item);
+}
+
 // TO-DO!!!!
 // function toggleFavourite() {
 //   isFavourite.value = !isFavourite.value;
@@ -104,7 +121,7 @@ button {
   padding-right: 0.1em;
 }
 
-.button-container {
+.favourite-button-container {
   width: 1.6rem;
   height: 1.6rem;
   display: grid;
@@ -113,7 +130,7 @@ button {
   border-radius: 50%;
 }
 
-.button-container:hover {
+.favourite-button-container:hover {
   border: 2px solid #ffe6e3;
   border-radius: 50%;
   background-color: #ffe6e3;
@@ -138,5 +155,30 @@ button {
 .heart-icon {
   width: 0.9rem;
   height: 0.9rem;
+}
+
+.delete-item-icon {
+  cursor: pointer;
+  padding: 0.2em;
+  width: 0.9rem;
+  height: 0.9rem;
+  display: grid;
+  place-items: center;
+}
+
+.delete-item-icon:hover {
+  background-color: #ffe6e3;
+  border-radius: 55%;
+}
+.edit-item-buttons {
+  display: flex;
+}
+
+.edit-item-buttons-visible {
+  visibility: visible;
+}
+
+.edit-item-buttons-hidden {
+  visibility: hidden;
 }
 </style>

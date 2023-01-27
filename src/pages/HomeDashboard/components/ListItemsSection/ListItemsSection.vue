@@ -19,13 +19,19 @@
   </section>
   <!-- list of list's items section -->
   <section>
-    <h2>{{ selectedList.listName }}</h2>
+    <!-- list title -->
+    <div class="list-title-container">
+      <h2>{{ selectedList.listName }}</h2>
+      <EditIconButton @click="showItemsButtons" class="action-icon-button" />
+    </div>
+    <!-- list of items -->
     <ul class="list-of-items">
       <Item
         v-for="item in items"
         :key="item.item_id"
         :item="item"
         @itemChanged="updateItems"
+        :showEditItemButtons="showEditItemButtons"
       />
     </ul>
   </section>
@@ -37,6 +43,7 @@ import { useListsStore } from "../../../../piniaStores/listsStore";
 import { useItemsStore } from "../../../../piniaStores/itemsStore";
 import { storeToRefs } from "pinia";
 import Item from "./Item.vue";
+import EditIconButton from "../../../../components/EditIconButton.vue";
 
 const DEFAULT_ERROR_MESSAGE = "Please add at least one character.";
 
@@ -69,6 +76,13 @@ watch(selectedList, async () => {
 let newListItem = ref("");
 let showErrorMsg = ref(false);
 let errorMsg = ref(DEFAULT_ERROR_MESSAGE);
+
+// ref to handle show/hide edit single item buttons in children Item component:
+let showEditItemButtons = ref(false);
+
+function showItemsButtons() {
+  showEditItemButtons.value = !showEditItemButtons.value;
+}
 
 // function called when children component emits @itemChanged:
 function updateItems() {
@@ -127,6 +141,12 @@ form {
   form {
     max-width: 70%;
   }
+}
+
+.list-title-container {
+  display: flex;
+  align-items: center;
+  gap: 1em;
 }
 
 h3 {
