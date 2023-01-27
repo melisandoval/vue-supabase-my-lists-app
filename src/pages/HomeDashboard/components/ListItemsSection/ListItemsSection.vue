@@ -55,10 +55,13 @@ onMounted(() => {
 
 // call fetch items again whenever selectedList changes!:
 watch(selectedList, async () => {
-  try {
-    await itemsStore.fetchListItems(selectedList.value.listId);
-  } catch (error) {
-    console.log(error);
+  console.log("Watch is called *******");
+  if (selectedList.value) {
+    try {
+      await itemsStore.fetchListItems(selectedList.value.listId);
+    } catch (error) {
+      console.log(error);
+    }
   }
 });
 

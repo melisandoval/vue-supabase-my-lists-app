@@ -44,11 +44,16 @@ function handleCloseModal() {
 }
 
 async function handleDeleteList() {
-  // send the ID of the selected list to delete list action in store:
-  if (selectedListToDelete.value.listId === selectedList.value.listId) {
-    listsStore.deselectListToShow();
-  }
+  // if (selectedListToDelete.value.listId === selectedList.value.listId) {
+  //   listsStore.deselectListToShow();
+  // }
+  console.log(`selected list is ${JSON.stringify(selectedList.value)}`);
+  console.log(
+    `selectedListToDelete is ${JSON.stringify(selectedListToDelete.value)}`
+  );
 
+  listsStore.deselectListToShow();
+  // call to store to delete list from Supabase:
   const error = await listsStore.deleteSelectedList(
     selectedListToDelete.value.listId
   );
