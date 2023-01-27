@@ -37,6 +37,7 @@ export const useListsStore = defineStore("lists", {
     },
 
     // handle state to SHOW the item's list:
+    // format of listObj: {listName, listId}
     selectListToShow(listObj) {
       this.selectedList = listObj;
       console.log(`selected list is ${JSON.stringify(this.selectedList)}`);
@@ -62,7 +63,7 @@ export const useListsStore = defineStore("lists", {
     },
 
     // handle state in order to SHOW delete list confirmation modal:
-    // needs to receive an obj with the name and Id of the list:
+    // format of listObj: {listName, listId}
     selectListToDelete(listObj) {
       this.selectedListToDelete = listObj;
     },
@@ -116,7 +117,7 @@ export const useListsStore = defineStore("lists", {
     },
 
     // handle state in order to SHOW edit list modal:
-    // needs to receive Id and name of the list
+    // format of listObj: {listName, listId}
     selectListToEdit(listObj) {
       this.selectedListToEdit = listObj;
       console.log(
@@ -129,24 +130,26 @@ export const useListsStore = defineStore("lists", {
     // handle state in order to HIDE edit list modal:
     deselectListToEdit() {
       this.selectedListToEdit = null;
-      console.log(`selectedListToEdit in Pinia is ${this.selectedListToEdit}`);
+      console.log(`selectedListToEdit is ${this.selectedListToEdit}`);
     },
 
     async editSelectedList(newListName, listId) {
       try {
-        const { error } = await supabase
+        const { data, error } = await supabase
           .from("lists")
           .update({ title: newListName })
-          .eq("list_id", listId);
+          .eq("list_id", listId)
+          .select();
 
         if (error) {
           console.log(error.message);
-          return error;
         }
 
         if (!error) {
           this.selectedListToEdit = null;
         }
+
+        return { data, error };
       } catch (e) {
         console.log(`Error from editSelectedList() catch is ${e}`);
       }

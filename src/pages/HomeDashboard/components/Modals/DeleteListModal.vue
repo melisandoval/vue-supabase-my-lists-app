@@ -39,7 +39,7 @@ const { selectedListToDelete, selectedList } = storeToRefs(listsStore);
 let showDeleteListResponse = ref(false);
 
 function handleCloseModal() {
-  // importan: sets the selectedList state back to null:
+  // important: sets the selectedList state back to null:
   listsStore.deselectListToDelete();
 }
 

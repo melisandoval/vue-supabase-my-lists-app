@@ -10,6 +10,7 @@
           id="new-list-name"
           type="text"
           :placeholder="selectedListToEdit.listName"
+          autocomplete="off"
         />
         <!-- buttons -->
         <div>
@@ -44,21 +45,34 @@ const newListName = ref("");
 let showInputValMsg = ref(false);
 
 async function handleConfirmNewName() {
+  // if input is empty, show error msg:
   if (!newListName.value) {
     showInputValMsg.value = true;
   } else {
     try {
-      const error = await listsStore.editSelectedList(
+      const { data, error } = await listsStore.editSelectedList(
         newListName.value,
         selectedListToEdit.value["listId"]
       );
 
+      if (error) {
+        console.log(error);
+      }
+
       if (!error) {
+        // set the selectedList (the list to display) to a new list obj with the new returned title,
+        // in order to display the name correctly in ListItemsSection component
+        listsStore.selectListToShow({
+          listName: data[0].title,
+          listId: data[0].list_id,
+        });
+
         // fetch again the updtated list to update navbar lists buttons:
         listsStore.fetchUserLists();
+
         // set input validation message back to false:
         showInputValMsg.value = false;
-        // set pinia state selectedListToEdit back to null:
+        // set store state selectedListToEdit back to null (this closes the modal)
         listsStore.deselectListToEdit();
       }
     } catch (e) {
