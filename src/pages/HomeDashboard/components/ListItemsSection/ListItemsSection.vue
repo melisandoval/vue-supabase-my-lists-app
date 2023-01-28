@@ -33,14 +33,14 @@
           />
         </div>
         <div class="item-button-container">
-          <button class="filled-bullet" />
+          <button @click="toggleShowOnlyCompletedItems" class="filled-bullet" />
         </div>
         <div class="item-button-container">
           <button><FilledHeartIconSVG /></button>
         </div>
       </div>
     </section>
-    <!-- list of items -->
+    <!-- list of ALL items -->
     <ul v-if="showAllItems" class="list-of-items">
       <Item
         v-for="item in items"
@@ -50,9 +50,20 @@
         :showEditItemButtons="showEditItemButtons"
       />
     </ul>
+    <!-- list of only UNCOMPLETED items -->
     <ul v-if="showOnlyUncompletedItems" class="list-of-items">
       <Item
         v-for="item in uncompletedItems"
+        :key="item.item_id"
+        :item="item"
+        @itemChanged="updateItems"
+        :showEditItemButtons="showEditItemButtons"
+      />
+    </ul>
+    <!-- list of only COMPLETED items -->
+    <ul v-if="showOnlyCompletedItems" class="list-of-items">
+      <Item
+        v-for="item in completedItems"
         :key="item.item_id"
         :item="item"
         @itemChanged="updateItems"
@@ -108,10 +119,12 @@ let showEditItemButtons = ref(false);
 
 let showAllItems = ref(true);
 let showOnlyUncompletedItems = ref(false);
+let showOnlyCompletedItems = ref(false);
 
-//borrar!!!
+//BORRAR!!!
 console.log(items.value);
 
+// handles only show uncompleted items:
 const uncompletedItems = computed(() => {
   return items.value.filter((item) => item.is_completed == false);
 });
@@ -127,6 +140,23 @@ function toggleShowOnlyUncompletedItems() {
   }
 }
 
+// handles only show completed items:
+const completedItems = computed(() => {
+  return items.value.filter((item) => item.is_completed == true);
+});
+
+function toggleShowOnlyCompletedItems() {
+  console.log(completedItems.value);
+  if (!showOnlyCompletedItems.value) {
+    showAllItems.value = false;
+    showOnlyCompletedItems.value = true;
+  } else {
+    showAllItems.value = true;
+    showOnlyCompletedItems.value = false;
+  }
+}
+
+// handle show/hide the buttons to edit a single item:
 function showItemsButtons() {
   showEditItemButtons.value = !showEditItemButtons.value;
 }
