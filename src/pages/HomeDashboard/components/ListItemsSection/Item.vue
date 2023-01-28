@@ -41,13 +41,13 @@ import DeleteIconButton from "../../../../components/DeleteIconButton.vue";
 import FilledHeartIconSVG from "../../../../components/FilledHeartIconSVG.vue";
 import UnfilledHeartIconSVG from "../../../../components/UnFilledHeartIconSVG.vue";
 
-// store
-const itemsStore = useItemsStore();
-
 // props
 const props = defineProps(["item", "showEditItemButtons"]);
 const item = toRef(props, "item");
 const showEditItemButtons = toRef(props, "showEditItemButtons");
+
+// store
+const itemsStore = useItemsStore();
 
 const emit = defineEmits(["itemChanged"]);
 

@@ -22,11 +22,18 @@
     <!-- list title with edit items buttons and filter items buttons-->
     <section class="list-title-section">
       <div class="list-title-container">
-        <h2>{{ selectedList.listName }}</h2>
+        <button @click="handleShowAllItems">
+          <h2>{{ selectedList.listName }}</h2>
+        </button>
         <EditIconButton @click="showItemsButtons" class="action-icon-button" />
       </div>
       <div class="list-items-filters">
-        <div class="item-button-container"><button class="empty-bullet" /></div>
+        <div class="item-button-container">
+          <button
+            @click="handleShowOnlyUncompletedItems"
+            class="empty-bullet"
+          />
+        </div>
         <div class="item-button-container">
           <button class="filled-bullet" />
         </div>
@@ -36,9 +43,18 @@
       </div>
     </section>
     <!-- list of items -->
-    <ul class="list-of-items">
+    <ul v-if="showAllItems" class="list-of-items">
       <Item
         v-for="item in items"
+        :key="item.item_id"
+        :item="item"
+        @itemChanged="updateItems"
+        :showEditItemButtons="showEditItemButtons"
+      />
+    </ul>
+    <ul v-if="showOnlyUncompletedItems" class="list-of-items">
+      <Item
+        v-for="item in uncompletedItems"
         :key="item.item_id"
         :item="item"
         @itemChanged="updateItems"
@@ -49,7 +65,7 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from "vue";
+import { ref, watch, onMounted, computed } from "vue";
 import { useListsStore } from "../../../../piniaStores/listsStore";
 import { useItemsStore } from "../../../../piniaStores/itemsStore";
 import { storeToRefs } from "pinia";
@@ -89,8 +105,29 @@ let newListItem = ref("");
 let showErrorMsg = ref(false);
 let errorMsg = ref(DEFAULT_ERROR_MESSAGE);
 
-// ref to handle show/hide edit single item buttons in children Item component:
+// ref to handle show/hide item buttons in children Item component:
 let showEditItemButtons = ref(false);
+
+let showAllItems = ref(true);
+let showOnlyUncompletedItems = ref(false);
+
+function handleShowAllItems() {
+  showAllItems.value = true;
+  showOnlyUncompletedItems.value = false;
+}
+
+//borrar!!!
+console.log(items.value);
+
+const uncompletedItems = computed(() => {
+  return items.value.filter((item) => item.is_completed == false);
+});
+
+function handleShowOnlyUncompletedItems() {
+  console.log(uncompletedItems.value);
+  showAllItems.value = false;
+  showOnlyUncompletedItems.value = true;
+}
 
 function showItemsButtons() {
   showEditItemButtons.value = !showEditItemButtons.value;
