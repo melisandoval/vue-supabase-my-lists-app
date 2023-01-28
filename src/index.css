@@ -70,7 +70,8 @@ input {
   padding: 0.2em;
 }
 
-.action-icon-button:hover {
+.action-icon-button:hover,
+.edit-items-is-selected {
   background-color: var(--dark-pink);
   border-radius: 55%;
 }

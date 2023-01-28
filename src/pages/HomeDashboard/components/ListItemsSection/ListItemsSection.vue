@@ -23,7 +23,11 @@
     <section class="list-title-section">
       <div class="list-title-container">
         <h2>{{ selectedList.listName }}</h2>
-        <EditIconButton @click="showItemsButtons" class="action-icon-button" />
+        <EditIconButton
+          @click="showItemsButtons"
+          class="action-icon-button"
+          :class="{ 'edit-items-is-selected': showEditItemButtons }"
+        />
       </div>
       <div class="list-items-filters">
         <!-- filter by uncompleted items button -->
