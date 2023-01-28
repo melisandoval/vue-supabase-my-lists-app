@@ -29,7 +29,8 @@ export const useItemsStore = defineStore("items", {
             user_id: userStore.user.id,
             list_id: selectedListId,
           })
-          .order("is_completed");
+          .order("is_completed")
+          .order("is_favourite", { ascending: false });
 
         if (data) {
           // update items state with the fetched data:
