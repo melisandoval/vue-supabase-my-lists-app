@@ -134,7 +134,7 @@ nav {
 }
 
 .navbar-header img {
-  padding: 2em 0 0;
+  padding: 2em 0 1em;
   width: 50%;
   object-fit: cover;
 }
@@ -279,7 +279,8 @@ h3 {
   border-radius: 50%;
 }
 
-.item-button-container:hover {
+.item-button-container:hover,
+.filter-button-is-selected {
   border: 2px solid #ffe6e3;
   border-radius: 50%;
   background-color: #ffe6e3;

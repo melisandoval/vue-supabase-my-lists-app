@@ -27,18 +27,27 @@
       </div>
       <div class="list-items-filters">
         <!-- filter by uncompleted items button -->
-        <div class="item-button-container">
+        <div
+          class="item-button-container"
+          :class="{ 'filter-button-is-selected': showOnlyUncompletedItems }"
+        >
           <button
             @click="toggleShowOnlyUncompletedItems"
             class="empty-bullet"
           />
         </div>
         <!-- filter by completed items button -->
-        <div class="item-button-container">
+        <div
+          class="item-button-container"
+          :class="{ 'filter-button-is-selected': showOnlyCompletedItems }"
+        >
           <button @click="toggleShowOnlyCompletedItems" class="filled-bullet" />
         </div>
         <!-- filter by favourites items button -->
-        <div class="item-button-container">
+        <div
+          class="item-button-container"
+          :class="{ 'filter-button-is-selected': showOnlyFavouritesItems }"
+        >
           <button @click="toggleShowOnlyFavouritesItems">
             <FilledHeartIconSVG />
           </button>
