@@ -20,12 +20,6 @@ export const useItemsStore = defineStore("items", {
       );
 
       const userStore = useUserStore();
-      const listStore = useListsStore();
-      // console.log(
-      //   `selectedList in itemsStore is ${JSON.stringify(
-      //     listStore.selectedList
-      //   )}`
-      // );
 
       try {
         const { data, error } = await supabase
@@ -109,5 +103,16 @@ export const useItemsStore = defineStore("items", {
     // hacer el de cambiar entre favorito/ no favorito
 
     // Hacer el delete
+    async deleteItem(itemId) {
+      try {
+        const { error } = await supabase
+          .from("items")
+          .delete()
+          .eq("item_id", itemId);
+        return error;
+      } catch (e) {
+        console.log(`Error from deleteItem() catch is ${e}`);
+      }
+    },
   },
 });

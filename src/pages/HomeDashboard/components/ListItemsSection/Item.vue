@@ -29,7 +29,7 @@
         </button>
       </div>
       <!-- delete button -->
-      <DeleteIconButton @handleClick="deleteItem" class="action-icon-button" />
+      <DeleteIconButton @click="deleteItem" class="action-icon-button" />
     </div>
   </li>
 </template>
@@ -66,7 +66,18 @@ async function toggleBullet() {
 }
 
 async function deleteItem() {
-  console.log(item);
+  console.log(item.value);
+
+  const error = await itemsStore.deleteItem(item.value.item_id);
+
+  if (error) {
+    console.log(error);
+  }
+
+  if (!error) {
+    console.log("item deleted!!!!");
+    emit("itemChanged");
+  }
 }
 
 // TO-DO!!!!
