@@ -23,43 +23,9 @@
       <div class="favourite-button-container">
         <button @click="toggleFavourite">
           <!-- filled heart icon if is favourite-->
-          <svg
-            v-if="isFavourite"
-            class="heart-icon"
-            width="16px"
-            height="16px"
-            stroke-width="2.02"
-            viewBox="0 0 24 24"
-            fill="#fe8684"
-            xmlns="http://www.w3.org/2000/svg"
-            color="#fe8684"
-          >
-            <path
-              d="M22 8.862a5.95 5.95 0 01-1.654 4.13c-2.441 2.531-4.809 5.17-7.34 7.608-.581.55-1.502.53-2.057-.045l-7.295-7.562c-2.205-2.286-2.205-5.976 0-8.261a5.58 5.58 0 018.08 0l.266.274.265-.274A5.612 5.612 0 0116.305 3c1.52 0 2.973.624 4.04 1.732A5.95 5.95 0 0122 8.862z"
-              stroke="#fe8684"
-              stroke-width="2.02"
-              stroke-linejoin="round"
-            ></path>
-          </svg>
+          <FilledHeartIconSVG v-if="isFavourite" />
           <!-- unfilled heart icon if is not favourite-->
-          <svg
-            v-else
-            class="heart-icon"
-            width="16px"
-            height="16px"
-            stroke-width="2.02"
-            viewBox="0 0 24 24"
-            fill="#ffffff"
-            xmlns="http://www.w3.org/2000/svg"
-            color="#fe8684"
-          >
-            <path
-              d="M22 8.862a5.95 5.95 0 01-1.654 4.13c-2.441 2.531-4.809 5.17-7.34 7.608-.581.55-1.502.53-2.057-.045l-7.295-7.562c-2.205-2.286-2.205-5.976 0-8.261a5.58 5.58 0 018.08 0l.266.274.265-.274A5.612 5.612 0 0116.305 3c1.52 0 2.973.624 4.04 1.732A5.95 5.95 0 0122 8.862z"
-              stroke="#fe8684"
-              stroke-width="2.02"
-              stroke-linejoin="round"
-            ></path>
-          </svg>
+          <UnfilledHeartIconSVG v-else />
         </button>
       </div>
       <!-- delete button -->
@@ -72,6 +38,8 @@
 import { ref, toRef } from "vue";
 import { useItemsStore } from "../../../../piniaStores/itemsStore";
 import DeleteIconButton from "../../../../components/DeleteIconButton.vue";
+import FilledHeartIconSVG from "../../../../components/FilledHeartIconSVG.vue";
+import UnfilledHeartIconSVG from "../../../../components/UnFilledHeartIconSVG.vue";
 
 // store
 const itemsStore = useItemsStore();
@@ -83,6 +51,7 @@ const showEditItemButtons = toRef(props, "showEditItemButtons");
 
 const emit = defineEmits(["itemChanged"]);
 
+// TEMPORAL!! CAMBIAR LUEGO POR LO QUE VIENE DE LA DB:
 let isFavourite = ref(false);
 
 async function toggleBullet() {
