@@ -2,11 +2,11 @@
   <section class="no-list-items-container">
     <div>
       <h2>Hi, {{ user.user_metadata.name }}!</h2>
+      <p>Select a list or create a new one!</p>
       <img
         src="../../../../assets/light-rabbit-happy.png"
         alt="illustration of a happy rabbit"
       />
-      <p>Select a list or create a new one!</p>
     </div>
   </section>
 </template>
@@ -34,8 +34,8 @@ p {
 }
 
 img {
-  width: 40%;
+  width: 30%;
   height: auto;
-  padding: 1em;
+  padding: 1.5em;
 }
 </style>

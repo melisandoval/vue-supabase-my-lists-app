@@ -13,6 +13,7 @@
   color: var(--dark-pink);
   font-family: "Gloria Hallelujah", cursive;
   font-size: 1rem;
+  letter-spacing: 0.05rem;
 }
 
 img {
@@ -155,6 +156,8 @@ h3 {
 
 .list-title-button {
   padding: 0em 0.2em;
+  font-size: 1.2rem;
+  letter-spacing: 0.05rem;
 }
 
 .list-title-button:hover {
