@@ -49,14 +49,16 @@ export const useListsStore = defineStore("lists", {
       console.log(`selected list is ${JSON.stringify(this.selectedList)}`);
     },
 
-    // add a new list to the Lists table in Supabase:
+    // create a new list:
     async addNewList(newListTitle) {
       const userStore = useUserStore();
       try {
-        const { error } = await supabase
+        const { data, error } = await supabase
           .from("lists")
-          .insert({ title: newListTitle, user_id: userStore.user.id });
-        return { error };
+          .insert({ title: newListTitle, user_id: userStore.user.id })
+          .select();
+
+        return { data, error };
       } catch (e) {
         console.log(`error from listsSTore.addNewList catch is ${e}`);
       }

@@ -27,7 +27,7 @@
         <h3>New list</h3>
         <label for="new-list-title">List's title:</label>
         <div class="new-list-input-and-button">
-          <input v-model="newListTitle" id="new-list-title" />
+          <input v-model="newList" id="new-list-title" />
           <button>
             <img src="../../../../assets/add-circle.svg" alt="Add list" />
           </button>
@@ -57,14 +57,14 @@ listsStore.fetchUserLists();
 const { lists } = storeToRefs(listsStore);
 
 // ref for the create a new list input field:
-let newListTitle = ref("");
+let newList = ref("");
 let showErrorMsg = ref(false);
 
 // function for create new list form:
 async function createNewList() {
   try {
     // preven user to create a list with an empty string:
-    if (newListTitle.value.length === 0) {
+    if (newList.value.length === 0) {
       showErrorMsg.value = true;
       setTimeout(() => {
         showErrorMsg.value = false;
@@ -72,14 +72,18 @@ async function createNewList() {
     } else {
       showErrorMsg.value = false;
       // call listStore action that adds a new list to Supabase Lists table:
-      const { error } = await listsStore.addNewList(newListTitle.value);
+      const { data, error } = await listsStore.addNewList(newList.value);
 
       if (!error) {
-        console.log(newListTitle.value);
+        // set the new list as the selected list to display:
+        listsStore.selectListToShow({
+          listName: data[0].title,
+          listId: data[0].list_id,
+        });
         // fetch the lists' titles again to reflect the updated lists in the lists titles section:
         listsStore.fetchUserLists();
         // clear newList input field:
-        newListTitle.value = "";
+        newList.value = "";
       }
 
       if (error) {
