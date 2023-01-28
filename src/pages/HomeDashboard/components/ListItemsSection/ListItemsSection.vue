@@ -22,15 +22,13 @@
     <!-- list title with edit items buttons and filter items buttons-->
     <section class="list-title-section">
       <div class="list-title-container">
-        <button @click="handleShowAllItems">
-          <h2>{{ selectedList.listName }}</h2>
-        </button>
+        <h2>{{ selectedList.listName }}</h2>
         <EditIconButton @click="showItemsButtons" class="action-icon-button" />
       </div>
       <div class="list-items-filters">
         <div class="item-button-container">
           <button
-            @click="handleShowOnlyUncompletedItems"
+            @click="toggleShowOnlyUncompletedItems"
             class="empty-bullet"
           />
         </div>
@@ -111,11 +109,6 @@ let showEditItemButtons = ref(false);
 let showAllItems = ref(true);
 let showOnlyUncompletedItems = ref(false);
 
-function handleShowAllItems() {
-  showAllItems.value = true;
-  showOnlyUncompletedItems.value = false;
-}
-
 //borrar!!!
 console.log(items.value);
 
@@ -123,10 +116,15 @@ const uncompletedItems = computed(() => {
   return items.value.filter((item) => item.is_completed == false);
 });
 
-function handleShowOnlyUncompletedItems() {
+function toggleShowOnlyUncompletedItems() {
   console.log(uncompletedItems.value);
-  showAllItems.value = false;
-  showOnlyUncompletedItems.value = true;
+  if (!showOnlyUncompletedItems.value) {
+    showAllItems.value = false;
+    showOnlyUncompletedItems.value = true;
+  } else {
+    showAllItems.value = true;
+    showOnlyUncompletedItems.value = false;
+  }
 }
 
 function showItemsButtons() {
