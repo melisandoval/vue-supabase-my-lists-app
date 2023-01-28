@@ -96,6 +96,7 @@ async function toggleFavourite() {
   if (!error) {
     // once is done uptate the heart icon button locally:
     isFavourite.value = !isFavourite.value;
+    emit("itemChanged");
   }
 }
 </script>

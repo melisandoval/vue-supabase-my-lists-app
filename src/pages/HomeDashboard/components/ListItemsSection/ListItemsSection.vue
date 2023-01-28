@@ -26,17 +26,22 @@
         <EditIconButton @click="showItemsButtons" class="action-icon-button" />
       </div>
       <div class="list-items-filters">
+        <!-- filter by uncompleted items button -->
         <div class="item-button-container">
           <button
             @click="toggleShowOnlyUncompletedItems"
             class="empty-bullet"
           />
         </div>
+        <!-- filter by completed items button -->
         <div class="item-button-container">
           <button @click="toggleShowOnlyCompletedItems" class="filled-bullet" />
         </div>
+        <!-- filter by favourites items button -->
         <div class="item-button-container">
-          <button><FilledHeartIconSVG /></button>
+          <button @click="toggleShowOnlyFavouritesItems">
+            <FilledHeartIconSVG />
+          </button>
         </div>
       </div>
     </section>
@@ -64,6 +69,16 @@
     <ul v-if="showOnlyCompletedItems" class="list-of-items">
       <Item
         v-for="item in completedItems"
+        :key="item.item_id"
+        :item="item"
+        @itemChanged="updateItems"
+        :showEditItemButtons="showEditItemButtons"
+      />
+    </ul>
+    <!-- list of only FAVOURITES items -->
+    <ul v-if="showOnlyFavouritesItems" class="list-of-items">
+      <Item
+        v-for="item in favouritesItems"
         :key="item.item_id"
         :item="item"
         @itemChanged="updateItems"
@@ -113,24 +128,21 @@ watch(selectedList, async () => {
 let newListItem = ref("");
 let showErrorMsg = ref(false);
 let errorMsg = ref(DEFAULT_ERROR_MESSAGE);
-
-// ref to handle show/hide item buttons in children Item component:
-let showEditItemButtons = ref(false);
-
 let showAllItems = ref(true);
 let showOnlyUncompletedItems = ref(false);
 let showOnlyCompletedItems = ref(false);
+let showOnlyFavouritesItems = ref(false);
+let showEditItemButtons = ref(false); // prop to children Item component
 
 //BORRAR!!!
 console.log(items.value);
 
-// handles only show uncompleted items:
+// handles only show UNCOMPLETED items:
 const uncompletedItems = computed(() => {
   return items.value.filter((item) => item.is_completed == false);
 });
 
 function toggleShowOnlyUncompletedItems() {
-  console.log(uncompletedItems.value);
   if (!showOnlyUncompletedItems.value) {
     showAllItems.value = false;
     showOnlyUncompletedItems.value = true;
@@ -140,19 +152,33 @@ function toggleShowOnlyUncompletedItems() {
   }
 }
 
-// handles only show completed items:
+// handles only show COMPLETED items:
 const completedItems = computed(() => {
   return items.value.filter((item) => item.is_completed == true);
 });
 
 function toggleShowOnlyCompletedItems() {
-  console.log(completedItems.value);
   if (!showOnlyCompletedItems.value) {
     showAllItems.value = false;
     showOnlyCompletedItems.value = true;
   } else {
     showAllItems.value = true;
     showOnlyCompletedItems.value = false;
+  }
+}
+
+// handles only show FAVOURITES items:
+const favouritesItems = computed(() => {
+  return items.value.filter((item) => item.is_favourite == true);
+});
+
+function toggleShowOnlyFavouritesItems() {
+  if (!showOnlyFavouritesItems.value) {
+    showAllItems.value = false;
+    showOnlyFavouritesItems.value = true;
+  } else {
+    showAllItems.value = true;
+    showOnlyFavouritesItems.value = false;
   }
 }
 
