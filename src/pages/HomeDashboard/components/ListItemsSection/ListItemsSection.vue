@@ -19,11 +19,22 @@
   </section>
   <!-- list of list's items section -->
   <section>
-    <!-- list title -->
-    <div class="list-title-container">
-      <h2>{{ selectedList.listName }}</h2>
-      <EditIconButton @click="showItemsButtons" class="action-icon-button" />
-    </div>
+    <!-- list title with edit items buttons and filter items buttons-->
+    <section class="list-title-section">
+      <div class="list-title-container">
+        <h2>{{ selectedList.listName }}</h2>
+        <EditIconButton @click="showItemsButtons" class="action-icon-button" />
+      </div>
+      <div class="list-items-filters">
+        <div class="item-button-container"><button class="empty-bullet" /></div>
+        <div class="item-button-container">
+          <button class="filled-bullet" />
+        </div>
+        <div class="item-button-container">
+          <button><FilledHeartIconSVG /></button>
+        </div>
+      </div>
+    </section>
     <!-- list of items -->
     <ul class="list-of-items">
       <Item
@@ -44,6 +55,7 @@ import { useItemsStore } from "../../../../piniaStores/itemsStore";
 import { storeToRefs } from "pinia";
 import Item from "./Item.vue";
 import EditIconButton from "../../../../components/EditIconButton.vue";
+import FilledHeartIconSVG from "../../../../components/FilledHeartIconSVG.vue";
 
 const DEFAULT_ERROR_MESSAGE = "Please add at least one character.";
 
@@ -188,5 +200,12 @@ img {
 
 .list-of-items {
   padding: 0 2em 2em;
+}
+
+.list-title-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1em;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <li class="item-component">
     <!-- bullet button -->
-    <div class="button-container">
+    <div class="item-button-container">
       <button
         :class="{
           'empty-bullet': !item.is_completed,
@@ -13,7 +13,7 @@
     <!-- item text -->
     <p>{{ item.item_text }}</p>
     <!-- favorite button -->
-    <div class="button-container">
+    <div class="item-button-container">
       <button @click="toggleFavourite">
         <!-- filled heart icon if is favourite-->
         <FilledHeartIconSVG v-if="isFavourite" />
@@ -113,37 +113,6 @@ button {
 .item-component p {
   padding-left: 0.6em;
   padding-right: 0.1em;
-}
-
-.button-container {
-  width: 1.6rem;
-  height: 1.6rem;
-  display: grid;
-  place-items: center;
-  border: 2px solid white;
-  border-radius: 50%;
-}
-
-.button-container:hover {
-  border: 2px solid #ffe6e3;
-  border-radius: 50%;
-  background-color: #ffe6e3;
-}
-
-.empty-bullet {
-  width: 1.2rem;
-  height: 1.2rem;
-  border: 2px solid #fe8684;
-  border-radius: 50%;
-  background-color: white;
-}
-
-.filled-bullet {
-  width: 1.2rem;
-  height: 1.2rem;
-  border: 2px solid #fe8684;
-  background-color: #fe8684;
-  border-radius: 50%;
 }
 
 .heart-icon {

@@ -246,6 +246,59 @@ h3 {
   justify-self: end;
 }
 
+/* list items section */
+.item-button-container {
+  width: 1.6rem;
+  height: 1.6rem;
+  display: grid;
+  place-items: center;
+  border: 2px solid white;
+  border-radius: 50%;
+}
+
+.item-button-container:hover {
+  border: 2px solid #ffe6e3;
+  border-radius: 50%;
+  background-color: #ffe6e3;
+}
+
+.empty-bullet {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid #fe8684;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.filled-bullet {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid #fe8684;
+  background-color: #fe8684;
+  border-radius: 50%;
+}
+
+.list-items-filters {
+  display: flex;
+  align-items: center;
+}
+
+.list-items-filters button {
+  max-width: 100%;
+  max-height: auto;
+  /* width: 0.8rem;
+  height: 0.8rem;
+  margin: 0 0.2rem; */
+  /* padding: 0.5rem !important; */
+  margin: 0 0.2rem;
+  padding: 0 !important;
+}
+
+.list-items-filters .heart-icon {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
 @media (min-width: 768px) {
   .dashboard-container {
     width: 100%;
