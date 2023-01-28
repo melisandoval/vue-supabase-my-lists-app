@@ -1,42 +1,41 @@
 <template>
   <nav>
-    <!-- welcome section -->
-    <section class="navbar-header">
-      <img src="../../../../assets/rabbit-writting.png" alt="" />
-    </section>
-    <!-- lists of Lists section -->
-    <section class="lists-of-lists-section">
-      <div>
-        <h1>My lists</h1>
-      </div>
-      <!-- List of list titles buttons, lists state is from storeToRefs(listsStore) -->
-      <ul>
-        <li v-for="list in lists">
-          <ListTitleButtonDiv
-            :title="list.title"
-            :listId="list.list_id"
-            :key="list.list_id"
-          ></ListTitleButtonDiv>
-        </li>
-      </ul>
-    </section>
-
-    <!-- new list form section -->
-    <section class="navbar-new-list-form-section">
-      <form v-on:submit.prevent="createNewList" autocomplete="off">
-        <h3>New list</h3>
-        <label for="new-list-title">List's title:</label>
-        <div class="new-list-input-and-button">
-          <input v-model="newList" id="new-list-title" />
-          <button>
-            <img src="../../../../assets/add-circle.svg" alt="Add list" />
-          </button>
+    <div class="navbar-content-container">
+      <section class="lists-of-lists-section">
+        <section class="navbar-header">
+          <img src="../../../../assets/rabbit-writting.png" alt="" />
+        </section>
+        <div>
+          <h1>My lists</h1>
         </div>
-        <p v-if="showErrorMsg" class="error-msg">
-          Please add at least one character.
-        </p>
-      </form>
-    </section>
+        <!-- List of list titles buttons, lists state is from storeToRefs(listsStore) -->
+        <ul>
+          <li v-for="list in lists">
+            <ListTitleButtonDiv
+              :title="list.title"
+              :listId="list.list_id"
+              :key="list.list_id"
+            ></ListTitleButtonDiv>
+          </li>
+        </ul>
+      </section>
+      <!-- new list form section -->
+      <section class="navbar-new-list-form-section">
+        <form v-on:submit.prevent="createNewList" autocomplete="off">
+          <h3>New list</h3>
+          <label for="new-list-title">List's title:</label>
+          <div class="new-list-input-and-button">
+            <input v-model="newList" id="new-list-title" />
+            <button>
+              <img src="../../../../assets/add-circle.svg" alt="Add list" />
+            </button>
+          </div>
+          <p v-if="showErrorMsg" class="error-msg">
+            Please add at least one character.
+          </p>
+        </form>
+      </section>
+    </div>
   </nav>
 </template>
 

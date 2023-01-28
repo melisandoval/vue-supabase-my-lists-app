@@ -117,7 +117,14 @@ watch(selectedList, async () => {
   console.log("Watch is called *******");
   if (selectedList.value) {
     try {
-      await itemsStore.fetchListItems(selectedList.value.listId);
+      const error = await itemsStore.fetchListItems(selectedList.value.listId);
+      if (!error) {
+        // reset all v-if refs:
+        showAllItems.value = true;
+        showOnlyCompletedItems.value = false;
+        showOnlyUncompletedItems.value = false;
+        showOnlyFavouritesItems.value = false;
+      }
     } catch (error) {
       console.log(error);
     }
@@ -144,7 +151,11 @@ const uncompletedItems = computed(() => {
 
 function toggleShowOnlyUncompletedItems() {
   if (!showOnlyUncompletedItems.value) {
+    // hide the rest of the v-if components:
     showAllItems.value = false;
+    showOnlyCompletedItems.value = false;
+    showOnlyFavouritesItems.value = false;
+    // show the uncompleted items list:
     showOnlyUncompletedItems.value = true;
   } else {
     showAllItems.value = true;
@@ -159,7 +170,11 @@ const completedItems = computed(() => {
 
 function toggleShowOnlyCompletedItems() {
   if (!showOnlyCompletedItems.value) {
+    // hide the rest of the v-if components:
     showAllItems.value = false;
+    showOnlyUncompletedItems.value = false;
+    showOnlyFavouritesItems.value = false;
+    // finally show the Completed items list:
     showOnlyCompletedItems.value = true;
   } else {
     showAllItems.value = true;
@@ -174,7 +189,11 @@ const favouritesItems = computed(() => {
 
 function toggleShowOnlyFavouritesItems() {
   if (!showOnlyFavouritesItems.value) {
+    // hide the rest of the v-if components:
     showAllItems.value = false;
+    showOnlyCompletedItems.value = false;
+    showOnlyUncompletedItems.value = false;
+    // finally show only the favourites items lists:
     showOnlyFavouritesItems.value = true;
   } else {
     showAllItems.value = true;
