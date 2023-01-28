@@ -1,7 +1,7 @@
 <template>
   <li class="item-component">
     <!-- bullet button -->
-    <div class="favourite-button-container">
+    <div class="button-container">
       <button
         :class="{
           'empty-bullet': !item.is_completed,
@@ -12,6 +12,15 @@
     </div>
     <!-- item text -->
     <p>{{ item.item_text }}</p>
+    <!-- favorite button -->
+    <div class="button-container">
+      <button @click="toggleFavourite">
+        <!-- filled heart icon if is favourite-->
+        <FilledHeartIconSVG v-if="isFavourite" />
+        <!-- unfilled heart icon if is not favourite-->
+        <UnfilledHeartIconSVG v-else />
+      </button>
+    </div>
     <div
       :class="{
         'edit-item-buttons-hidden': !showEditItemButtons,
@@ -19,15 +28,6 @@
       }"
       class="edit-item-buttons"
     >
-      <!-- favorite button -->
-      <div class="favourite-button-container">
-        <button @click="toggleFavourite">
-          <!-- filled heart icon if is favourite-->
-          <FilledHeartIconSVG v-if="isFavourite" />
-          <!-- unfilled heart icon if is not favourite-->
-          <UnfilledHeartIconSVG v-else />
-        </button>
-      </div>
       <!-- delete button -->
       <DeleteIconButton @click="deleteItem" class="action-icon-button" />
     </div>
@@ -51,8 +51,8 @@ const showEditItemButtons = toRef(props, "showEditItemButtons");
 
 const emit = defineEmits(["itemChanged"]);
 
-// TEMPORAL!! CAMBIAR LUEGO POR LO QUE VIENE DE LA DB:
-let isFavourite = ref(false);
+// initial state of is favourite is the same as the item property in db:
+let isFavourite = ref(item.value.is_favourite);
 
 async function toggleBullet() {
   const error = await itemsStore.toggleItemIsCompleted(
@@ -60,6 +60,8 @@ async function toggleBullet() {
     item.value.is_completed
   );
 
+  // tell the parent component to render the list again
+  // to update the list items with the order uncompleted first:
   if (!error) {
     emit("itemChanged");
   }
@@ -80,10 +82,22 @@ async function deleteItem() {
   }
 }
 
-// TO-DO!!!!
-// function toggleFavourite() {
-//   isFavourite.value = !isFavourite.value;
-// }
+async function toggleFavourite() {
+  // update the property in Supabase:
+  const error = await itemsStore.toggleItemIsFavourite(
+    item.value.item_id,
+    isFavourite.value
+  );
+
+  if (error) {
+    console.log(error);
+  }
+
+  if (!error) {
+    // once is done uptate the heart icon button locally:
+    isFavourite.value = !isFavourite.value;
+  }
+}
 </script>
 
 <style scoped>
@@ -101,7 +115,7 @@ button {
   padding-right: 0.1em;
 }
 
-.favourite-button-container {
+.button-container {
   width: 1.6rem;
   height: 1.6rem;
   display: grid;
@@ -110,7 +124,7 @@ button {
   border-radius: 50%;
 }
 
-.favourite-button-container:hover {
+.button-container:hover {
   border: 2px solid #ffe6e3;
   border-radius: 50%;
   background-color: #ffe6e3;

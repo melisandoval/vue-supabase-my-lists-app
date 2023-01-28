@@ -29,7 +29,6 @@ export const useItemsStore = defineStore("items", {
             user_id: userStore.user.id,
             list_id: selectedListId,
           })
-          .order("is_favourite")
           .order("is_completed");
 
         if (data) {
@@ -64,7 +63,7 @@ export const useItemsStore = defineStore("items", {
       }
     },
 
-    // toggle is_completed of selected item:
+    // toggle item is_completed:
     async toggleItemIsCompleted(itemId, isCompleted) {
       if (!isCompleted) {
         try {
@@ -100,9 +99,43 @@ export const useItemsStore = defineStore("items", {
       }
     },
 
-    // hacer el de cambiar entre favorito/ no favorito
+    // toggle item is favourite:
+    async toggleItemIsFavourite(itemId, isFavourite) {
+      if (!isFavourite) {
+        try {
+          const { error } = await supabase
+            .from("items")
+            .update({ is_favourite: true })
+            .eq("item_id", itemId);
 
-    // Hacer el delete
+          if (error) {
+            console.log(error.message);
+          }
+
+          return error;
+        } catch (e) {
+          console.log(`Error from toggleItemIsFavourite() catch is ${e}`);
+        }
+      }
+
+      if (isFavourite) {
+        try {
+          const { error } = await supabase
+            .from("items")
+            .update({ is_favourite: false })
+            .eq("item_id", itemId);
+
+          if (error) {
+            console.log(error.message);
+          }
+          return error;
+        } catch (e) {
+          console.log(`Error from toggleItemIsFavourite() catch is ${e}`);
+        }
+      }
+    },
+
+    // delete an item:
     async deleteItem(itemId) {
       try {
         const { error } = await supabase
