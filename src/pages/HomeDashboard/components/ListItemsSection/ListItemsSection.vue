@@ -22,7 +22,9 @@
     <!-- list title with edit items buttons and filter items buttons-->
     <section class="list-title-section">
       <div class="list-title-container">
+        <!-- list title -->
         <h2>{{ selectedList.listName }}</h2>
+        <!-- show edit list's items button -->
         <EditIconButton
           @click="showItemsButtons"
           class="action-icon-button"
@@ -59,45 +61,56 @@
       </div>
     </section>
     <!-- list of ALL items -->
-    <ul v-if="showAllItems" class="list-of-items">
-      <Item
-        v-for="item in items"
-        :key="item.item_id"
-        :item="item"
-        @itemChanged="updateItems"
-        :showEditItemButtons="showEditItemButtons"
-      />
-    </ul>
+    <div v-if="showAllItems" class="list-of-items">
+      <ul>
+        <Item
+          v-for="item in items"
+          :key="item.item_id"
+          :item="item"
+          @itemChanged="updateItems"
+          :showEditItemButtons="showEditItemButtons"
+        />
+      </ul>
+    </div>
     <!-- list of only UNCOMPLETED items -->
-    <ul v-if="showOnlyUncompletedItems" class="list-of-items">
-      <Item
-        v-for="item in uncompletedItems"
-        :key="item.item_id"
-        :item="item"
-        @itemChanged="updateItems"
-        :showEditItemButtons="showEditItemButtons"
-      />
-    </ul>
+    <div v-if="showOnlyUncompletedItems" class="list-of-items">
+      <ul v-if="uncompletedItems.length >= 1">
+        <Item
+          v-for="item in uncompletedItems"
+          :key="item.item_id"
+          :item="item"
+          @itemChanged="updateItems"
+          :showEditItemButtons="showEditItemButtons"
+        />
+      </ul>
+      <p v-else>No uncompleted items in this list.</p>
+    </div>
     <!-- list of only COMPLETED items -->
-    <ul v-if="showOnlyCompletedItems" class="list-of-items">
-      <Item
-        v-for="item in completedItems"
-        :key="item.item_id"
-        :item="item"
-        @itemChanged="updateItems"
-        :showEditItemButtons="showEditItemButtons"
-      />
-    </ul>
+    <div v-if="showOnlyCompletedItems" class="list-of-items">
+      <ul v-if="completedItems.length >= 1">
+        <Item
+          v-for="item in completedItems"
+          :key="item.item_id"
+          :item="item"
+          @itemChanged="updateItems"
+          :showEditItemButtons="showEditItemButtons"
+        />
+      </ul>
+      <p v-else>No completed items in this list.</p>
+    </div>
     <!-- list of only FAVOURITES items -->
-    <ul v-if="showOnlyFavouritesItems" class="list-of-items">
-      <Item
-        v-for="item in favouritesItems"
-        :key="item.item_id"
-        :item="item"
-        @itemChanged="updateItems"
-        :showEditItemButtons="showEditItemButtons"
-      />
-    </ul>
+    <div v-if="showOnlyFavouritesItems" class="list-of-items">
+      <ul v-if="favouritesItems.length >= 1">
+        <Item
+          v-for="item in favouritesItems"
+          :key="item.item_id"
+          :item="item"
+          @itemChanged="updateItems"
+          :showEditItemButtons="showEditItemButtons"
+        />
+      </ul>
+      <p v-else>No favourites items in this list.</p>
+    </div>
   </section>
 </template>
 
@@ -219,7 +232,7 @@ function showItemsButtons() {
   showEditItemButtons.value = !showEditItemButtons.value;
 }
 
-// function called when children component emits @itemChanged:
+// update the list in case the items changed:
 function updateItems() {
   itemsStore.fetchListItems(selectedList.value.listId);
 }
@@ -272,6 +285,11 @@ form {
   border-radius: 1em;
 }
 
+h3 {
+  font-size: 1.2rem;
+  padding-top: 1em;
+}
+
 @media (min-width: 1440px) {
   form {
     max-width: 70%;
@@ -282,11 +300,6 @@ form {
   display: flex;
   align-items: center;
   gap: 1em;
-}
-
-h3 {
-  font-size: 1.2rem;
-  padding-top: 1em;
 }
 
 .input-and-button {
