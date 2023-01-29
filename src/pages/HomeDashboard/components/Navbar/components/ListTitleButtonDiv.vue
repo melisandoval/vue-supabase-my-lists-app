@@ -1,6 +1,12 @@
 <template>
   <div class="list-title-button-div">
-    <button @click="handleShowList" class="list-title-button">
+    <button
+      @click="handleShowList"
+      class="list-title-button"
+      :class="{ 'list-is-selected': isSelected }"
+      style="display: flex"
+    >
+      <BookmarkSVG />
       {{ title }}
     </button>
     <div class="title-edit-delete-buttons-container">
@@ -17,11 +23,24 @@
 import { useListsStore } from "../../../../../piniaStores/listsStore";
 import EditIconButton from "../../../../../components/EditIconButton.vue";
 import DeleteIconButton from "../../../../../components/DeleteIconButton.vue";
+import BookmarkSVG from "../../../../../components/BookmarkSVG.vue";
+import { storeToRefs } from "pinia";
+import { watch, ref } from "vue";
 
-const props = defineProps(["title", "listId"]);
+const props = defineProps(["title", "listId", "key"]);
 const emit = defineEmits(["deleteList"]);
 
 const listsStore = useListsStore();
+
+const { selectedList } = storeToRefs(listsStore);
+
+let isSelected = ref(false);
+
+watch(selectedList, () => {
+  if (selectedList.value.listName === props.title) {
+    isSelected.value = true;
+  } else isSelected.value = false;
+});
 
 // handle show selected list item's:
 function handleShowList() {

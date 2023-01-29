@@ -133,27 +133,36 @@ nav {
 h1 {
   font-size: 3rem;
   font-family: "Pacifico", cursive;
-  padding: 0.5em 0;
+  padding: 1em 0;
 }
 
 h3 {
   font-size: 1.8rem;
 }
 
+/* .list-of-lists {
+  padding-left: 0.1em;
+} */
+
 .list-title-button-div {
   padding: 0.2em 0;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  /* justify-content: space-between; */
   gap: 0.5em;
 }
 
 .list-title-button {
   padding: 0em 0.2em;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   letter-spacing: 0.05rem;
+  background-color: var(--light-pink);
+  display: flex;
+  gap: 1em;
 }
 
-.list-title-button:hover {
+.list-title-button:hover,
+.list-is-selected {
   color: white;
   background-color: var(--dark-pink);
   cursor: pointer;

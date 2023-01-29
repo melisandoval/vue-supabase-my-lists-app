@@ -9,7 +9,7 @@
           <h1>My lists</h1>
         </div>
         <!-- List of list titles buttons, lists state is from storeToRefs(listsStore) -->
-        <ul>
+        <ul class="list-of-lists">
           <li v-for="list in lists">
             <ListTitleButtonDiv
               :title="list.title"
