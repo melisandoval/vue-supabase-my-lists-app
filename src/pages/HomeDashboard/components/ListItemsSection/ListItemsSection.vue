@@ -24,11 +24,22 @@
       <div class="list-title-container">
         <!-- list title -->
         <h2>{{ selectedList.listName }}</h2>
-        <!-- show edit list's items button -->
+        <!-- edit list's items buttons -->
+        <EditIconButtonDisabled v-if="listItemsIsEmpty" />
         <EditIconButton
+          v-else
           @click="showItemsButtons"
-          class="action-icon-button"
-          :class="{ 'edit-items-is-selected': showEditItemButtons }"
+          :class="{
+            'edit-items-is-selected': showEditItemButtons,
+          }"
+        />
+        <DeleteIconButton
+          v-if="!listItemsIsEmpty"
+          @click="handleShowDeleteAllListItemsModal"
+          :class="{
+            'action-icon-button': showEditItemButtons,
+            'hidden-list-title-button': !showEditItemButtons,
+          }"
         />
       </div>
       <div class="list-items-filters">
@@ -60,57 +71,64 @@
         </div>
       </div>
     </section>
-    <!-- list of ALL items -->
-    <div v-if="showAllItems" class="list-of-items">
-      <ul>
-        <Item
-          v-for="item in items"
-          :key="item.item_id"
-          :item="item"
-          @itemChanged="updateItems"
-          :showEditItemButtons="showEditItemButtons"
-        />
-      </ul>
-    </div>
-    <!-- list of only UNCOMPLETED items -->
-    <div v-if="showOnlyUncompletedItems" class="list-of-items">
-      <ul v-if="uncompletedItems.length >= 1">
-        <Item
-          v-for="item in uncompletedItems"
-          :key="item.item_id"
-          :item="item"
-          @itemChanged="updateItems"
-          :showEditItemButtons="showEditItemButtons"
-        />
-      </ul>
-      <p v-else>No uncompleted items in this list.</p>
-    </div>
-    <!-- list of only COMPLETED items -->
-    <div v-if="showOnlyCompletedItems" class="list-of-items">
-      <ul v-if="completedItems.length >= 1">
-        <Item
-          v-for="item in completedItems"
-          :key="item.item_id"
-          :item="item"
-          @itemChanged="updateItems"
-          :showEditItemButtons="showEditItemButtons"
-        />
-      </ul>
-      <p v-else>No completed items in this list.</p>
-    </div>
-    <!-- list of only FAVOURITES items -->
-    <div v-if="showOnlyFavouritesItems" class="list-of-items">
-      <ul v-if="favouritesItems.length >= 1">
-        <Item
-          v-for="item in favouritesItems"
-          :key="item.item_id"
-          :item="item"
-          @itemChanged="updateItems"
-          :showEditItemButtons="showEditItemButtons"
-        />
-      </ul>
-      <p v-else>No favourites items in this list.</p>
-    </div>
+    <!-- list of items section -->
+    <section>
+      <!-- list of ALL items -->
+      <div v-if="showAllItems" class="list-of-items">
+        <ul>
+          <Item
+            v-for="item in items"
+            :key="item.item_id"
+            :item="item"
+            @itemChanged="updateItems"
+            :showEditItemButtons="showEditItemButtons"
+          />
+        </ul>
+        <div v-if="listItemsIsEmpty">
+          <p>The list is empty.</p>
+          <p>Lets create create an item for it!</p>
+        </div>
+      </div>
+      <!-- list of only UNCOMPLETED items -->
+      <div v-if="showOnlyUncompletedItems" class="list-of-items">
+        <ul v-if="uncompletedItems.length >= 1">
+          <Item
+            v-for="item in uncompletedItems"
+            :key="item.item_id"
+            :item="item"
+            @itemChanged="updateItems"
+            :showEditItemButtons="showEditItemButtons"
+          />
+        </ul>
+        <p v-else>No uncompleted items in this list.</p>
+      </div>
+      <!-- list of only COMPLETED items -->
+      <div v-if="showOnlyCompletedItems" class="list-of-items">
+        <ul v-if="completedItems.length >= 1">
+          <Item
+            v-for="item in completedItems"
+            :key="item.item_id"
+            :item="item"
+            @itemChanged="updateItems"
+            :showEditItemButtons="showEditItemButtons"
+          />
+        </ul>
+        <p v-else>No completed items in this list.</p>
+      </div>
+      <!-- list of only FAVOURITES items -->
+      <div v-if="showOnlyFavouritesItems" class="list-of-items">
+        <ul v-if="favouritesItems.length >= 1">
+          <Item
+            v-for="item in favouritesItems"
+            :key="item.item_id"
+            :item="item"
+            @itemChanged="updateItems"
+            :showEditItemButtons="showEditItemButtons"
+          />
+        </ul>
+        <p v-else>No favourites items in this list.</p>
+      </div>
+    </section>
   </section>
 </template>
 
@@ -122,6 +140,8 @@ import { storeToRefs } from "pinia";
 import Item from "./Item.vue";
 import EditIconButton from "../../../../components/EditIconButton.vue";
 import FilledHeartIconSVG from "../../../../components/FilledHeartIconSVG.vue";
+import DeleteIconButton from "../../../../components/DeleteIconButton.vue";
+import EditIconButtonDisabled from "../../../../components/EditIconButtonDisabled.vue";
 
 const DEFAULT_ERROR_MESSAGE = "Please add at least one character.";
 
@@ -133,9 +153,28 @@ const itemsStore = useItemsStore();
 const { items } = storeToRefs(itemsStore);
 const { selectedList } = storeToRefs(listsStore);
 
+// component refs:
+let newListItem = ref("");
+let showErrorMsg = ref(false);
+let errorMsg = ref(DEFAULT_ERROR_MESSAGE);
+let showAllItems = ref(true);
+let showOnlyUncompletedItems = ref(false);
+let showOnlyCompletedItems = ref(false);
+let showOnlyFavouritesItems = ref(false);
+let showEditItemButtons = ref(false); // prop to children Item component
+let listItemsIsEmpty = ref(false);
+
 // call fetch items of current selected list with first component render:
 onMounted(() => {
+  showEditItemButtons.value = false;
   itemsStore.fetchListItems(selectedList.value.listId);
+});
+
+watch(items, async () => {
+  if (items.value.length === 0) {
+    showEditItemButtons.value = false;
+    listItemsIsEmpty.value = true;
+  } else listItemsIsEmpty.value = false;
 });
 
 // call fetch items again whenever selectedList changes!:
@@ -156,19 +195,6 @@ watch(selectedList, async () => {
     }
   }
 });
-
-// component refs:
-let newListItem = ref("");
-let showErrorMsg = ref(false);
-let errorMsg = ref(DEFAULT_ERROR_MESSAGE);
-let showAllItems = ref(true);
-let showOnlyUncompletedItems = ref(false);
-let showOnlyCompletedItems = ref(false);
-let showOnlyFavouritesItems = ref(false);
-let showEditItemButtons = ref(false); // prop to children Item component
-
-//BORRAR!!!
-console.log(items.value);
 
 // handles only show UNCOMPLETED items:
 const uncompletedItems = computed(() => {
@@ -274,6 +300,14 @@ async function createNewListItem() {
     newListItem.value = "";
   }
 }
+
+function handleShowDeleteAllListItemsModal() {
+  console.log(items);
+  // if (selectedList.value.length === 0) {
+  //   console.log("no hay ningun item para borrar");
+  // }
+  // itemsStore.toggleAreListItemsSelectedToDelete();
+}
 </script>
 
 <style scoped>
@@ -336,8 +370,6 @@ img {
 
 .list-of-items {
   padding: 0 2em 2em;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
 }
 
 .list-title-section {
@@ -345,5 +377,9 @@ img {
   align-items: center;
   justify-content: space-between;
   padding: 0 1em;
+}
+
+.hidden-list-title-button {
+  visibility: hidden;
 }
 </style>

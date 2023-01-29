@@ -2,6 +2,7 @@
   <!-- full page modals -->
   <EditListModal v-if="selectedListToEdit" />
   <DeleteListModal v-if="selectedListToDelete" />
+  <DeleteAllListItemsModal v-if="areListItemsSelectedToDelete" />
   <!-- Home/ Dashboard -->
   <div class="dashboard-container">
     <section class="navbar-container">
@@ -20,24 +21,29 @@
 <script setup>
 import { useUserStore } from "../../piniaStores/userStore.js";
 import { useListsStore } from "../../piniaStores/listsStore";
+import { useItemsStore } from "../../piniaStores/itemsStore";
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
+import { ref } from "vue";
 import Navbar from "./components/Navbar/Navbar.vue";
 import DeleteListModal from "./components/Modals/DeleteListModal.vue";
 import EditListModal from "./components/Modals/EditListModal.vue";
 import ListItemsWelcomeVue from "./components/ListItemsSection/ListItemsWelcome.vue";
 import PrimaryButton from "../../components/PrimaryButton.vue";
 import ListItemsSection from "./components/ListItemsSection/ListItemsSection.vue";
+import DeleteAllListItemsModal from "./components/Modals/DeleteAllListItemsModal.vue";
 
 const router = useRouter();
 
 // stores:
 const userStore = useUserStore();
 const listsStore = useListsStore();
+const itemsStore = useItemsStore();
 
 // ref to handle v-ifs =
 const { selectedList, selectedListToEdit, selectedListToDelete } =
   storeToRefs(listsStore);
+const { areListItemsSelectedToDelete } = storeToRefs(itemsStore);
 
 async function logOut() {
   const error = await userStore.signOut();

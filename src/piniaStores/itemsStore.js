@@ -8,7 +8,8 @@ export const useItemsStore = defineStore("items", {
 
   state: () => ({
     items: null,
-    // selectedItem: null,
+    // to show/hide the modal to confirm delete all items from a single list:
+    areListItemsSelectedToDelete: false,
   }),
 
   actions: {
@@ -147,6 +148,11 @@ export const useItemsStore = defineStore("items", {
       } catch (e) {
         console.log(`Error from deleteItem() catch is ${e}`);
       }
+    },
+
+    // action to change state areListItemsSelectedToDelete:
+    toggleAreListItemsSelectedToDelete() {
+      this.areListItemsSelectedToDelete = !this.areListItemsSelectedToDelete;
     },
   },
 });
