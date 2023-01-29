@@ -21,6 +21,9 @@ const { user } = storeToRefs(userStore);
 </script>
 
 <style scoped>
+h2 {
+  font-size: 2rem;
+}
 .no-list-items-container {
   height: 100%;
   z-index: 10;

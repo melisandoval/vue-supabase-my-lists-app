@@ -76,6 +76,11 @@ input {
   border-radius: 55%;
 }
 
+.button-to-show-edit-buttons:hover {
+  background-color: var(--light-pink);
+  border-radius: 55%;
+}
+
 .action-icon {
   width: 1rem;
   height: 1rem;
@@ -325,7 +330,7 @@ h3 {
 
 @media (min-width: 1024px) {
   .dashboard-container {
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 35% 65%;
   }
 
   .modal {
