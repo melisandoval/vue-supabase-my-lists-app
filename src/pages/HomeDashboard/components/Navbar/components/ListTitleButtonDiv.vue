@@ -37,9 +37,11 @@ const { selectedList } = storeToRefs(listsStore);
 let isSelected = ref(false);
 
 watch(selectedList, () => {
-  if (selectedList.value.listName === props.title) {
-    isSelected.value = true;
-  } else isSelected.value = false;
+  if (selectedList.value) {
+    if (selectedList.value.listName === props.title) {
+      isSelected.value = true;
+    } else isSelected.value = false;
+  } else return;
 });
 
 // handle show selected list item's:

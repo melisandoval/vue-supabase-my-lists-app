@@ -44,28 +44,32 @@ function handleCloseModal() {
 }
 
 async function handleDeleteList() {
-  // if (selectedListToDelete.value.listId === selectedList.value.listId) {
-  //   listsStore.deselectListToShow();
-  // }
   console.log(`selected list is ${JSON.stringify(selectedList.value)}`);
   console.log(
     `selectedListToDelete is ${JSON.stringify(selectedListToDelete.value)}`
   );
 
-  listsStore.deselectListToShow();
   // call to store to delete list from Supabase:
-  const error = await listsStore.deleteSelectedList(
-    selectedListToDelete.value.listId
-  );
+  try {
+    const error = await listsStore.deleteSelectedList(
+      selectedListToDelete.value.listId
+    );
 
-  if (!error) {
-    listsStore.fetchUserLists();
+    if (error) {
+      console.log(error);
+    }
+
+    if (!error) {
+      listsStore.fetchUserLists();
+      console.log(
+        `listsStore.selectedListToDelete is ${listsStore.selectedListToDelete}`
+      );
+      showDeleteListResponse.value = true;
+      listsStore.deselectListToShow();
+    }
+  } catch (e) {
+    console.log(e);
   }
-
-  showDeleteListResponse.value = true;
-  console.log(
-    `listsStore.selectedListToDelete is ${listsStore.selectedListToDelete}`
-  );
 }
 </script>
 
