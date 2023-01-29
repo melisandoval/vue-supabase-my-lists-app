@@ -3,11 +3,11 @@
     <div class="modal">
       <div v-if="!showDeleteListResponse" class="m-6">
         <h3>Are you sure?</h3>
+        <p>Do you want to <u>delete</u></p>
         <p>
-          All the items asociated with the list <br />
-          <span>" {{ selectedListToDelete.listName }} "</span><br />
-          will be deleted too!!!
+          <span>" {{ selectedListToDelete.listName }} "</span> list?
         </p>
+        <p>All it's items will be deleted too!</p>
         <div>
           <SecondaryButton @click="handleDeleteList" text="Delete list" />
           <PrimaryButton @click="handleCloseModal" text="Cancel" />
@@ -80,11 +80,12 @@ async function handleDeleteList() {
 
 h3 {
   font-family: "Pacifico", cursive;
-  font-size: 2.2rem;
+  font-size: 2rem;
   padding: 1rem;
 }
 
-p {
+p,
+u {
   font-size: 1.3rem;
   padding-bottom: 1rem;
 }
