@@ -7,7 +7,7 @@
         <p>
           <span>" {{ selectedListToDelete.listName }} "</span> list?
         </p>
-        <p>All it's items will be deleted too!</p>
+        <p><u>All it's items</u> will be deleted too!!</p>
         <div>
           <SecondaryButton @click="handleDeleteList" text="Delete list" />
           <PrimaryButton @click="handleCloseModal" text="Cancel" />

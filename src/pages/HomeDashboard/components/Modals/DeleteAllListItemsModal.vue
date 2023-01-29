@@ -5,7 +5,7 @@
       <p>
         Do you want to delete <br />
         <u>all the items</u> <br />
-        in the <span>{{ selectedList.listName }}</span> list?
+        in the <span>"{{ selectedList.listName }}"</span> list?
       </p>
       <div>
         <SecondaryButton text="Delete" @click="deleteAllListItems" />
@@ -66,7 +66,13 @@ p span {
   font-size: 1.3rem;
 }
 
+u {
+  background-color: #fdaea14f;
+  padding: 0 1em;
+}
+
 p span {
   font-family: "Pacifico", cursive;
+  font-size: 1.6rem;
 }
 </style>
