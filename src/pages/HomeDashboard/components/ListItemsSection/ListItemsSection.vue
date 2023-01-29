@@ -23,7 +23,7 @@
     <section class="list-title-section">
       <div class="list-title-container">
         <!-- list title -->
-        <h2>{{ selectedList.listName }}</h2>
+        <h2 @click="handleShowAllListItems">{{ selectedList.listName }}</h2>
         <!-- edit list's items buttons -->
         <EditIconButtonDisabled v-if="listItemsIsEmpty" />
         <EditIconButton
@@ -185,16 +185,25 @@ watch(selectedList, async () => {
       const error = await itemsStore.fetchListItems(selectedList.value.listId);
       if (!error) {
         // reset all v-if refs:
-        showAllItems.value = true;
         showOnlyCompletedItems.value = false;
         showOnlyUncompletedItems.value = false;
         showOnlyFavouritesItems.value = false;
+        showAllItems.value = true;
       }
     } catch (error) {
       console.log(error);
     }
   }
 });
+
+// handle show all list items (title list onClick):
+function handleShowAllListItems() {
+  // reset all filters:
+  showOnlyCompletedItems.value = false;
+  showOnlyUncompletedItems.value = false;
+  showOnlyFavouritesItems.value = false;
+  showAllItems.value = true;
+}
 
 // handles only show UNCOMPLETED items:
 const uncompletedItems = computed(() => {
@@ -314,6 +323,10 @@ form {
   margin-bottom: 1.4em;
   padding: 1em;
   border-radius: 1em;
+}
+
+h2 {
+  cursor: pointer;
 }
 
 h3 {
