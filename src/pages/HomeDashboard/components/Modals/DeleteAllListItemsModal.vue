@@ -3,11 +3,12 @@
     <div class="modal">
       <h3>Are you sure?</h3>
       <p>
-        Do you want to delete <u>all the items</u> in the
-        <span>{{ selectedList.listName }}</span> list?
+        Do you want to delete <br />
+        <u>all the items</u> <br />
+        in the <span>{{ selectedList.listName }}</span> list?
       </p>
       <div>
-        <SecondaryButton text="Delete" />
+        <SecondaryButton text="Delete" @click="deleteAllListItems" />
         <PrimaryButton text="Cancel" @click="handleCloseModal" />
       </div>
     </div>
@@ -29,15 +30,34 @@ const { selectedList } = storeToRefs(listsStore);
 function handleCloseModal() {
   itemsStore.toggleAreListItemsSelectedToDelete();
 }
+
+async function deleteAllListItems() {
+  console.log(selectedList.value.listId);
+
+  const error = await itemsStore.deleteAllListItems(selectedList.value.listId);
+
+  if (!error) {
+    try {
+      await itemsStore.fetchListItems(selectedList.value.listId);
+    } catch (e) {
+      console.log(
+        `Error for fetchListItems() after deleting all list items is ${e} `
+      );
+    }
+
+    handleCloseModal();
+  }
+}
 </script>
 
 <style scoped>
 h3 {
-  padding: 1em;
+  padding-top: 1em;
 }
 
 p {
   text-align: center;
+  padding: 1em;
 }
 
 p,

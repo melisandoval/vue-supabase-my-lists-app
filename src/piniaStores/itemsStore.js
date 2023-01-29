@@ -154,5 +154,17 @@ export const useItemsStore = defineStore("items", {
     toggleAreListItemsSelectedToDelete() {
       this.areListItemsSelectedToDelete = !this.areListItemsSelectedToDelete;
     },
+
+    async deleteAllListItems(selectedListId) {
+      try {
+        const { error } = await supabase
+          .from("items")
+          .delete()
+          .eq("list_id", selectedListId);
+        return error;
+      } catch (e) {
+        console.log(`Error from deleteAllListItems() catch is ${e}`);
+      }
+    },
   },
 });

@@ -170,7 +170,7 @@ onMounted(() => {
   itemsStore.fetchListItems(selectedList.value.listId);
 });
 
-watch(items, async () => {
+watch(items, () => {
   if (items.value.length === 0) {
     showEditItemButtons.value = false;
     listItemsIsEmpty.value = true;
@@ -303,10 +303,7 @@ async function createNewListItem() {
 
 function handleShowDeleteAllListItemsModal() {
   console.log(items);
-  // if (selectedList.value.length === 0) {
-  //   console.log("no hay ningun item para borrar");
-  // }
-  // itemsStore.toggleAreListItemsSelectedToDelete();
+  itemsStore.toggleAreListItemsSelectedToDelete();
 }
 </script>
 
