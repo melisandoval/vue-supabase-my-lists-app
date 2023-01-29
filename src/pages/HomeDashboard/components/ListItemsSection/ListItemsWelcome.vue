@@ -34,7 +34,7 @@ p {
 }
 
 img {
-  width: 30%;
+  width: 20%;
   height: auto;
   padding: 1.5em;
 }

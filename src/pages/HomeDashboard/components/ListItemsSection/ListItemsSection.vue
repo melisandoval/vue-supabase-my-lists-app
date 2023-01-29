@@ -336,6 +336,8 @@ img {
 
 .list-of-items {
   padding: 0 2em 2em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .list-title-section {
