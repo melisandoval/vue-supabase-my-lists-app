@@ -10,7 +10,11 @@
       {{ title }}
     </button>
     <div class="title-edit-delete-buttons-container">
-      <EditIconButton @click="showEditListModal" class="action-icon-button" />
+      <EditIconButton
+        @click="showEditListModal"
+        class="action-icon-button"
+        width="16px"
+      />
       <DeleteIconButton
         @click="showDeleteListModal"
         class="action-icon-button"

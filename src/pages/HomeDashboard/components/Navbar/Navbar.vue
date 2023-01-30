@@ -5,8 +5,19 @@
         <section class="navbar-header">
           <img src="../../../../assets/rabbit-writting.png" alt="" />
         </section>
-        <div>
+        <div class="app-title-container">
           <h1>My lists</h1>
+          <div>
+            <!-- <EditIconButton
+              @click="handleShowEditListsButtons"
+              class="action-icon-button"
+              :class="{
+                'edit-icon-button-is-selected': showEditListsButtons,
+              }"
+            /> -->
+            <BigEditIconButtonDisabled v-if="userHasNoLists" />
+            <BigEditIconButton v-else />
+          </div>
         </div>
         <!-- List of list titles buttons, lists state is from storeToRefs(listsStore) -->
         <ul class="list-of-lists">
@@ -42,9 +53,10 @@
 <script setup>
 import { useListsStore } from "../../../../piniaStores/listsStore";
 import { storeToRefs } from "pinia";
-
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import ListTitleButtonDiv from "./components/ListTitleButtonDiv.vue";
+import BigEditIconButtonDisabled from "./components/BigEditIconButtonDisabled.vue";
+import BigEditIconButton from "./components/BigEditIconButton.vue";
 
 // get lists store to get the titles of the lists to display in lists titles button section:
 const listsStore = useListsStore();
@@ -58,6 +70,14 @@ const { lists } = storeToRefs(listsStore);
 // ref for the create a new list input field:
 let newList = ref("");
 let showErrorMsg = ref(false);
+let userHasNoLists = ref(false);
+let showEditListsButtons = ref(false);
+
+watch(lists, () => {
+  if (lists.value.length === 0) {
+    userHasNoLists.value = true;
+  } else userHasNoLists.value = false;
+});
 
 // function for create new list form:
 async function createNewList() {
