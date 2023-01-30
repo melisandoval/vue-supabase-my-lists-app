@@ -3,9 +3,10 @@
     <div class="modal">
       <h3>Are you sure?</h3>
       <p>
-        Do you want to delete <br />
-        <u>all the items</u> <br />
-        in the <span>"{{ selectedList.listName }}"</span> list?
+        Do you want to <br />
+        <u>delete all the items</u><br />
+        in the "<span>{{ selectedList.listName }}</span
+        >" list?
       </p>
       <div>
         <SecondaryButton text="Delete" @click="deleteAllListItems" />
@@ -58,6 +59,7 @@ h3 {
 p {
   text-align: center;
   padding: 1em;
+  line-height: 3.2rem;
 }
 
 p,
@@ -67,12 +69,13 @@ p span {
 }
 
 u {
-  background-color: #fdaea14f;
   padding: 0 1em;
+  background-color: #fdaea14f;
 }
 
 p span {
   font-family: "Pacifico", cursive;
   font-size: 1.6rem;
+  text-decoration: underline;
 }
 </style>
