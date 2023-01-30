@@ -99,7 +99,7 @@ h3 {
 }
 
 input[type="text"] {
-  max-width: 100%;
+  width: 100%;
   border: 0.1em solid #fdaea14f;
   margin: 1em 0;
 }
