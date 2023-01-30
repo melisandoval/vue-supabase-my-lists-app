@@ -71,7 +71,7 @@ input {
 }
 
 .action-icon-button:hover,
-.edit-items-is-selected {
+.edit-icon-button-is-selected {
   background-color: var(--dark-pink);
   border-radius: 55%;
 }

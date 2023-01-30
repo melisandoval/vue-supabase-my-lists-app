@@ -31,7 +31,7 @@
           @click="showItemsButtons"
           class="button-to-show-edit-buttons"
           :class="{
-            'edit-items-is-selected': showEditItemButtons,
+            'edit-icon-button-is-selected': showEditItemButtons,
           }"
         />
         <DeleteIconButton
