@@ -51,7 +51,7 @@ async function logOut() {
     console.log(`Error from HomeDashboard logOut() is ${error.message}`);
   }
   // after log out redirect user to login page:
-  router.push({ path: "/login" });
+  router.push({ path: "/auth" });
 }
 </script>
 

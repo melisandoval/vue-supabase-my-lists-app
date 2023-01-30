@@ -9,8 +9,8 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  border: 3px solid #eee;
-  border-top-color: #333;
+  border: 3px solid #ffe6e3;
+  border-top-color: #fe8684;
   animation: spin 0.8s linear infinite;
 }
 

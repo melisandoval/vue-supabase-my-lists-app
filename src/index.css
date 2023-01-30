@@ -98,13 +98,74 @@ input {
 
 h1,
 h2,
-h3 {
+h3,
+.auth label {
   font-family: "Pacifico", cursive;
 }
 
 h2 {
   font-size: 1.5rem;
   padding: 1em 0;
+}
+
+/* auth */
+
+.auth {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth label {
+  font-size: 1.4rem;
+}
+
+.auth form,
+.auth .links {
+  padding: 2em 1em 1em;
+  max-width: 100%;
+}
+
+@media (min-width: 758px) {
+  .auth form,
+  .auth .links {
+    padding: 2em 4em 1em;
+    max-width: 100%;
+    margin-top: 1em;
+  }
+}
+
+.auth-form-card {
+  background-color: #ffe6e3;
+  border-radius: 1em;
+  max-width: 100%;
+}
+
+.auth .input-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5em 0;
+}
+
+.auth input {
+  background-color: white;
+  padding: 0.4em;
+  margin: 0.5em 0;
+}
+
+.button-section {
+  display: grid;
+  place-items: center;
+}
+
+.auth .button-container {
+  display: flex;
+  align-items: center;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
 }
 
 /* navbar */

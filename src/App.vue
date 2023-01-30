@@ -26,7 +26,7 @@ onMounted(async () => {
       // inicial pinia state "user" is null, but fetchUser() sets "user" value to the logged in user in Supabase, so:
       // if the current Pinia user state is null, means that the user is not logged in in Supabase,
       // so router redirects the user from path "/" to path "/login":
-      router.push({ path: "/login" });
+      router.push({ path: "/auth" });
     }
 
     if (user.value) {

@@ -1,45 +1,39 @@
 <template>
-  <main>
-    <form v-on:submit.prevent="submitLogIn">
+  <main class="auth">
+    <form v-on:submit.prevent="submitLogIn" class="auth-form-card">
       <!-- email input -->
-      <div>
-        <label> Email * </label>
+      <div class="input-container">
+        <label> Email</label>
         <input v-model="user.email" id="email" type="email" required />
       </div>
       <!-- password input -->
-      <div>
-        <label for="password" required> Password * </label>
-        <input
-          v-model="user.password"
-          id="password"
-          type="password"
-          placeholder="********"
-          required
-        />
+      <div class="input-container">
+        <label for="password" required> Password</label>
+        <input v-model="user.password" id="password" type="password" required />
       </div>
       <!-- error message -->
       <div>
         <p>{{ errorMsg }}</p>
       </div>
-      <!-- log in button -->
-      <div class="flex flex items-center">
-        <button type="submit">Log in</button>
-        <!-- spinner -->
-        <div v-if="showSpinner" class="mx-4">
-          <Spinner />
+      <!-- log in button with Spinner-->
+      <section class="button-section">
+        <div class="button-container">
+          <PrimaryButton type="submit" text="Log in" />
+          <!-- spinner -->
+          <div v-if="showSpinner">
+            <Spinner />
+          </div>
         </div>
-      </div>
+      </section>
     </form>
     <!-- link to register page -->
-    <div>
+    <div class="links">
       <p>
         Don't have an account?
         <span><router-link to="/register">Please register</router-link></span
         >.
       </p>
-    </div>
-    <!-- link to Reset password form -->
-    <div>
+      <!-- link to reset password form -->
       <p>
         Forgot your password?
         <span
@@ -52,9 +46,10 @@
 
 <script setup>
 import { reactive, ref } from "vue";
-import { useUserStore } from "../../piniaStores/userStore.js";
-import Spinner from "../../components/Spinner.vue";
+import { useUserStore } from "../../../piniaStores/userStore";
+import Spinner from "../../../components/Spinner.vue";
 import { useRouter } from "vue-router";
+import PrimaryButton from "../../../components/PrimaryButton.vue";
 
 // for redirecting the user after logged in:
 const router = useRouter();
@@ -71,7 +66,6 @@ const user = reactive({
   password: "",
 });
 
-// get userStore object in order to use user state and actions:
 const userStore = useUserStore();
 
 async function submitLogIn() {
