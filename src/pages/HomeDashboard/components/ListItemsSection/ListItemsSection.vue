@@ -43,7 +43,7 @@
           }"
         />
       </div>
-      <div class="list-items-filters">
+      <div v-if="!listItemsIsEmpty" class="list-items-filters">
         <!-- filter by uncompleted items button -->
         <div
           class="item-button-container"
