@@ -120,18 +120,45 @@ h2 {
   font-size: 1.4rem;
 }
 
+.auth .links p,
+.auth .links u {
+  font-size: 0.9rem;
+}
+
+.auth form {
+  padding: 1em;
+}
+
+.auth .links {
+  padding: 0.5em 1em;
+  text-align: center;
+}
+
 .auth form,
 .auth .links {
-  padding: 2em 1em 1em;
   max-width: 100%;
 }
 
 @media (min-width: 758px) {
-  .auth form,
-  .auth .links {
-    padding: 2em 4em 1em;
+  .auth input {
+    width: 60vw;
+  }
+
+  .auth form {
+    padding: 2em 4em 0.5em;
     max-width: 100%;
-    margin-top: 1em;
+  }
+}
+
+@media (min-width: 1024px) {
+  .auth input {
+    width: 35vw;
+  }
+}
+
+@media (min-width: 2560px) {
+  .auth input {
+    width: 25vw;
   }
 }
 
@@ -151,6 +178,10 @@ h2 {
   background-color: white;
   padding: 0.4em;
   margin: 0.5em 0;
+}
+
+.auth u {
+  cursor: pointer;
 }
 
 .button-section {

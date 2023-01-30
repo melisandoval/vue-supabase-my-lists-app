@@ -28,17 +28,13 @@
     </form>
     <!-- link to register page -->
     <div class="links">
-      <p>
-        Don't have an account?
-        <span><router-link to="/register">Please register</router-link></span
-        >.
-      </p>
+      <p>Don't have an account? <u @click="toggleForms">Please register</u>.</p>
       <!-- link to reset password form -->
       <p>
         Forgot your password?
-        <span
+        <!-- <span
           ><router-link to="/reset-password">Reset password</router-link></span
-        >.
+        >. -->
       </p>
     </div>
   </main>
@@ -50,6 +46,12 @@ import { useUserStore } from "../../../piniaStores/userStore";
 import Spinner from "../../../components/Spinner.vue";
 import { useRouter } from "vue-router";
 import PrimaryButton from "../../../components/PrimaryButton.vue";
+
+const emit = defineEmits(["userIsNotRegistered"]);
+
+function toggleForms() {
+  emit("userIsNotRegistered");
+}
 
 // for redirecting the user after logged in:
 const router = useRouter();
