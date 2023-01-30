@@ -8,15 +8,15 @@
         <div class="app-title-container">
           <h1>My lists</h1>
           <div>
-            <!-- <EditIconButton
-              @click="handleShowEditListsButtons"
-              class="action-icon-button"
+            <BigEditIconButtonDisabled v-if="userHasNoLists" />
+            <BigEditIconButton
+              v-else
+              @click="toggleShowEditListsButtons"
+              class="button-to-show-edit-buttons"
               :class="{
                 'edit-icon-button-is-selected': showEditListsButtons,
               }"
-            /> -->
-            <BigEditIconButtonDisabled v-if="userHasNoLists" />
-            <BigEditIconButton v-else />
+            />
           </div>
         </div>
         <!-- List of list titles buttons, lists state is from storeToRefs(listsStore) -->
@@ -26,6 +26,7 @@
               :title="list.title"
               :listId="list.list_id"
               :key="list.list_id"
+              :showButtons="showEditListsButtons"
             ></ListTitleButtonDiv>
           </li>
         </ul>
@@ -76,8 +77,15 @@ let showEditListsButtons = ref(false);
 watch(lists, () => {
   if (lists.value.length === 0) {
     userHasNoLists.value = true;
-  } else userHasNoLists.value = false;
+  } else {
+    userHasNoLists.value = false;
+    showEditListsButtons.value = false;
+  }
 });
+
+function toggleShowEditListsButtons() {
+  showEditListsButtons.value = !showEditListsButtons.value;
+}
 
 // function for create new list form:
 async function createNewList() {

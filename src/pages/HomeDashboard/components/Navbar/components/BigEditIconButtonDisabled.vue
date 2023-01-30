@@ -25,5 +25,6 @@
 <style scoped>
 button {
   cursor: default;
+  padding: 0.7em;
 }
 </style>

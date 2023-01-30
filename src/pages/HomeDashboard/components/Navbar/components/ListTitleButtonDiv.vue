@@ -9,7 +9,7 @@
       <BookmarkSVG />
       {{ title }}
     </button>
-    <div class="title-edit-delete-buttons-container">
+    <div v-if="showButtons" class="title-edit-delete-buttons-container">
       <EditIconButton
         @click="showEditListModal"
         class="action-icon-button"
@@ -29,10 +29,12 @@ import EditIconButton from "../../../../../components/EditIconButton.vue";
 import DeleteIconButton from "../../../../../components/DeleteIconButton.vue";
 import BookmarkSVG from "../../../../../components/BookmarkSVG.vue";
 import { storeToRefs } from "pinia";
-import { watch, ref } from "vue";
+import { watch, ref, toRef } from "vue";
 
-const props = defineProps(["title", "listId", "key"]);
+const props = defineProps(["title", "listId", "key", "showButtons"]);
 const emit = defineEmits(["deleteList"]);
+
+const showButtons = toRef(props, "showButtons");
 
 const listsStore = useListsStore();
 

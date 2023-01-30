@@ -5,7 +5,7 @@
       height="29px"
       stroke-width="2.06"
       viewBox="0 0 24 24"
-      fill="none"
+      fill="#ffffff"
       xmlns="http://www.w3.org/2000/svg"
       color="#fe8684"
     >
@@ -22,4 +22,15 @@
 
 <script setup></script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+button {
+  padding: 0.7em;
+  display: grid;
+  place-items: center;
+}
+
+button:hover {
+  background-color: var(--dark-pink);
+  border-radius: 50%;
+}
+</style>
