@@ -14,12 +14,12 @@ export const useListsStore = defineStore("lists", {
 
   actions: {
     async fetchUserLists(userId) {
-      // const userStore = useUserStore();
+      const userStore = useUserStore();
       try {
         const { data, error } = await supabase
           .from("lists")
           .select()
-          .match({ user_id: userId })
+          .match({ user_id: userId || userStore.user.id })
           .order("title", { ascending: true });
 
         if (data) {

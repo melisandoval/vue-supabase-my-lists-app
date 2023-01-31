@@ -86,8 +86,7 @@ async function submitLogIn() {
         "Your email address has not been confirmed. Please check your inbox for a confirmation email and confirm your account to log in.";
     } else if (error.message === "Invalid login credentials") {
       // show a different error message to user:
-      errorMsg.value =
-        "Sorry, the email or password you entered is incorrect. Please try again or click 'Reset password' to reset your credentials.";
+      errorMsg.value = "Sorry, the email or password you entered is incorrect.";
     } else errorMsg.value = error.message;
 
     setTimeout(() => {
