@@ -88,6 +88,12 @@ header {
   }
 }
 
+@media (min-width: 1440px) {
+  .auth-content-container {
+    width: 30%;
+  }
+}
+
 @media (min-width: 2560px) {
   h1 {
     font-size: 6rem;
