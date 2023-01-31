@@ -5,12 +5,12 @@
   <DeleteAllListItemsModal v-if="areListItemsSelectedToDelete" />
   <!-- Home/ Dashboard -->
   <div class="dashboard-container">
-    <section class="navbar-container">
-      <Navbar />
+    <section v-if="!hideNavbar" class="navbar-container">
+      <Navbar @hideNavbarInMobileVersion="handleHideNavbar" />
     </section>
-    <section class="lists-items-section-container">
+    <section v-if="!hideItemsSection" class="lists-items-section-container">
       <div class="buttons-container">
-        <BurgerMenuButton />
+        <BurgerMenuButton @click="handleShowNavbar" />
         <PrimaryButton @click="logOut" text="Log out" class="log-out-button" />
       </div>
       <div class="list-items-section-content-container">
@@ -29,7 +29,7 @@ import { useListsStore } from "../../piniaStores/listsStore";
 import { useItemsStore } from "../../piniaStores/itemsStore";
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import Navbar from "./components/Navbar/Navbar.vue";
 import DeleteListModal from "./components/Modals/DeleteListModal.vue";
 import EditListModal from "./components/Modals/EditListModal.vue";
@@ -50,6 +50,29 @@ const itemsStore = useItemsStore();
 const { selectedList, selectedListToEdit, selectedListToDelete } =
   storeToRefs(listsStore);
 const { areListItemsSelectedToDelete } = storeToRefs(itemsStore);
+
+// refs to handle mobile version:
+let hideItemsSection = ref(false);
+let hideNavbar = ref(false);
+
+onMounted(() => {
+  let screenWidth = window.innerWidth;
+  if (screenWidth < 767) {
+    hideItemsSection.value = true;
+  } else hideItemsSection.value = false;
+});
+
+// for mobile version:
+function handleHideNavbar() {
+  hideNavbar.value = true;
+  hideItemsSection.value = false;
+  console.log("handleHideNavbar is called!!!!!!");
+}
+
+function handleShowNavbar() {
+  hideNavbar.value = false;
+  hideItemsSection.value = true;
+}
 
 async function logOut() {
   const error = await userStore.signOut();

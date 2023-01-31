@@ -27,6 +27,7 @@
               :listId="list.list_id"
               :key="list.list_id"
               :showButtons="showEditListsButtons"
+              @hideNavbarInMobileVersion="hideNavbarInMobileVersion"
             ></ListTitleButtonDiv>
           </li>
         </ul>
@@ -59,6 +60,12 @@ import { ref, watch, onMounted } from "vue";
 import ListTitleButtonDiv from "./components/ListTitleButtonDiv.vue";
 import BigEditIconButtonDisabled from "./components/BigEditIconButtonDisabled.vue";
 import BigEditIconButton from "./components/BigEditIconButton.vue";
+
+const emit = defineEmits(["hideNavbarInMobileVersion"]);
+
+function hideNavbarInMobileVersion() {
+  emit("hideNavbarInMobileVersion");
+}
 
 // get lists store to get the titles of the lists to display in lists titles button section:
 const listsStore = useListsStore();
@@ -153,9 +160,5 @@ async function createNewList() {
 
 .error-msg {
   font-size: 0.8rem;
-}
-
-.hidden-navbar {
-  display: none;
 }
 </style>

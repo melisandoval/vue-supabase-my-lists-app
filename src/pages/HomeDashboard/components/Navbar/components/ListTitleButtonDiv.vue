@@ -32,7 +32,7 @@ import { storeToRefs } from "pinia";
 import { watch, ref, toRef } from "vue";
 
 const props = defineProps(["title", "listId", "key", "showButtons"]);
-const emit = defineEmits(["deleteList"]);
+const emit = defineEmits(["deleteList", "hideNavbarInMobileVersion"]);
 
 const showButtons = toRef(props, "showButtons");
 
@@ -52,6 +52,11 @@ watch(selectedList, () => {
 
 // handle show selected list item's:
 function handleShowList() {
+  let screenWidth = window.innerWidth;
+  if (screenWidth < 767) {
+    emit("hideNavbarInMobileVersion");
+  }
+
   listsStore.selectListToShow({
     listName: props.title,
     listId: props.listId,
