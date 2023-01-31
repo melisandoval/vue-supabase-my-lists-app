@@ -111,7 +111,7 @@ h2 {
 /* auth */
 
 .auth {
-  max-width: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -127,6 +127,7 @@ h2 {
 
 .auth form {
   padding: 1em;
+  max-width: 100%;
 }
 
 .auth .links {
@@ -140,25 +141,8 @@ h2 {
 }
 
 @media (min-width: 758px) {
-  .auth input {
-    width: 60vw;
-  }
-
   .auth form {
     padding: 2em 4em 0.5em;
-    max-width: 100%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .auth input {
-    width: 35vw;
-  }
-}
-
-@media (min-width: 2560px) {
-  .auth input {
-    width: 25vw;
   }
 }
 
@@ -182,6 +166,10 @@ h2 {
 
 .auth u {
   cursor: pointer;
+}
+
+.auth .error-message {
+  text-align: center;
 }
 
 .button-section {

@@ -13,7 +13,7 @@
       </div>
       <!-- error message -->
       <div>
-        <p>{{ errorMsg }}</p>
+        <p class="error-message">{{ errorMsg }}</p>
       </div>
       <!-- log in button with Spinner-->
       <section class="button-section">
@@ -73,12 +73,12 @@ const userStore = useUserStore();
 async function submitLogIn() {
   showSpinner.value = true;
 
-  const { data, error } = await userStore.signIn(user.email, user.password);
-  console.log(`data from Pinia in logInForm is ${JSON.stringify(data)}`);
+  const { error } = await userStore.signIn(user.email, user.password);
 
   if (error) {
     showSpinner.value = false;
-    console.log(`error returned from userStore.signIn() is ${error.message}`);
+
+    console.log(error.message);
 
     if (error.message === "Email not confirmed") {
       // show a different error message to user:
@@ -89,6 +89,10 @@ async function submitLogIn() {
       errorMsg.value =
         "Sorry, the email or password you entered is incorrect. Please try again or click 'Reset password' to reset your credentials.";
     } else errorMsg.value = error.message;
+
+    setTimeout(() => {
+      errorMsg.value = "";
+    }, 7000);
   }
 
   if (!error) {

@@ -5,8 +5,16 @@
         <h1>My lists</h1>
         <img src="../../assets/rabbit-writting.png" alt="" />
       </header>
-      <LoginForm v-if="userIsRegistered" @userIsNotRegistered="toggleForms" />
-      <RegisterForm v-if="!userIsRegistered" @userIsRegistered="toggleForms" />
+      <LoginForm
+        v-if="userIsRegistered && !showRegisterResponse"
+        @userIsNotRegistered="toggleForms"
+      />
+      <RegisterForm
+        v-if="!userIsRegistered && !showRegisterResponse"
+        @userIsRegistered="toggleForms"
+        @registerFormHasBeenSubmitted="handleShowRegisterResponse"
+      />
+      <RegisterResponse v-if="showRegisterResponse" />
     </section>
   </div>
 </template>
@@ -15,11 +23,18 @@
 import { ref } from "vue";
 import LoginForm from "./components/LogInForm.vue";
 import RegisterForm from "./components/RegisterForm.vue";
+import RegisterResponse from "./components/RegisterResponse.vue";
 
 let userIsRegistered = ref(true);
+let showRegisterResponse = ref(false);
 
 function toggleForms() {
   userIsRegistered.value = !userIsRegistered.value;
+}
+
+function handleShowRegisterResponse() {
+  console.log("handleShowRegisterResponse() was called!!!!");
+  showRegisterResponse.value = true;
 }
 </script>
 
@@ -60,6 +75,16 @@ header {
   img {
     max-width: 100px;
     padding: 1em;
+  }
+
+  .auth-content-container {
+    width: 70%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .auth-content-container {
+    width: 50%;
   }
 }
 
