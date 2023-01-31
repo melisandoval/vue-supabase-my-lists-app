@@ -100,6 +100,12 @@ function toggleShowEditListsButtons() {
   showEditListsButtons.value = !showEditListsButtons.value;
 }
 
+let hideNavbar = ref(false);
+
+function handleShowOrHideNavbar() {
+  hideNavbar.value = true;
+}
+
 // function for create new list form:
 async function createNewList() {
   try {
@@ -147,5 +153,9 @@ async function createNewList() {
 
 .error-msg {
   font-size: 0.8rem;
+}
+
+.hidden-navbar {
+  display: none;
 }
 </style>

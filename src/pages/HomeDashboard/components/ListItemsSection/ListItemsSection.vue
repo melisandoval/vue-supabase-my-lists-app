@@ -335,12 +335,6 @@ h3 {
   padding-top: 1em;
 }
 
-@media (min-width: 1440px) {
-  form {
-    max-width: 70%;
-  }
-}
-
 .list-title-container {
   display: flex;
   align-items: center;

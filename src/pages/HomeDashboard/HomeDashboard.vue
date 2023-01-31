@@ -9,10 +9,15 @@
       <Navbar />
     </section>
     <section class="lists-items-section-container">
-      <PrimaryButton @click="logOut" text="Log out" class="log-out-button" />
-      <div class="list-items-div-container">
-        <ListItemsWelcomeVue v-if="!selectedList" />
-        <ListItemsSection v-else />
+      <div class="buttons-container">
+        <BurgerMenuButton />
+        <PrimaryButton @click="logOut" text="Log out" class="log-out-button" />
+      </div>
+      <div class="list-items-section-content-container">
+        <div class="list-items-div-container">
+          <ListItemsWelcomeVue v-if="!selectedList" />
+          <ListItemsSection v-else />
+        </div>
       </div>
     </section>
   </div>
@@ -32,6 +37,7 @@ import ListItemsWelcomeVue from "./components/ListItemsSection/ListItemsWelcome.
 import PrimaryButton from "../../components/PrimaryButton.vue";
 import ListItemsSection from "./components/ListItemsSection/ListItemsSection.vue";
 import DeleteAllListItemsModal from "./components/Modals/DeleteAllListItemsModal.vue";
+import BurgerMenuButton from "../../components/BurgerMenuButton.vue";
 
 const router = useRouter();
 
@@ -55,4 +61,10 @@ async function logOut() {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.buttons-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+</style>
