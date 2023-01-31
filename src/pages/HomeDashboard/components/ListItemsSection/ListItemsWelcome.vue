@@ -1,7 +1,7 @@
 <template>
   <section class="no-list-items-container">
     <div>
-      <h2>Hi, {{ user.user_metadata.name }}!</h2>
+      <h2 v-if="user">Hi, {{ user.user_metadata.name }}!</h2>
       <p>Select a list or create a new one!</p>
       <img
         src="../../../../assets/light-rabbit-happy.png"

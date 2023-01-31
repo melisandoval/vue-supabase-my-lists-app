@@ -13,13 +13,13 @@ export const useListsStore = defineStore("lists", {
   }),
 
   actions: {
-    async fetchUserLists() {
-      const userStore = useUserStore();
+    async fetchUserLists(userId) {
+      // const userStore = useUserStore();
       try {
         const { data, error } = await supabase
           .from("lists")
           .select()
-          .match({ user_id: userStore.user.id })
+          .match({ user_id: userId })
           .order("title", { ascending: true });
 
         if (data) {
@@ -31,6 +31,7 @@ export const useListsStore = defineStore("lists", {
             `error from supabase.from("lists").select() is ${error.message}`
           );
         }
+        return { data, error };
       } catch (e) {
         console.log(`error from fetchUserLists() try-catch is ${e}`);
       }

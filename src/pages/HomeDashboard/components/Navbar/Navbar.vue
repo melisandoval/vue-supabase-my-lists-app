@@ -53,17 +53,30 @@
 
 <script setup>
 import { useListsStore } from "../../../../piniaStores/listsStore";
+import { useUserStore } from "../../../../piniaStores/userStore";
 import { storeToRefs } from "pinia";
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
 import ListTitleButtonDiv from "./components/ListTitleButtonDiv.vue";
 import BigEditIconButtonDisabled from "./components/BigEditIconButtonDisabled.vue";
 import BigEditIconButton from "./components/BigEditIconButton.vue";
 
 // get lists store to get the titles of the lists to display in lists titles button section:
 const listsStore = useListsStore();
+const userStore = useUserStore();
+
+const { user } = storeToRefs(userStore);
 
 // fetch user lists with first render:
-listsStore.fetchUserLists();
+onMounted(() => {
+  if (user.value) {
+    try {
+      console.log(user.value);
+      listsStore.fetchUserLists(user.value.id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+});
 
 // obtain lists state as ref to display a list of Lists titles buttons:
 const { lists } = storeToRefs(listsStore);
