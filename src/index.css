@@ -1,7 +1,3 @@
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
-
 :root {
   --light-pink: #ffe6e3;
   --dark-pink: #fe8684;
@@ -276,7 +272,7 @@ h3 {
 
 .navbar-new-list-form-section {
   padding-top: 2em;
-  padding-bottom: 2em;
+  padding-bottom: 4em;
 }
 
 .navbar-new-list-form-section form {
