@@ -24,16 +24,13 @@ export const useListsStore = defineStore("lists", {
 
         if (data) {
           this.lists = data;
-          // console.log(`lists in Pinia store are ${JSON.stringify(this.lists)}`);
         }
         if (error) {
-          console.log(
-            `error from supabase.from("lists").select() is ${error.message}`
-          );
+          console.log(`Error from fetchUserLists() is ${error.message}`);
         }
         return { data, error };
       } catch (e) {
-        console.log(`error from fetchUserLists() try-catch is ${e}`);
+        console.log(`Error from fetchUserLists() try-catch is ${e}`);
       }
     },
 
@@ -41,13 +38,11 @@ export const useListsStore = defineStore("lists", {
     // format of listObj: {listName, listId}
     selectListToShow(listObj) {
       this.selectedList = listObj;
-      console.log(`selected list is ${JSON.stringify(this.selectedList)}`);
     },
 
     // sets selectedList back to null:
     deselectListToShow() {
       this.selectedList = null;
-      console.log(`selected list is ${JSON.stringify(this.selectedList)}`);
     },
 
     // create a new list:
@@ -61,7 +56,7 @@ export const useListsStore = defineStore("lists", {
 
         return { data, error };
       } catch (e) {
-        console.log(`error from listsSTore.addNewList catch is ${e}`);
+        console.log(`Error from addNewList() catch is ${e}`);
       }
     },
 
@@ -123,17 +118,11 @@ export const useListsStore = defineStore("lists", {
     // format of listObj: {listName, listId}
     selectListToEdit(listObj) {
       this.selectedListToEdit = listObj;
-      console.log(
-        `selectedListToEdit in Pinia is ${JSON.stringify(
-          this.selectedListToEdit
-        )}`
-      );
     },
 
     // handle state in order to HIDE edit list modal:
     deselectListToEdit() {
       this.selectedListToEdit = null;
-      console.log(`selectedListToEdit is ${this.selectedListToEdit}`);
     },
 
     async editSelectedList(newListName, listId) {

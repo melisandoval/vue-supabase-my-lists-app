@@ -33,7 +33,6 @@ function toggleForms() {
 }
 
 function handleShowRegisterResponse() {
-  console.log("handleShowRegisterResponse() was called!!!!");
   showRegisterResponse.value = true;
 }
 </script>

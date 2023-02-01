@@ -36,7 +36,6 @@ export const useItemsStore = defineStore("items", {
         if (data) {
           // update items state with the fetched data:
           this.items = data;
-          // console.log(`items are ${JSON.stringify(this.items)}`);
         }
         if (error) {
           console.log(

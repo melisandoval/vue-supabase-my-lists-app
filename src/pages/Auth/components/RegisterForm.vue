@@ -54,7 +54,6 @@ function toggleForms() {
 
 function showResponse() {
   emit("registerFormHasBeenSubmitted");
-  console.log("showResponse() called!!!!!");
 }
 
 // for storing user inputs:
@@ -97,7 +96,6 @@ async function submitRegistration() {
     errorMsg.value = "";
     showSpinner.value = false;
     showResponse();
-    console.log("Form succesfully submitted");
   }
 }
 </script>

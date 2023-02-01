@@ -72,7 +72,6 @@ async function submitLogIn() {
 
   if (error) {
     showSpinner.value = false;
-
     console.log(error.message);
 
     if (error.message === "Email not confirmed") {
