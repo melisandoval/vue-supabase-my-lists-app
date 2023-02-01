@@ -68,8 +68,6 @@ async function toggleBullet() {
 }
 
 async function deleteItem() {
-  console.log(item.value);
-
   const error = await itemsStore.deleteItem(item.value.item_id);
 
   if (error) {
@@ -77,7 +75,6 @@ async function deleteItem() {
   }
 
   if (!error) {
-    console.log("item deleted!!!!");
     emit("itemChanged");
   }
 }

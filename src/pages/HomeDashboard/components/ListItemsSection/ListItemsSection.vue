@@ -202,7 +202,6 @@ watch(items, () => {
 
 // call fetch items again whenever selectedList changes!:
 watch(selectedList, async () => {
-  console.log("Watch is called *******");
   if (selectedList.value) {
     try {
       const error = await itemsStore.fetchListItems(selectedList.value.listId);
@@ -312,8 +311,6 @@ async function createNewListItem() {
   if (newListItem.value.length > 0) {
     showErrorMsg.value = false;
 
-    console.log(newListItem.value);
-
     try {
       const error = await itemsStore.addItemToList(newListItem.value);
       if (error) {
@@ -334,7 +331,6 @@ async function createNewListItem() {
 }
 
 function handleShowDeleteAllListItemsModal() {
-  console.log(items);
   itemsStore.toggleAreListItemsSelectedToDelete();
 }
 </script>

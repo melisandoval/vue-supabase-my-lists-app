@@ -67,7 +67,6 @@ onMounted(() => {
 function handleHideNavbar() {
   hideNavbar.value = true;
   hideItemsSection.value = false;
-  console.log("handleHideNavbar is called!!!!!!");
 }
 
 function handleShowNavbar() {

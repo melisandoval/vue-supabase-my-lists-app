@@ -44,11 +44,6 @@ function handleCloseModal() {
 }
 
 async function handleDeleteList() {
-  console.log(`selected list is ${JSON.stringify(selectedList.value)}`);
-  console.log(
-    `selectedListToDelete is ${JSON.stringify(selectedListToDelete.value)}`
-  );
-
   // call to store to delete list from Supabase:
   try {
     const error = await listsStore.deleteSelectedList(

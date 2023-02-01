@@ -33,8 +33,6 @@ function handleCloseModal() {
 }
 
 async function deleteAllListItems() {
-  console.log(selectedList.value.listId);
-
   const error = await itemsStore.deleteAllListItems(selectedList.value.listId);
 
   if (!error) {

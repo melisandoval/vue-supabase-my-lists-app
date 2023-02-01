@@ -69,12 +69,6 @@ function showEditListModal() {
     listName: props.title,
     listId: props.listId,
   });
-
-  console.log(
-    `listsStore.selectedListToEdit is ${JSON.stringify(
-      listsStore.selectedListToEdit
-    )}`
-  );
 }
 
 // makes the delete list modal appears:
