@@ -30,12 +30,7 @@
     <div class="links">
       <p>Don't have an account? <u @click="toggleForms">Please register</u>.</p>
       <!-- link to reset password form -->
-      <p>
-        Forgot your password?
-        <!-- <span
-          ><router-link to="/reset-password">Reset password</router-link></span
-        >. -->
-      </p>
+      <!-- <p>Forgot your password? Reset password. </p> -->
     </div>
   </main>
 </template>
