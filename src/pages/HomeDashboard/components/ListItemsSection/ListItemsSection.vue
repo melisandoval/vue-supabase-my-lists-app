@@ -85,10 +85,12 @@
             :showEditItemButtons="showEditItemButtons"
           />
         </ul>
-        <div v-if="listItemsIsEmpty">
-          <p>The list is empty.</p>
-          <p>Lets create create an item for it!</p>
-        </div>
+        <section v-if="listItemsIsEmpty">
+          <NoItemsInTheList
+            text="The list is empty. Lets create an item for it!"
+            :img="rabbitHappy"
+          />
+        </section>
       </div>
       <!-- list of only UNCOMPLETED items -->
       <div v-if="showOnlyUncompletedItems" class="list-of-items">
@@ -102,7 +104,10 @@
           />
         </ul>
         <section v-else>
-          <p>No uncompleted items in this list.</p>
+          <NoItemsInTheList
+            text="There is no uncompleted items in this list!"
+            :img="rabbitSurprised"
+          />
         </section>
       </div>
       <!-- list of only COMPLETED items -->
@@ -116,7 +121,12 @@
             :showEditItemButtons="showEditItemButtons"
           />
         </ul>
-        <p v-else>No completed items in this list.</p>
+        <section v-else>
+          <NoItemsInTheList
+            text="There is no completed items in this list."
+            :img="rabbitUps"
+          />
+        </section>
       </div>
       <!-- list of only FAVOURITES items -->
       <div v-if="showOnlyFavouritesItems" class="list-of-items">
@@ -129,7 +139,12 @@
             :showEditItemButtons="showEditItemButtons"
           />
         </ul>
-        <p v-else>No favourites items in this list.</p>
+        <section v-else>
+          <NoItemsInTheList
+            text="There is no favourites items in this list."
+            :img="rabbitConcerned"
+          />
+        </section>
       </div>
     </section>
   </section>
@@ -145,6 +160,11 @@ import EditIconButton from "../../../../components/EditIconButton.vue";
 import FilledHeartIconSVG from "../../../../components/FilledHeartIconSVG.vue";
 import DeleteIconButton from "../../../../components/DeleteIconButton.vue";
 import EditIconButtonDisabled from "../../../../components/EditIconButtonDisabled.vue";
+import NoItemsInTheList from "./NoItemsInTheList.vue";
+import rabbitHappy from "../../../../assets/light-rabbit-happy.png";
+import rabbitConcerned from "../../../../assets/rabbit-concerned.png";
+import rabbitSurprised from "../../../../assets/rabbit-surprised.png";
+import rabbitUps from "../../../../assets/rabbit-ups.png";
 
 const DEFAULT_ERROR_MESSAGE = "Please add at least one character.";
 

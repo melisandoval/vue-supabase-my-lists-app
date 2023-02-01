@@ -350,14 +350,6 @@ h3 {
   padding: 0.5em;
 } */
 
-.log-out-button {
-  /* position: absolute;
-  align-self: start;
-  justify-self: end; */
-  margin-top: 1rem !important;
-  margin-right: 3rem !important;
-}
-
 /* list items section */
 
 .list-title-section {
@@ -481,7 +473,8 @@ h3 {
     width: 40%;
   }
 
-  /* .list-items-div-container {
-    max-width: 70%;
-  } */
+  .log-out-button {
+    margin-top: 1rem !important;
+    margin-right: 3rem !important;
+  }
 }
