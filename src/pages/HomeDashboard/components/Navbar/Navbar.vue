@@ -77,7 +77,6 @@ const { user } = storeToRefs(userStore);
 onMounted(() => {
   if (user.value) {
     try {
-      console.log(user.value);
       listsStore.fetchUserLists(user.value.id);
     } catch (error) {
       console.log(error);
@@ -105,12 +104,6 @@ watch(lists, () => {
 
 function toggleShowEditListsButtons() {
   showEditListsButtons.value = !showEditListsButtons.value;
-}
-
-let hideNavbar = ref(false);
-
-function handleShowOrHideNavbar() {
-  hideNavbar.value = true;
 }
 
 // function for create new list form:

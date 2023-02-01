@@ -2,7 +2,6 @@
   --light-pink: #ffe6e3;
   --dark-pink: #fe8684;
   --dark-brown: #300703;
-  /* --dark-grey: #595959; */
 }
 
 * {
@@ -82,7 +81,6 @@ input {
   align-items: center;
   padding: 2rem 0;
   gap: 1em;
-  /* justify-content: space-between; */
   align-items: baseline;
 }
 
@@ -185,13 +183,6 @@ input:-webkit-autofill:focus {
 
 /* navbar */
 
-/* .navbar-container {
-  display: block;
-  background-color: var(--light-pink);
-  max-width: 100%;
-  min-height: 100vh;
-} */
-
 nav {
   background-color: var(--light-pink);
   display: flex;
@@ -210,8 +201,6 @@ nav {
 }
 
 .navbar-header {
-  /* max-height: 100%;
-  max-width: 100%; */
   display: grid;
   place-items: center;
 }
@@ -230,15 +219,10 @@ h3 {
   font-size: 1.8rem;
 }
 
-/* .list-of-lists {
-  padding-left: 0.1em;
-} */
-
 .list-title-button-div {
   padding: 0.2em 0;
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
   gap: 0.5em;
 }
 
@@ -330,8 +314,6 @@ h3 {
 
 .lists-items-section-container {
   position: relative;
-  /* display: grid;
-  justify-items: center; */
   min-height: 100%;
 }
 
@@ -343,12 +325,7 @@ h3 {
 .list-items-div-container {
   max-width: 95%;
   min-width: 95%;
-  /* padding-top: 80px; */
 }
-
-/* .list-items-div-container section {
-  padding: 0.5em;
-} */
 
 /* list items section */
 

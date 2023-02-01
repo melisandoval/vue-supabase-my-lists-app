@@ -55,6 +55,7 @@ const { areListItemsSelectedToDelete } = storeToRefs(itemsStore);
 let hideItemsSection = ref(false);
 let hideNavbar = ref(false);
 
+// handle mobile version:
 onMounted(() => {
   let screenWidth = window.innerWidth;
   if (screenWidth < 767) {

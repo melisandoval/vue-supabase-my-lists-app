@@ -33,7 +33,6 @@
     <!-- link to register page -->
     <div class="links">
       <p>Already have an account? <u @click="toggleForms">Please log in</u>.</p>
-      <!-- link to reset password form -->
     </div>
   </main>
 </template>
