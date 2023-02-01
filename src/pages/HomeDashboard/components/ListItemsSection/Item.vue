@@ -39,7 +39,7 @@ import { ref, toRef } from "vue";
 import { useItemsStore } from "../../../../piniaStores/itemsStore";
 import DeleteIconButton from "../../../../components/DeleteIconButton.vue";
 import FilledHeartIconSVG from "../../../../components/FilledHeartIconSVG.vue";
-import UnfilledHeartIconSVG from "../../../../components/UnFilledHeartIconSVG.vue";
+import UnfilledHeartIconSVG from "../../../../components/UnfilledHeartIconSVG.vue";
 
 // props
 const props = defineProps(["item", "showEditItemButtons"]);
