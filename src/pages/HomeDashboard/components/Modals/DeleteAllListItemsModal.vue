@@ -8,7 +8,7 @@
         in the "<span>{{ selectedList.listName }}</span
         >" list?
       </p>
-      <div>
+      <div class="modal-buttons">
         <SecondaryButton text="Delete" @click="deleteAllListItems" />
         <PrimaryButton text="Cancel" @click="handleCloseModal" />
       </div>
@@ -75,5 +75,19 @@ p span {
   font-family: "Pacifico", cursive;
   font-size: 1.6rem;
   text-decoration: underline;
+}
+
+.modal-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .modal-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
 }
 </style>
