@@ -101,7 +101,9 @@
             :showEditItemButtons="showEditItemButtons"
           />
         </ul>
-        <p v-else>No uncompleted items in this list.</p>
+        <section v-else>
+          <p>No uncompleted items in this list.</p>
+        </section>
       </div>
       <!-- list of only COMPLETED items -->
       <div v-if="showOnlyCompletedItems" class="list-of-items">
@@ -335,12 +337,6 @@ h3 {
   padding-top: 1em;
 }
 
-.list-title-container {
-  display: flex;
-  align-items: center;
-  gap: 1em;
-}
-
 .input-and-button {
   display: flex;
 }
@@ -374,14 +370,14 @@ img {
 }
 
 .list-of-items {
-  padding: 0 2em 2em;
+  max-width: 100%;
+  padding: 1em;
 }
 
-.list-title-section {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1em;
+@media (min-width: 768px) {
+  .list-of-items {
+    margin: 0 2em;
+  }
 }
 
 .hidden-list-title-button {

@@ -100,7 +100,7 @@ h3,
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 1em 0;
 }
 
@@ -223,8 +223,7 @@ nav {
 }
 
 h1 {
-  font-size: 3rem;
-  font-family: "Pacifico", cursive;
+  font-size: 2.2rem;
 }
 
 h3 {
@@ -342,10 +341,14 @@ h3 {
 }
 
 .list-items-div-container {
-  max-width: 100%;
+  max-width: 95%;
   min-width: 95%;
   /* padding-top: 80px; */
 }
+
+/* .list-items-div-container section {
+  padding: 0.5em;
+} */
 
 .log-out-button {
   /* position: absolute;
@@ -356,6 +359,24 @@ h3 {
 }
 
 /* list items section */
+
+.list-title-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 1em;
+}
+
+.list-title-container {
+  display: flex;
+  align-items: center;
+  gap: 0.2em;
+}
+
+.list-items-filters {
+  align-self: end;
+}
+
 .item-button-container {
   width: 1.6rem;
   height: 1.6rem;
@@ -406,6 +427,11 @@ h3 {
 }
 
 @media (min-width: 768px) {
+  h2 {
+    font-size: 1.5rem;
+    padding: 1em 0;
+  }
+
   .dashboard-container {
     width: 100%;
     height: 100%;
@@ -413,17 +439,23 @@ h3 {
     grid-template-columns: 40% 60%;
   }
 
-  /* .lists-items-section-container {
-    visibility: visible;
-  } */
-
   .modal {
     width: 70%;
   }
 
-  /* .list-items-div-container {
-    width: 90%;
-  } */
+  .list-title-container {
+    gap: 1em;
+  }
+
+  .list-title-section {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .list-items-filters {
+    align-self: inherit;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -438,7 +470,11 @@ h3 {
 
 @media (min-width: 1440px) {
   .dashboard-container {
-    grid-template-columns: 25% 75%;
+    grid-template-columns: 30% 70%;
+  }
+
+  h1 {
+    font-size: 3rem;
   }
 
   .modal {
