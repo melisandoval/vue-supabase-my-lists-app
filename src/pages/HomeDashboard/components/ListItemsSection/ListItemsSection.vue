@@ -106,7 +106,7 @@
         <section v-else>
           <NoItemsInTheList
             text="There is no uncompleted items in this list!"
-            :img="rabbitSurprised"
+            :img="rabbitSurprisedGood"
           />
         </section>
       </div>
@@ -163,7 +163,7 @@ import EditIconButtonDisabled from "../../../../components/EditIconButtonDisable
 import NoItemsInTheList from "./NoItemsInTheList.vue";
 import rabbitHappy from "../../../../assets/light-rabbit-happy.png";
 import rabbitConcerned from "../../../../assets/rabbit-concerned.png";
-import rabbitSurprised from "../../../../assets/rabbit-surprised.png";
+import rabbitSurprisedGood from "../../../../assets/rabbit-surprised-good.png";
 import rabbitUps from "../../../../assets/rabbit-ups.png";
 
 const DEFAULT_ERROR_MESSAGE = "Please add at least one character.";
