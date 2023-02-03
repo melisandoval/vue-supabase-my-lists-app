@@ -1,7 +1,9 @@
-# Vue 3 + Vite
+# My lists app
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+- SPA (Single Page Application)
+- JavaScript frameworks: Vue 3 + Pinia.
+- Database: Supabase.
+- CSS + UI responsive design.
 
-## Recommended IDE Setup
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+![My-Lists-Dashboard](https://user-images.githubusercontent.com/94930294/216600520-d5769095-945d-4f49-9da1-44814029c02c.gif)
