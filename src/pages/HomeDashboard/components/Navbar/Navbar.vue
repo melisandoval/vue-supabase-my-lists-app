@@ -27,6 +27,7 @@
               :listId="list.list_id"
               :key="list.list_id"
               :showButtons="showEditListsButtons"
+              @onListClicked="handleShowList"
               @hideNavbarInMobileVersion="hideNavbarInMobileVersion"
             ></ListTitleButtonDiv>
           </li>
@@ -67,7 +68,7 @@ function hideNavbarInMobileVersion() {
   emit("hideNavbarInMobileVersion");
 }
 
-// get lists store to get the titles of the lists to display in lists titles button section:
+// stores:
 const listsStore = useListsStore();
 const userStore = useUserStore();
 
@@ -84,14 +85,22 @@ onMounted(() => {
   }
 });
 
-// obtain lists state as ref to display a list of Lists titles buttons:
 const { lists } = storeToRefs(listsStore);
 
-// ref for the create a new list input field:
-let newList = ref("");
-let showErrorMsg = ref(false);
-let userHasNoLists = ref(false);
-let showEditListsButtons = ref(false);
+// handle show selected list item's:
+function handleShowList(list) {
+  // for mobile version:
+  let screenWidth = window.innerWidth;
+  if (screenWidth < 767) {
+    emit("hideNavbarInMobileVersion");
+  }
+
+  // sets the selectedList state:
+  listsStore.selectListToShow({
+    listName: list.title,
+    listId: list.listId,
+  });
+}
 
 watch(lists, () => {
   if (lists.value.length === 0) {
@@ -106,7 +115,13 @@ function toggleShowEditListsButtons() {
   showEditListsButtons.value = !showEditListsButtons.value;
 }
 
-// function for create new list form:
+// ref for the create a new list input field:
+let newList = ref("");
+let showErrorMsg = ref(false);
+let userHasNoLists = ref(false);
+let showEditListsButtons = ref(false);
+
+// function for create new list:
 async function createNewList() {
   try {
     // preven user to create a list with an empty string:
@@ -126,6 +141,7 @@ async function createNewList() {
           listName: data[0].title,
           listId: data[0].list_id,
         });
+
         // fetch the lists' titles again to reflect the updated lists in the lists titles section:
         listsStore.fetchUserLists();
         // clear newList input field:

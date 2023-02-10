@@ -15,11 +15,6 @@ export const useItemsStore = defineStore("items", {
   actions: {
     // fetch a list of items from a single list of the logged in user:
     async fetchListItems(selectedListId) {
-      console.log(
-        "%c fetchListItems() is called!",
-        "background: #222; color: #bada55"
-      );
-
       const userStore = useUserStore();
 
       try {
