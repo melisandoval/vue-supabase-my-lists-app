@@ -52,7 +52,7 @@ const itemsStore = useItemsStore();
 const emit = defineEmits(["itemChanged"]);
 
 // initial state of is favourite is the same as the item property in db:
-let isFavourite = ref(item.value.is_favourite);
+const isFavourite = ref(item.value.is_favourite);
 
 async function toggleBullet() {
   const error = await itemsStore.toggleItemIsCompleted(

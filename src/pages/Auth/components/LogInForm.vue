@@ -52,10 +52,10 @@ function toggleForms() {
 const router = useRouter();
 
 // for v-if showSpinner:
-let showSpinner = ref(false);
+const showSpinner = ref(false);
 
 // for storing the error message to display:
-let errorMsg = ref("");
+const errorMsg = ref("");
 
 // for storing user inputs:
 const user = reactive({

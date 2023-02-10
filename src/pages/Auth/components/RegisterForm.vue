@@ -64,8 +64,8 @@ const user = reactive({
 });
 
 // v-ifs:
-let errorMsg = ref("");
-let showSpinner = ref(false);
+const errorMsg = ref("");
+const showSpinner = ref(false);
 
 // Register button function:
 async function submitRegistration() {

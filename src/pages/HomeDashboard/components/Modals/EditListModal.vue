@@ -18,7 +18,7 @@
           <SecondaryButton text="Cancel" @click="handleCloseModal" />
         </div>
         <!-- error message: -->
-        <div v-if="showInputValMsg">
+        <div v-if="showErrorMsg">
           <p>Please enter a name with at least one caracter.</p>
         </div>
       </div>
@@ -42,12 +42,12 @@ const { selectedListToEdit } = storeToRefs(listsStore);
 const newListName = ref("");
 
 // ref for input validation:
-let showInputValMsg = ref(false);
+const showErrorMsg = ref(false);
 
 async function handleConfirmNewName() {
   // if input is empty, show error msg:
   if (!newListName.value) {
-    showInputValMsg.value = true;
+    showErrorMsg.value = true;
   } else {
     try {
       const { data, error } = await listsStore.editSelectedList(
@@ -71,7 +71,7 @@ async function handleConfirmNewName() {
         listsStore.fetchUserLists();
 
         // set input validation message back to false:
-        showInputValMsg.value = false;
+        showErrorMsg.value = false;
         // set store state selectedListToEdit back to null (this closes the modal)
         listsStore.deselectListToEdit();
       }

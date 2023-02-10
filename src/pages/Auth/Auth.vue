@@ -25,8 +25,8 @@ import LoginForm from "./components/LogInForm.vue";
 import RegisterForm from "./components/RegisterForm.vue";
 import RegisterResponse from "./components/RegisterResponse.vue";
 
-let userIsRegistered = ref(true);
-let showRegisterResponse = ref(false);
+const userIsRegistered = ref(true);
+const showRegisterResponse = ref(false);
 
 function toggleForms() {
   userIsRegistered.value = !userIsRegistered.value;

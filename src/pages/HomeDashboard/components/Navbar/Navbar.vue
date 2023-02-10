@@ -111,15 +111,17 @@ watch(lists, () => {
   }
 });
 
+// for show/hide edit lists buttons:
+const userHasNoLists = ref(false);
+const showEditListsButtons = ref(false);
+
 function toggleShowEditListsButtons() {
   showEditListsButtons.value = !showEditListsButtons.value;
 }
 
 // ref for the create a new list input field:
-let newList = ref("");
-let showErrorMsg = ref(false);
-let userHasNoLists = ref(false);
-let showEditListsButtons = ref(false);
+const newList = ref("");
+const showErrorMsg = ref(false);
 
 // function for create new list:
 async function createNewList() {

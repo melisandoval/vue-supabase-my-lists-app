@@ -177,15 +177,15 @@ const { items } = storeToRefs(itemsStore);
 const { selectedList } = storeToRefs(listsStore);
 
 // component refs:
-let newListItem = ref("");
-let showErrorMsg = ref(false);
-let errorMsg = ref(DEFAULT_ERROR_MESSAGE);
-let showAllItems = ref(true);
-let showOnlyUncompletedItems = ref(false);
-let showOnlyCompletedItems = ref(false);
-let showOnlyFavouritesItems = ref(false);
-let showEditItemButtons = ref(false); // prop to children Item component
-let listItemsIsEmpty = ref(false);
+const newListItem = ref("");
+const showErrorMsg = ref(false);
+const errorMsg = ref(DEFAULT_ERROR_MESSAGE);
+const showAllItems = ref(true);
+const showOnlyUncompletedItems = ref(false);
+const showOnlyCompletedItems = ref(false);
+const showOnlyFavouritesItems = ref(false);
+const showEditItemButtons = ref(false); // prop to children Item component
+const listItemsIsEmpty = ref(false);
 
 // call fetch items of current selected list with first component render:
 onMounted(() => {

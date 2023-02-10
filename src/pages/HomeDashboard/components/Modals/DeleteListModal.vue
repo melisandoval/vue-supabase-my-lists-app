@@ -36,7 +36,7 @@ const listsStore = useListsStore();
 const { selectedListToDelete, selectedList } = storeToRefs(listsStore);
 
 // to show response and hide delete buttons after deleting a list:
-let showDeleteListResponse = ref(false);
+const showDeleteListResponse = ref(false);
 
 function handleCloseModal() {
   // important: sets the selectedList state back to null:

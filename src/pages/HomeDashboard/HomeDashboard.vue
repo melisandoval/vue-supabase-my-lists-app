@@ -52,8 +52,8 @@ const { selectedList, selectedListToEdit, selectedListToDelete } =
 const { areListItemsSelectedToDelete } = storeToRefs(itemsStore);
 
 // refs to handle mobile version:
-let hideItemsSection = ref(false);
-let hideNavbar = ref(false);
+const hideItemsSection = ref(false);
+const hideNavbar = ref(false);
 
 // handle mobile version:
 onMounted(() => {
