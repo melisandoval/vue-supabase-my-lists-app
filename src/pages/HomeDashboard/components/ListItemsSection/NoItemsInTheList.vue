@@ -16,6 +16,7 @@ const props = defineProps(["text", "img"]);
   align-items: center;
   gap: 2em;
   padding-top: 2em;
+  padding-bottom: 2em;
 }
 
 @media (min-width: 1024px) {
