@@ -6,8 +6,8 @@
       style="display: flex"
       :class="{ 'list-is-selected': isListSelected }"
     >
-      <BookmarkSVG />
-      {{ title }}
+      <!-- <BookmarkSVG /> -->
+      • {{ title }}
     </button>
     <div v-if="showButtons" class="title-edit-delete-buttons-container">
       <EditIconButton

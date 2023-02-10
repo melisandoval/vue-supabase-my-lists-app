@@ -227,12 +227,13 @@ h3 {
 }
 
 .list-title-button {
-  padding: 0em 0.2em;
+  padding: 0em 1em 0 0.2em;
   font-size: 1.1rem;
   letter-spacing: 0.05rem;
   background-color: var(--light-pink);
   display: flex;
   gap: 1em;
+  font-family: "Pacifico", cursive;
 }
 
 .list-title-button:hover,
