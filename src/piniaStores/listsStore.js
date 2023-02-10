@@ -54,6 +54,9 @@ export const useListsStore = defineStore("lists", {
           .insert({ title: newListTitle, user_id: userStore.user.id })
           .select();
 
+        // fetch the list again to update the front:
+        this.fetchUserLists();
+
         return { data, error };
       } catch (e) {
         console.log(`Error from addNewList() catch is ${e}`);

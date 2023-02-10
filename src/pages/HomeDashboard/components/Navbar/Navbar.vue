@@ -142,8 +142,6 @@ async function createNewList() {
           listId: data[0].list_id,
         });
 
-        // fetch the lists' titles again to reflect the updated lists in the lists titles section:
-        listsStore.fetchUserLists();
         // clear newList input field:
         newList.value = "";
       }

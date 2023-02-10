@@ -56,9 +56,6 @@ async function handleDeleteList() {
 
     if (!error) {
       listsStore.fetchUserLists();
-      console.log(
-        `listsStore.selectedListToDelete is ${listsStore.selectedListToDelete}`
-      );
       showDeleteListResponse.value = true;
       listsStore.deselectListToShow();
     }
