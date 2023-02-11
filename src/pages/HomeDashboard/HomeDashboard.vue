@@ -10,7 +10,7 @@
     </section>
     <section v-if="!hideItemsSection" class="lists-items-section-container">
       <div class="buttons-container">
-        <BurgerMenuButton @click="handleShowNavbar" />
+        <ArrowBackButton @click="handleShowNavbar" />
         <PrimaryButton @click="logOut" text="Log out" class="log-out-button" />
       </div>
       <div class="list-items-section-content-container">
@@ -37,7 +37,7 @@ import ListItemsWelcomeVue from "./components/ListItemsSection/ListItemsWelcome.
 import PrimaryButton from "../../components/PrimaryButton.vue";
 import ListItemsSection from "./components/ListItemsSection/ListItemsSection.vue";
 import DeleteAllListItemsModal from "./components/Modals/DeleteAllListItemsModal.vue";
-import BurgerMenuButton from "../../components/BurgerMenuButton.vue";
+import ArrowBackButton from "../../components/ArrowBackButton.vue";
 
 const router = useRouter();
 
