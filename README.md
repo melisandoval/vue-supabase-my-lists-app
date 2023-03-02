@@ -2,10 +2,11 @@
 
 ![My-Lists-Dashboard](https://user-images.githubusercontent.com/94930294/216600520-d5769095-945d-4f49-9da1-44814029c02c.gif)
 
-- Responsive Vue SPA (Single Page Application)
-- JavaScript frameworks: Vue.js (Vue 3), Vue Router, Pinia.
-- Database with Supabase (all CRUD Operations). 
-- CSS + UI responsive design.
+- Responsive Vue SPA (Single Page Application).
+- JavaScript frameworks: [Vue.js](https://vuejs.org/) (Vue 3), [Vue Router](https://router.vuejs.org/) and [Pinia](https://pinia.vuejs.org/).
+- Database with [Supabase](https://supabase.com/) (all CRUD Operations). 
+- CSS3 + own UI responsive design.
+- App mascot illustration created with the IA [Dall-E 2](https://openai.com/product/dall-e-2). 
 - Live version: https://my-lists-melisandoval.netlify.app/ 
 
 
