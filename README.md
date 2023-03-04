@@ -1,4 +1,4 @@
-# My lists app
+# My Lists App
 
 ![My-Lists-Dashboard](https://user-images.githubusercontent.com/94930294/216600520-d5769095-945d-4f49-9da1-44814029c02c.gif)
 
